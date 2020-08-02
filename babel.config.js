@@ -6,7 +6,7 @@ module.exports = function (api) {
       '@babel/preset-env',
       {
         targets: '> 1%, not dead',
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
         corejs: 3,
         modules: false,
       },
@@ -20,6 +20,7 @@ module.exports = function (api) {
         root: ['./client/src'],
         alias: {
           imgs: './client/public/images',
+          components: './client/src/components',
           utils: './client/utils',
           styles: './client/src/styles',
         },

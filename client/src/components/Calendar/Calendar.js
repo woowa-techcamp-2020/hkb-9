@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 import './index.scss';
-import { TAG_NAME, CLASS_NAME } from 'utils/constants';
-import { calendarTemplate } from 'utils/template';
+import { CLASS_NAME } from '../../../utils/constants';
+import { calendarTemplate } from '../../../utils/template';
 
 export default function Calendar() {
   if (new.target !== Calendar) {
@@ -10,7 +9,7 @@ export default function Calendar() {
 
   this.init = () => {
     this.date = new Date();
-    this.$target = document.querySelector(TAG_NAME.MAIN);
+    this.$target = document.querySelector(`.${CLASS_NAME.CALENDAR_CONTAINER}`);
     this.$target.innerHTML = calendarTemplate;
 
     this.$monthDays = document.querySelector(`.${CLASS_NAME.CALENDAR_DAYS}`);

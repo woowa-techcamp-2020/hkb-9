@@ -1,6 +1,6 @@
 import './index.scss';
-import { headerTemplate } from 'utils/template';
-import { TAG_NAME } from 'utils/constants';
+import { headerTemplate } from '../../../../utils/template';
+import { TAG_NAME } from '../../../../utils/constants';
 
 export default function Header() {
   if (new.target !== Header) {

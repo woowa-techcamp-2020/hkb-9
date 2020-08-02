@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
 
-    button {
+    a {
       width: 30%;
       background-color: $woowa-color-week;
       color: #eeeeee;
@@ -29,7 +29,7 @@
       }
     }
   
-    button + button {
+    a + a {
       margin-left: 3%;
     }
   }

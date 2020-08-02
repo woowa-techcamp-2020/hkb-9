@@ -1,6 +1,6 @@
 import './index.scss';
-import { selectMonthTemplate } from 'utils/template';
-import { CLASS_NAME } from 'utils/constants';
+import { selectMonthTemplate } from '../../../../utils/template';
+import { CLASS_NAME } from '../../../../utils/constants';
 
 export default function SelectMonth({ onClickButton }) {
   if (new.target !== SelectMonth) {
@@ -9,7 +9,7 @@ export default function SelectMonth({ onClickButton }) {
 
   this.init = () => {
     this.$target = document.querySelector(`.${CLASS_NAME.SELECT_MONTH}`);
-    this.month = new Date().getMonth();
+    this.month = new Date().getMonth() + 1;
     this.render();
     this.bindEvent();
   };
@@ -30,7 +30,6 @@ export default function SelectMonth({ onClickButton }) {
       if (e.target.classList.contains(CLASS_NAME.SELECT_NEXT)) {
         this.month = this.month + 1 === 13 ? 1 : this.month + 1;
         this.render();
-
         onClickButton('next');
       }
     });

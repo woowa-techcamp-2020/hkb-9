@@ -12,11 +12,11 @@ export const selectMonthTemplate = (currentMonth) => `
   <i class="f7-icons next">arrowtriangle_right</i>
 `;
 
-export const pageFilterTemplate = `
+export const navigationTemplate = `
   <div class="filter-box">
-    <button class="log">내역</button>
-    <button class="calendar">달력</button>
-    <button class="statics">통계</button>
+    <a href="/" class="log">내역</a>
+    <a href="/calendar" class="calendar">달력</a>
+    <a href="/statics" class="statics">통계</a>
   </div>
 `;
 
@@ -36,9 +36,17 @@ export const calendarTemplate = `
   </div>
 `;
 
-export const calendarPageTemplate = `
+export const defaultHTMLTemplate = `
   <header></header>
   <div class="select-month"></div>
   <div class="page-filters"></div>
-  <main class="calendar-container"></main>
+  <main></main>
+`;
+
+export const mainPageTemplate = `
+  <div class="main-container">Main Page</div>
+`;
+
+export const calendarPageTemplate = `
+  <div class="calendar-container"></div>
 `;

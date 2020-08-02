@@ -1,6 +1,7 @@
 export const TAG_NAME = {
-  HEADER: 'header',
-  MAIN: 'main',
+  HEADER: 'HEADER',
+  MAIN: 'MAIN',
+  A: 'A',
 };
 
 export const CLASS_NAME = {
@@ -9,5 +10,7 @@ export const CLASS_NAME = {
   SELECT_NEXT: 'next',
   PAGE_FILTER: 'page-filters',
 
+  MAIN_CONTAINER: 'main-container',
+  CALENDAR_CONTAINER: 'calendar-container',
   CALENDAR_DAYS: 'days',
 };
