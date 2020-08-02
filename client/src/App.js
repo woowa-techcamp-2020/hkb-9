@@ -1,10 +1,9 @@
-import './styles/reset.scss'
-import { Header } from './components/common/Header'
-import { Navbar } from './components/common/Navbar'
-import { SelectMonth } from './components/common/SelectMonth'
-import MainPage from './pages/MainPage';
-import CalendarPage from './pages/CalendarPage';
-
+import './styles/reset.scss';
+import { Header } from './components/common/Header';
+import { Navbar } from './components/common/Navbar';
+import { SelectMonth } from './components/common/SelectMonth';
+import { Main } from './components/Main';
+import { Calendar } from './components/Calendar';
 
 class App {
   constructor() {
@@ -14,8 +13,8 @@ class App {
     new SelectMonth();
     this.navbar = new Navbar();
 
-    this.bindEvent()
-    this.render()
+    this.bindEvent();
+    this.render();
   }
 
   init() {
@@ -24,33 +23,33 @@ class App {
       <div class="select-month"></div>
       <nav class="nav-bar"></nav>
       <main></main>
-    `
+    `;
   }
 
   render(path) {
     if (!path) {
-      new MainPage()
+      new Main();
     } else if (path === 'calendar') {
-      new CalendarPage()
+      new Calendar();
     }
   }
 
   bindEvent() {
-    this.navbar.getElement().addEventListener('click', (e) => {
-      if(e.target.tagName !== 'A') {
-        return
+    this.navbar.getElement().addEventListener('click', e => {
+      if (e.target.tagName !== 'A') {
+        return;
       }
-      e.preventDefault()
-      const pathArray = e.target.href.split('/')
-      const path = pathArray[pathArray.length-1]
-      history.pushState({ path }, null, path)
-      this.render(path)
-    })
+      e.preventDefault();
+      const pathArray = e.target.href.split('/');
+      const path = pathArray[pathArray.length - 1];
+      history.pushState({ path }, null, path);
+      this.render(path);
+    });
 
     window.addEventListener('popstate', e => {
-      const { path } = e.state
-      this.render(path)
-    })
+      const { path } = e.state;
+      this.render(path);
+    });
   }
 }
 
