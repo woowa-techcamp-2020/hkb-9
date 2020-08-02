@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 import './Main.scss';
-import mainTemplate from './template';
+import { InputForm } from './InputForm';
+import { List } from './List'
 
 export default class Main {
   constructor() {
-    this.$target = document.querySelector('main');
-    this.$target.innerHTML = 'hi this is Main Page';
+    new InputForm();
+    new List();
   }
 }
