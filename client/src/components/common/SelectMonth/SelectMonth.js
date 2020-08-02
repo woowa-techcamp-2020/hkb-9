@@ -1,4 +1,4 @@
-import './index.scss';
+import './SelectMonth.scss';
 import HTMLTemplate from './template';
 export default class SelectMonth {
   constructor() {

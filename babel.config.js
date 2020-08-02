@@ -6,7 +6,7 @@ module.exports = function (api) {
       '@babel/preset-env',
       {
         targets: '> 1%, not dead',
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
         corejs: 3,
         modules: false,
       },

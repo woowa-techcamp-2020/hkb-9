@@ -1,0 +1,65 @@
+@import '../../styles/definition';
+
+.calendar-container {
+ width: 100%;
+ margin-top: 1.5rem;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ 
+
+  .weekdays {
+    display: flex;
+    width: 50%;
+    color: black;
+  
+    div {
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      width: calc(100% / 7);
+      height: 3rem;
+      // color: #eeeeee;
+      padding: 0.2rem;
+    }
+  }
+
+  .days {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+      font-size: 1.4rem;
+      padding: 0.2rem;
+      width: calc(100% / 7);
+      height: 5rem;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      // text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+      transition: background-color 0.2s;
+
+      &:hover:not(.today) {
+        background-color: #262626;
+        border: 0.2rem solid #777;
+        cursor: pointer;
+        color: #eeeeee;
+      }
+    }
+
+    .today {
+      color: $woowa-color;
+    }
+
+    .prev-date,
+    .next-date {
+      opacity: 0.5;
+    }
+  }
+
+  .red {
+    color: red;
+  }
+}

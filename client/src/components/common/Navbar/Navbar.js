@@ -7,6 +7,11 @@ export default class Navbar {
     this.init()
   }
 
+
+  getElement() {
+    return this.$target
+  }
+
   init() {
     this.$target.innerHTML = navbarTemplate
   }

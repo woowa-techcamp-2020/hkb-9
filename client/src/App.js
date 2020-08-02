@@ -2,14 +2,20 @@ import './styles/reset.scss'
 import { Header } from './components/common/Header'
 import { Navbar } from './components/common/Navbar'
 import { SelectMonth } from './components/common/SelectMonth'
+import MainPage from './pages/MainPage';
+import CalendarPage from './pages/CalendarPage';
+
 
 class App {
   constructor() {
     this.$app = document.querySelector('#App');
     this.init();
-    this.header = new Header();
-    this.month = new SelectMonth();
+    new Header();
+    new SelectMonth();
     this.navbar = new Navbar();
+
+    this.bindEvent()
+    this.render()
   }
 
   init() {
@@ -17,7 +23,34 @@ class App {
       <header></header>
       <div class="select-month"></div>
       <nav class="nav-bar"></nav>
+      <main></main>
     `
+  }
+
+  render(path) {
+    if (!path) {
+      new MainPage()
+    } else if (path === 'calendar') {
+      new CalendarPage()
+    }
+  }
+
+  bindEvent() {
+    this.navbar.getElement().addEventListener('click', (e) => {
+      if(e.target.tagName !== 'A') {
+        return
+      }
+      e.preventDefault()
+      const pathArray = e.target.href.split('/')
+      const path = pathArray[pathArray.length-1]
+      history.pushState({ path }, null, path)
+      this.render(path)
+    })
+
+    window.addEventListener('popstate', e => {
+      const { path } = e.state
+      this.render(path)
+    })
   }
 }
 
