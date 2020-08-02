@@ -1,40 +1,32 @@
 import './index.scss';
-import { selectMonthTemplate } from 'utils/template';
-import { CLASS_NAME } from 'utils/constants';
-
-export default function SelectMonth({ onClickButton }) {
-  if (new.target !== SelectMonth) {
-    return new SelectMonth();
-  }
-
-  this.init = () => {
-    this.$target = document.querySelector(`.${CLASS_NAME.SELECT_MONTH}`);
+import HTMLTemplate from './template';
+export default class SelectMonth {
+  constructor() {
+    this.$target = document.querySelector(`.select-month`);
     this.month = new Date().getMonth();
     this.render();
     this.bindEvent();
+  }
+
+  render() {
+    this.$target.innerHTML = HTMLTemplate(this.month);
   };
 
-  this.render = () => {
-    this.$target.innerHTML = selectMonthTemplate(this.month);
-  };
-
-  this.bindEvent = () => {
+  bindEvent() {
     this.$target.addEventListener('click', (e) => {
-      if (e.target.classList.contains(CLASS_NAME.SELECT_PREV)) {
+      if (e.target.classList.contains('prev')) {
         this.month = this.month - 1 === 0 ? 12 : this.month - 1;
         this.render();
-        onClickButton('prev');
+        // onClickButton('prev');
         return;
       }
 
-      if (e.target.classList.contains(CLASS_NAME.SELECT_NEXT)) {
+      if (e.target.classList.contains('next')) {
         this.month = this.month + 1 === 13 ? 1 : this.month + 1;
         this.render();
 
-        onClickButton('next');
+        // onClickButton('next');
       }
     });
   };
-
-  this.init();
 }

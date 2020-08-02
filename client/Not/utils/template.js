@@ -14,9 +14,9 @@ export const selectMonthTemplate = (currentMonth) => `
 
 export const pageFilterTemplate = `
   <div class="filter-box">
-    <button class="log">내역</button>
-    <button class="calendar">달력</button>
-    <button class="statics">통계</button>
+    <a href="/" class="log">내역</button>
+    <a href="/calendar" class="calendar">달력</button>
+    <a href="/statics" class="statics">통계</button>
   </div>
 `;
 

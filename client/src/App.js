@@ -1,17 +1,24 @@
-/* eslint-disable no-new */
-import 'styles/reset.scss';
-import CalendarPage from './pages/CalendarPage';
+import './styles/reset.scss'
+import { Header } from './components/common/Header'
+import { Navbar } from './components/common/Navbar'
+import { SelectMonth } from './components/common/SelectMonth'
 
-function App() {
-  this.init = () => {
-    new CalendarPage();
-  };
+class App {
+  constructor() {
+    this.$app = document.querySelector('#App');
+    this.init();
+    this.header = new Header();
+    this.month = new SelectMonth();
+    this.navbar = new Navbar();
+  }
 
-  this.init();
+  init() {
+    this.$app.innerHTML = `
+      <header></header>
+      <div class="select-month"></div>
+      <nav class="nav-bar"></nav>
+    `
+  }
 }
 
-try {
-  new App();
-} catch (e) {
-  console.error(e);
-}
+new App();

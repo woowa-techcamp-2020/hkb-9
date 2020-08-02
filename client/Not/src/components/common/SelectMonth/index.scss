@@ -1,0 +1,17 @@
+.select-month {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+
+  .month {
+    font-size: 2rem;
+    margin: 0 1.5rem;
+  }
+
+  i {
+    cursor: pointer;
+    font-size: 35px;;
+  }
+}
