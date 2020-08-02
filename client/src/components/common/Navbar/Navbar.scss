@@ -1,19 +1,19 @@
 @import '../../../styles/definition';
 
-.page-filters {
+.nav-bar {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 1.5rem;
-
+  
   .filter-box {
     width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    button {
+    a {
       width: 30%;
       background-color: $woowa-color-week;
       color: #eeeeee;
@@ -29,7 +29,7 @@
       }
     }
   
-    button + button {
+    a + a {
       margin-left: 3%;
     }
   }

@@ -1,18 +1,23 @@
 /* eslint-disable no-undef */
-import './Calendar.scss';
-import calendarTemplate from './template';
+import './index.scss';
+import { TAG_NAME, CLASS_NAME } from 'utils/constants';
+import { calendarTemplate } from 'utils/template';
 
-export default class Calendar {
-  constructor() {
-    this.date = new Date();
-    this.$target = document.querySelector('main');
-    this.$target.innerHTML = calendarTemplate;
-
-    this.$monthDays = document.querySelector(`.days`);
-    this.render();
+export default function Calendar() {
+  if (new.target !== Calendar) {
+    return new Calendar();
   }
 
-  setState(type){
+  this.init = () => {
+    this.date = new Date();
+    this.$target = document.querySelector(TAG_NAME.MAIN);
+    this.$target.innerHTML = calendarTemplate;
+
+    this.$monthDays = document.querySelector(`.${CLASS_NAME.CALENDAR_DAYS}`);
+    this.render();
+  };
+
+  this.setState = (type) => {
     if (type === 'prev') {
       this.date.setMonth(this.date.getMonth() - 1);
       this.render();
@@ -23,7 +28,7 @@ export default class Calendar {
     this.render();
   };
 
-  render() {
+  this.render = () => {
     this.date.setDate(1); // 현재 달을 1일로 초기화
 
     const firstDayIndex = this.date.getDay();
@@ -79,4 +84,6 @@ export default class Calendar {
 
     this.$monthDays.innerHTML = days;
   };
+
+  this.init();
 }

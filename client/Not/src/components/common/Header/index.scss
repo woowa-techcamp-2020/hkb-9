@@ -1,0 +1,24 @@
+@import '../../../styles/definition';
+
+Header {
+  width: 100%;
+  height: 5rem;
+  background-color: $woowa-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  color: #eeeeee;
+  font-weight: 600;
+
+  .title {
+    margin-left: 47.5%;
+    font-size: 2rem;
+
+  }
+
+  .side {
+    margin-left: auto;
+    cursor: pointer
+  }
+}

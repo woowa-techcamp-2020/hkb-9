@@ -1,16 +1,14 @@
-import './index.scss';
-import { headerTemplate } from 'utils/template';
-import { TAG_NAME } from 'utils/constants';
+import './Header.scss';
+import headerTemplate from './template';
 
-export default function Header() {
-  if (new.target !== Header) {
-    return new Header();
+export default class Header {
+  constructor() {
+    this.$target = document.querySelector('header');
+
+    this.init()
   }
 
-  this.init = () => {
-    this.$target = document.querySelector(TAG_NAME.HEADER);
-    this.$target.innerHTML = headerTemplate;
-  };
-
-  this.init();
+  init() {
+    this.$target.innerHTML = headerTemplate
+  }
 }
