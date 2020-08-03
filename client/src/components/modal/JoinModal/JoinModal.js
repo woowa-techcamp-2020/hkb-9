@@ -35,17 +35,23 @@ export default class JoinModal {
       if (hasError) {
         return;
       }
-      try {
-        const requestBody = {};
-        this.$inputs.forEach($input => {
-          requestBody[$input.name] = $input.value;
-        });
-        delete requestBody.passwordConfirm; // passwordConfirm은 필요 x
-        await apis.createUser(requestBody);
-        alert('success');
-      } catch (e) {
-        console.error(e);
+
+      const requestBody = {};
+      this.$inputs.forEach($input => {
+        requestBody[$input.name] = $input.value;
+      });
+      delete requestBody.passwordConfirm; // passwordConfirm은 필요 x
+      const res = await apis.createUser(requestBody);
+      if (res.status === 409) {
+        alert('중복된 아이디입니다.');
+        return;
       }
+
+      if (res.status !== 201) {
+        alert('회원가입 실패');
+        return;
+      }
+      console.log('...');
     }; // create user
 
     this.$target

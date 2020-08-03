@@ -21,15 +21,10 @@ const METHOD = {
 };
 
 const apis = (() => {
-  const request = (url, args) => {
-    try {
-      return fetch(url, args);
-    } catch (e) {
-      console.error(e);
-    }
-  };
+  const request = (url, args) => fetch(url, args);
   const requestWithReturn = (url, args) =>
     request(url, args).then(res => res.json());
+
   return {
     createUser(args) {
       return request('/api/user', METHOD.POST(args));

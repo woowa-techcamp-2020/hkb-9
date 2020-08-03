@@ -1,13 +1,17 @@
 const { Router } = require('express');
 const passport = require('passport');
+const { wrapAsync } = require('../../utils/functions');
 const { validateUserBody } = require('../../utils/validation');
-const { createUserController, loginController, testController } = require('./user-ctrl');
+const { createUserController, loginController } = require('./user-ctrl');
 
 const router = Router();
 
-router.post('/', validateUserBody, createUserController);
-router.post('/login', validateUserBody, passport.authenticate('local', { session: false }), loginController);
-
-router.get('/test', passport.authenticate('jwt', { session: false }), testController);
+router.post('/', validateUserBody, wrapAsync(createUserController));
+router.post(
+  '/login',
+  validateUserBody,
+  passport.authenticate('local', { session: false }),
+  loginController,
+);
 
 module.exports = router;
