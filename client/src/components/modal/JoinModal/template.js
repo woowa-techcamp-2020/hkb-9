@@ -4,13 +4,25 @@ const joinModalTemplate = `
       <div class="title">
         회원가입
       </div>
-      <input type="text" placeholder="아이디">
-      <input type="text" placeholder="이름">
-      <input type="password" placeholder="비밀번호">
-      <input type="password" placeholder="비밀번호 확인">
+      <div class="input-wrapper">
+        <input type="text" name="id" placeholder="아이디">
+        <div class="error">에러 메시지입니당</div>
+      </div>
+      <div class="input-wrapper">
+        <input type="text" name="name" placeholder="이름">
+        <div class="error">에러 메시지입니당</div>
+      </div>
+      <div class="input-wrapper">
+        <input type="password" name="password" placeholder="비밀번호">
+        <div class="error">에러 메시지입니당</div>
+      </div>
+      <div class="input-wrapper">
+        <input type="password" name="password_confirm" placeholder="비밀번호 확인">
+        <div class="error">에러 메시지입니당</div>
+      </div>
       <button>회원가입</button>
       <div class="modal-bottom">
-        <nav>로그인</nav>
+        <nav>뒤로가기</nav>
       </div>
     </div>
   </div>

@@ -35,17 +35,27 @@
         size: 40px;
       }
     }
+    .input-wrapper {
+      width: 100%;
 
-    input {
-      height: 60px;
-      border: none;
-      outline: none;
-      border-radius: 5px;
-      font-size: 25px;
-      padding-left: 20px;
+      input {
+        width: 100%;
+        height: 60px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-size: 25px;
+        padding-left: 20px;
+      }
+
+      .error {
+        margin-top: 5px;
+        color: red;
+        display: none;
+      }
     }
 
-    input + input {
+    .input-wrapper + .input-wrapper {
       margin-top: 15px;
     }
 
