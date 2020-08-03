@@ -4,6 +4,7 @@ import { Navbar } from './components/common/Navbar';
 import { SelectMonth } from './components/common/SelectMonth';
 import { Main } from './components/Main';
 import { Calendar } from './components/Calendar';
+import parsePath from './utils/functions';
 
 class App {
   constructor() {
@@ -14,7 +15,8 @@ class App {
     this.navbar = new Navbar();
 
     this.bindEvent();
-    this.render();
+    const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
+    this.render(path);
   }
 
   init() {
@@ -40,9 +42,8 @@ class App {
         return;
       }
       e.preventDefault();
-      const pathArray = e.target.href.split('/');
-      const path = pathArray[pathArray.length - 1];
-      history.pushState({ path }, null, path);
+      const path = parsePath(e.target.href);
+      history.pushState({ path }, null, path || '/');
       this.render(path);
     });
 

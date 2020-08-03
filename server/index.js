@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 
 app.use('/api', apiRoutes);
 app.use((req, res) => {
+  console.log(appRoot.resolve('client/dist/index.html'));
   res.sendFile(appRoot.resolve('client/dist/index.html'));
 });
 

@@ -5,10 +5,10 @@ export default class Header {
   constructor() {
     this.$target = document.querySelector('header');
 
-    this.init()
+    this.init();
   }
 
   init() {
-    this.$target.innerHTML = headerTemplate
+    this.$target.innerHTML = headerTemplate;
   }
 }
