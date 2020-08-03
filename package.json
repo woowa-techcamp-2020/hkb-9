@@ -51,6 +51,7 @@
   },
   "scripts": {
     "dev:server": "cp .env.dev .env && nodemon ./server/index",
+    "dev:client-server": "webpack-dev-server --open --config webpack.dev.js",
     "dev:client": "webpack --watch --config webpack.dev.js",
     "dev": "npm-run-all --parallel dev:client dev:server",
     "build:production": "webpack --config webpack.prod.js"
