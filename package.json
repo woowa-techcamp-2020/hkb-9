@@ -4,14 +4,15 @@
   "description": "🤮 Bong and Hong  🤑",
   "main": ".prettierrc.js",
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.1.0",
+    "node-sass": "^4.14.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "node-sass": "^4.14.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -31,6 +32,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
@@ -50,7 +52,8 @@
   },
   "scripts": {
     "dev:server": "cp .env.dev .env && nodemon ./server/index",
-    "build": "webpack-dev-server --open --config webpack.dev.js",
+    "dev:client": "webpack --config webpack.dev.js",
+    "dev": "npm-run-all --parallel dev:client dev:server",
     "build:production": "webpack --config webpack.prod.js"
   },
   "repository": {
