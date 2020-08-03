@@ -1,5 +1,6 @@
 import './JoinModal.scss';
 import joinModalTemplate from './template';
+import apis from '../../../api/apis';
 import { isEmpty } from '../../../utils/validation';
 
 export default class JoinModal {
@@ -29,8 +30,10 @@ export default class JoinModal {
   }
 
   bindEvent() {
-    const onSubmitHandler = e => {
-      this.validateInput();
+    const onSubmitHandler = async () => {
+      const hasError = this.validateInput();
+      if (hasError) {
+      }
     };
 
     this.$target
