@@ -1,6 +1,6 @@
 import './List.scss';
 import listTemplate from './template';
-import { Item } from './Item';
+import { Item } from './../Item';
 
 export default class List {
   constructor() {

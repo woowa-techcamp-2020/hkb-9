@@ -4,12 +4,8 @@
   width: 60%;
   justify-content: center;
   align-items: center;
-  margin: 1% auto;
+  margin: 3% auto;
   position: relative;
-
-  label {
-    cursor: pointer;
-  }
 
   .delete-btn {
     position: absolute;
@@ -19,7 +15,28 @@
 
   .select-type {
     display: block;
-    margin: 10px 0 20px 10px;
+    margin: 10px 0 20px 0;
+
+    .title {
+      margin-right: 20px;
+    }
+
+    .income, .expense {
+      cursor: pointer;
+      color: $woowa-color;
+      border: 2px solid $woowa-color;
+      border-radius: 3px;
+      padding: 3px 15px;
+      margin: 0 3px;
+    }
+
+    input {
+      display: none;
+      &:checked + label {
+        color: white;
+        background-color: $woowa-color;
+      }
+    }
   }
 
   .input-form-1 {
@@ -33,7 +50,11 @@
       vertical-align: middle;
     }
 
-    .date,
+    .date {
+      width: 100%;
+      margin: 0 30px 0 0;
+    }
+
     .category {
       width: 100%;
       margin: 0 30px 0 5px;

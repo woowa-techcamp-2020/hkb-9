@@ -4,11 +4,11 @@ const inputFormTemplate = `
     <button class="delete-btn" type="button">내용 지우기</button>
 
     <div class="select-type">
-      <label>분류</label>
+      <label class="title">분류</label>
       <input type="radio" id="income" class="income" name="type" value="income">
-      <label for="income">수입</label>
+      <label for="income" class="income">수입</label>
       <input type="radio" id="expense" class="expense" name="type" value="expense">
-      <label for="expense">지출</label>
+      <label for="expense" class="expense">지출</label>
     </div>
 
     <div class="input-form-1">

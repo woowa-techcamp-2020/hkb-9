@@ -1,22 +1,23 @@
-@import '../../../../../styles/definition';
+@import '../../../styles/definition';
 
-.item-content {
+
+.item-header {
   height: 30px;
   line-height: 30px;
   position: relative;
 
-  .item-category {
+  .date {
     position: absolute;
   }
-  .item-content {
+  .day {
     position: absolute;
     left: 80px; 
   }
-  .item-card {
+  .date-income {
     position: absolute;
     right: 100px; 
   }
-  .item-amount {
+  .date-expense {
     position: absolute;
     right: 0; 
   }

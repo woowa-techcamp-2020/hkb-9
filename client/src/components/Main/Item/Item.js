@@ -1,5 +1,5 @@
 import './Item.scss';
-import { ItemContent } from './ItemContent';
+import { ItemContent } from './../ItemContent';
 import itemTemplate from './template';
 
 export default class Item {
