@@ -1,5 +1,6 @@
 import './JoinModal.scss';
 import joinModalTemplate from './template';
+import { isEmpty } from '../../../utils/validation';
 
 export default class JoinModal {
   constructor($children) {
@@ -8,8 +9,32 @@ export default class JoinModal {
     this.bindEvent();
   }
 
+  validateInput() {
+    const $inputs = this.$target.querySelectorAll('input');
+    const $errors = this.$target.querySelectorAll('.error');
+    $errors.forEach($error => ($error.style.display = 'none'));
+
+    let hasError = false;
+    Array.from($inputs).every($input => {
+      if (isEmpty($input.value)) {
+        const $error = $input.nextElementSibling;
+        $error.style.display = 'block';
+        hasError = true;
+        return false;
+      }
+      return true;
+    });
+
+    return hasError;
+  }
+
   bindEvent() {
-    const onFocusoutHandler = e => {};
-    this.$target.addEventListener('focusout', onFocusoutHandler);
+    const onSubmitHandler = e => {
+      this.validateInput();
+    };
+
+    this.$target
+      .querySelector('button')
+      .addEventListener('click', onSubmitHandler);
   }
 }
