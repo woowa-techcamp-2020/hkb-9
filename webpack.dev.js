@@ -10,5 +10,8 @@ module.exports = merge(commonConfig, {
     contentBase: path.resolve(__dirname, './client/public'),
     port: 9000,
     hot: true,
+    proxy: {
+      '/api': 'http://localhost:4000', // 프록시
+    },
   },
 });
