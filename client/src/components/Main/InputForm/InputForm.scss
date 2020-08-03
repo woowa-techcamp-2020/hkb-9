@@ -1,1 +1,20 @@
 @import '../../../styles/definition';
+
+.input-form {
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  margin: 2% auto;
+  position: relative;
+
+  .delete-btn {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+  }
+
+  .type {
+    display: block;
+    margin: 10px 0 20px 10px;
+  }
+}

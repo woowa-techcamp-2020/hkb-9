@@ -5,6 +5,7 @@ export default class List {
   constructor() {
     this.$target = document.querySelector('main');
     this.$list = document.createElement('div');
+    this.$list.classList.add('list');
     this.$list.innerHTML = listTemplate;
     this.render();
   }
