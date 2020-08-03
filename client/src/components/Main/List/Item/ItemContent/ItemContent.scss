@@ -1,0 +1,23 @@
+@import '../../../../../styles/definition';
+
+.item-content {
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+
+  .item-category {
+    position: absolute;
+  }
+  .item-content {
+    position: absolute;
+    left: 80px; 
+  }
+  .item-card {
+    position: absolute;
+    right: 100px; 
+  }
+  .item-amount {
+    position: absolute;
+    right: 0; 
+  }
+}

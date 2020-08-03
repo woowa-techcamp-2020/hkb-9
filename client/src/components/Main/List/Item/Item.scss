@@ -1,0 +1,23 @@
+@import '../../../../styles/definition';
+
+.item-header {
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+
+  .date {
+    position: absolute;
+  }
+  .day {
+    position: absolute;
+    left: 80px; 
+  }
+  .date-income {
+    position: absolute;
+    right: 100px; 
+  }
+  .date-expense {
+    position: absolute;
+    right: 0; 
+  }
+}

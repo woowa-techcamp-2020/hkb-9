@@ -1,1 +1,15 @@
 @import '../../../styles/definition';
+
+.list-container {
+  width: 60%;
+  margin: 0 auto;
+
+  form {
+    text-align: center;
+  }
+
+  .income,
+  .expense {
+    margin: 5px 0;
+  }
+}

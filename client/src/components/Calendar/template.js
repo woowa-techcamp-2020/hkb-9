@@ -14,4 +14,4 @@ const calendarTemplate = `
   </div>
 `;
 
-export default calendarTemplate
+export default calendarTemplate;
