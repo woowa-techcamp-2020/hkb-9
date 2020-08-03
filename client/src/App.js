@@ -5,6 +5,7 @@ import { SelectMonth } from './components/common/SelectMonth';
 import { Main } from './components/Main';
 import { Calendar } from './components/Calendar';
 import { LoginModal } from './components/modal/LoginModal';
+import { JoinModal } from './components/modal/JoinModal';
 import parsePath from './utils/functions';
 
 class App {
@@ -14,7 +15,8 @@ class App {
     new Header();
     new SelectMonth();
     this.navbar = new Navbar();
-    new LoginModal();
+    // new LoginModal();
+    new JoinModal();
 
     this.bindEvent();
     const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크

@@ -1,4 +1,4 @@
-import './LoginModal.scss';
+import './JoinModal.scss';
 import joinModalTemplate from './template';
 
 export default class JoinModal {
