@@ -1,6 +1,6 @@
 import './LoginModal.scss';
 import loginModalTemplate from './template';
-import apis from '../../../api/apis';
+import userApis from '../../../api/userApis';
 
 export default class LoginModal {
   constructor({ onModalVisible, renderApp }) {
@@ -34,7 +34,7 @@ export default class LoginModal {
     const onSubmitHandler = async () => {
       const requestBody = {}; // loginId, password
       this.$inputs.forEach($input => (requestBody[$input.name] = $input.value));
-      const { accessToken } = await apis.login(requestBody);
+      const { accessToken } = await userApis.login(requestBody);
       if (!accessToken) {
         alert('아이디 또는 비밀번호가 올바르지 않습니다.');
         return;

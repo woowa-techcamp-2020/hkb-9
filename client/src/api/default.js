@@ -1,4 +1,4 @@
-const METHOD = {
+export const METHOD = {
   POSTWithHeader(body) {
     return {
       method: 'POST',
@@ -20,19 +20,7 @@ const METHOD = {
   },
 };
 
-const apis = (() => {
-  const request = (url, args) => fetch(url, args);
-  const requestWithReturn = (url, args) =>
-    request(url, args).then(res => res.json());
+export const request = (url, args) => fetch(url, args);
 
-  return {
-    createUser(args) {
-      return request('/api/user', METHOD.POST(args));
-    },
-    login(body) {
-      return requestWithReturn('/api/user/login', METHOD.POST(body));
-    },
-  };
-})();
-
-export default apis;
+export const requestWithReturn = (url, args) =>
+  request(url, args).then(res => res.json());

@@ -1,6 +1,5 @@
 import './CardModal.scss';
 import cardModalTemplate from './template';
-import apis from '../../../api/apis';
 
 export default class CardModal {
   constructor({ onModalVisible }) {

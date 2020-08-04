@@ -1,6 +1,6 @@
 import './JoinModal.scss';
 import joinModalTemplate from './template';
-import apis from '../../../api/apis';
+import userApis from '../../../api/userApis';
 import { isEmpty } from '../../../utils/validation';
 
 export default class JoinModal {
@@ -56,7 +56,7 @@ export default class JoinModal {
         requestBody[$input.name] = $input.value;
       });
       delete requestBody.passwordConfirm; // passwordConfirm은 필요 x
-      const res = await apis.createUser(requestBody);
+      const res = await userApis.createUser(requestBody);
       if (res.status === 409) {
         alert('중복된 아이디입니다.');
         return;

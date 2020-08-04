@@ -44,7 +44,6 @@
   "eslintConfig": {
     "parser": "babel-eslint",
     "extends": [
-      "airbnb",
       "prettier"
     ],
     "env": {
