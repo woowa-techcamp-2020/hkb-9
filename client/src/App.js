@@ -6,15 +6,19 @@ import { Main } from './components/Main';
 import { Calendar } from './components/Calendar';
 import { LoginModal } from './components/modal/LoginModal';
 import { JoinModal } from './components/modal/JoinModal';
-import { parsePath, checkIsLogin } from './utils/functions';
+import { parsePath, checkIsLogin, html } from './utils/functions';
+import { CardModal } from './components/modal/CardModal';
 
 class App {
   constructor() {
+    // App constructor 분리해줘야함
     this.$app = document.querySelector('#App');
     this.init();
     this.header = new Header();
     new SelectMonth();
     this.navbar = new Navbar();
+
+    /* modal start */
     this.loginModal = new LoginModal({
       onModalVisible: this.onModalVisible.bind(this),
       renderApp: this.render.bind(this),
@@ -22,6 +26,11 @@ class App {
     this.joinModal = new JoinModal({
       onModalVisible: this.onModalVisible.bind(this),
     });
+    this.cardModal = new CardModal({
+      onModalVisible: this.onModalVisible.bind(this),
+    });
+    /* modal end */
+
     this.bindEvent();
     const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
 
@@ -34,7 +43,7 @@ class App {
   }
 
   init() {
-    this.$app.innerHTML = `
+    this.$app.innerHTML = html`
       <header></header>
       <div class="select-month"></div>
       <nav class="nav-bar"></nav>
