@@ -1,5 +1,4 @@
-const pool = require('../config/db');
-const { wrapAsync } = require('../../utils/functions');
+const pool = require('../../config/db');
 const Card = require('../../model/card');
 
 exports.createCardController = async (req, res) => {
@@ -8,7 +7,26 @@ exports.createCardController = async (req, res) => {
     user,
   } = req;
 
-  const connection = await wrapAsync(pool.getConnection());
-  await wrapAsync(Card.createCard(connection, { userId: user.id, name }));
-  res.stats(201).json('');
+  const connection = await pool.getConnection();
+  const insertId = await Card.createCard(connection, { userId: user.id, name });
+  connection.release();
+  res.stats(201).json({ insertId });
+};
+
+exports.getCardsController = async (req, res) => {
+  const { user } = req;
+  const connection = await pool.getConnection();
+  const cards = await Card.getCards(connection, user.id);
+  connection.release();
+  res.status(200).json({ cards });
+};
+
+exports.deleteCardController = async (req, res) => {
+  const {
+    params: { cardId },
+  } = req;
+  const connection = await pool.getConnection();
+  const affectedRows = await Card.deleteCard(connection, cardId);
+  connection.release();
+  res.stats(200).json({ affectedRows });
 };

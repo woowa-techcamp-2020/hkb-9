@@ -1,0 +1,84 @@
+@import '../../../styles/definition';
+
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .modal-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background: #40e1e6;
+    border-radius: 7px;
+
+    min: {
+      width: 500px;
+      height: 500px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+
+    .title {
+      color: #eeeeee;
+      margin-bottom: 30px;
+      font: {
+        weight: 600;
+        size: 40px;
+      }
+    }
+
+    input {
+      height: 60px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      font-size: 25px;
+      padding-left: 20px;
+    }
+
+    input + input {
+      margin-top: 15px;
+    }
+
+    button {
+      margin-top: 30px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 20px;
+      height: 60px;
+      cursor: pointer;
+      background-color: #4899fa;
+      color: white;
+
+      &:hover {
+        background-color: #4876fa;
+      }
+    }
+
+    .modal-bottom {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+      nav {
+        color: #eeeeee;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.visible {
+  display: block;
+}

@@ -7,3 +7,17 @@ exports.createCard = async (connection, options) => {
   `);
   return result;
 };
+
+exports.getCards = async (connection, userId) => {
+  const [rows] = await connection.query(
+    `SELECT * FROM card WHERE user_id=${userId}`,
+  );
+  return rows;
+};
+
+exports.deleteCard = async (connection, cardId) => {
+  const [affectedRows] = await connection.query(
+    `DELETE FROM card WHERE id=${cardId}`,
+  );
+  return affectedRows;
+};

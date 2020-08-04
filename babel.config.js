@@ -5,7 +5,7 @@ module.exports = function (api) {
     [
       '@babel/preset-env',
       {
-        targets: '> 1%, not dead',
+        targets: '> 0.1%, not dead',
         useBuiltIns: 'entry',
         corejs: 3,
         modules: false,
@@ -14,6 +14,12 @@ module.exports = function (api) {
   ];
 
   const plugins = [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        regenerator: true,
+      },
+    ],
     [
       'module-resolver',
       {

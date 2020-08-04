@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
+const appRoot = require('app-root-path');
 const passport = require('passport');
 const { urlencoded, json } = require('express');
 const apiRoutes = require('./routes');
@@ -10,13 +12,20 @@ const passportConfig = require('./lib/passport');
 
 const app = express();
 
+app.use(cors());
 app.use(urlencoded({ extended: true }), json());
+app.use(express.static(appRoot.resolve('client/dist')));
 app.use(passport.initialize());
 passportConfig();
 
 app.use(morgan('dev'));
 
 app.use('/api', apiRoutes);
+app.use((req, res) => {
+  console.log(appRoot.resolve('client/dist/index.html'));
+  res.sendFile(appRoot.resolve('client/dist/index.html'));
+});
+
 app.use(errorHandler);
 
 app.listen(SERVER_PORT, () => {
