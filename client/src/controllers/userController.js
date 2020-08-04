@@ -1,6 +1,5 @@
 import observer from '../models/observer';
 import User from '../models/userModel';
-
 class UserController {
   constructor() {
     this.observer = observer;
@@ -37,6 +36,12 @@ class UserController {
       return;
     }
     return res.status;
+  }
+
+  requestLogout() {
+    window.localStorage.removeItem('accessToken');
+    window.location.href = '/';
+    window.location.reload();
   }
 }
 

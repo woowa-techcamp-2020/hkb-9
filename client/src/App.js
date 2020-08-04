@@ -12,22 +12,8 @@ import observer from './models/observer';
 import { userController } from './controllers';
 class App {
   constructor() {
-    // App constructor 분리해줘야함
     this.$app = document.querySelector('#App');
     this.init();
-
-    // /* modal start */
-    // this.loginModal = new LoginModal({
-    //   onModalVisible: this.onModalVisible.bind(this),
-    //   renderApp: this.render.bind(this),
-    // });
-    // this.joinModal = new JoinModal({
-    //   onModalVisible: this.onModalVisible.bind(this),
-    // });
-    // this.cardModal = new CardModal({
-    //   onModalVisible: this.onModalVisible.bind(this),
-    // });
-    // /* modal end */
 
     // this.bindEvent();
     // const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크

@@ -14,10 +14,6 @@ class UserModel {
   async fetchJoin(userData) {
     return await userApis.join(userData);
   }
-
-  async fetchLogout() {
-    window.localStorage.removeItem('accessToken');
-  }
 }
 
 export default new UserModel();

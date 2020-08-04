@@ -8,7 +8,5 @@ export const parsePath = url => {
   return path;
 };
 
-export const checkIsLogin = () => window.localStorage.getItem('accessToken');
-
 export const html = (s, ...args) =>
   s.map((ss, i) => `${ss}${args[i] || ''}`).join('');
