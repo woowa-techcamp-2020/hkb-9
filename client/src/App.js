@@ -1,29 +1,14 @@
 import { Header } from './components/common/Header';
 import { HkbPage } from './pages';
-
-import { Main } from './components/Main';
-import { Calendar } from './components/Calendar';
 import { LoginModal } from './components/modal/LoginModal';
 import { JoinModal } from './components/modal/JoinModal';
-import { parsePath, checkIsLogin, html } from './utils/functions';
-import { CardModal } from './components/modal/CardModal';
-
 import observer from './models/observer';
-import { userController } from './controllers';
+import { userController, routeController } from './controllers';
 class App {
   constructor() {
     this.$app = document.querySelector('#App');
     this.init();
-
-    // this.bindEvent();
-    // const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
-
-    // if (!checkIsLogin()) {
-    //   this.onModalVisible('loginModal', true); // login modal render
-    //   return;
-    // }
-
-    // this.render(path);
+    this.bindEvent();
   }
 
   init() {
@@ -41,34 +26,13 @@ class App {
     new JoinModal();
   }
 
-  // onModalVisible(modalName, visible) {
-  //   this[modalName].render(visible);
-  // } // modal visible management
+  bindEvent() {
+    const onPopState = ({ state }) => {
+      routeController.setPage(state.path);
+    };
 
-  // render(path) {
-  //   if (!path) {
-  //     new Main();
-  //   } else if (path === 'calendar') {
-  //     new Calendar();
-  //   }
-  // }
-
-  // bindEvent() {
-  //   this.navbar.getElement().addEventListener('click', e => {
-  //     if (e.target.tagName !== 'A') {
-  //       return;
-  //     }
-  //     e.preventDefault();
-  //     const path = parsePath(e.target.href);
-  //     history.pushState({ path }, null, path || '/');
-  //     this.render(path);
-  //   });
-
-  //   window.addEventListener('popstate', e => {
-  //     const { path } = e.state;
-  //     this.render(path);
-  //   });
-  // }
+    window.addEventListener('popstate', onPopState);
+  }
 }
 
 export default App;
