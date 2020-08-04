@@ -17,18 +17,19 @@ class App {
     this.navbar = new Navbar();
     this.loginModal = new LoginModal({
       onModalVisible: this.onModalVisible.bind(this),
+      renderApp: this.render.bind(this),
     });
     this.joinModal = new JoinModal({
       onModalVisible: this.onModalVisible.bind(this),
     });
+    this.bindEvent();
+    const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
 
     if (!checkIsLogin()) {
       this.onModalVisible('loginModal', true); // login modal render
+      return;
     }
 
-    // 로그인 했음
-    this.bindEvent();
-    const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
     this.render(path);
   }
 

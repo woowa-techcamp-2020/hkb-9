@@ -14,3 +14,17 @@ exports.validateUserBody = (req, res, next) => {
 
   next();
 };
+
+exports.validateUserLoginBody = (req, res, next) => {
+  const { loginId, password } = req.body;
+  if (isEmpty(loginId) || isEmpty(password)) {
+    res.status(400).json({ message: 'invalid request body' });
+    return;
+  }
+
+  if (!isString(loginId) || !isString(password)) {
+    res.status(400).json({ message: 'property type must be string' });
+    return;
+  }
+  next();
+};

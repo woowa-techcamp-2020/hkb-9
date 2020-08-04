@@ -11,19 +11,19 @@ export default class JoinModal {
     $div.innerHTML = joinModalTemplate;
     this.$target.appendChild($div);
 
-    this.$inputs = document.querySelectorAll('.join-modal input');
+    this.$joinModal = this.$target.querySelector('.join-modal');
+    this.$inputs = this.$joinModal.querySelectorAll('input');
     this.onModalVisible = onModalVisible;
     this.bindEvent();
   }
 
   render(visible) {
-    const $joinModal = this.$target.querySelector('.join-modal');
     if (visible) {
-      $joinModal.classList.add('visible');
+      this.$joinModal.classList.add('visible');
       return;
     }
 
-    $joinModal.classList.remove('visible');
+    this.$joinModal.classList.remove('visible');
   }
 
   validateInput() {
@@ -67,7 +67,7 @@ export default class JoinModal {
         return;
       }
       alert('회원가입 성공 >_<');
-      this.$inputs.forEach($input => ($input.value = ''));
+      this.$inputs.forEach($input => ($input.value = '')); // input value 초기화
       onShowLoginModal(); // login on , join off
     }; // create user
 

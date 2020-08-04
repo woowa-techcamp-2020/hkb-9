@@ -29,6 +29,9 @@ const apis = (() => {
     createUser(args) {
       return request('/api/user', METHOD.POST(args));
     },
+    login(body) {
+      return requestWithReturn('/api/user/login', METHOD.POST(body));
+    },
   };
 })();
 
