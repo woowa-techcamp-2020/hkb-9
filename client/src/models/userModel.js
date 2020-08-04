@@ -7,12 +7,7 @@ class UserModel {
   }
 
   async fetchLogin(userData) {
-    try {
-      const { accessToken } = await userApis.login(userData);
-      return accessToken;
-    } catch (e) {
-      throw e;
-    }
+    return await userApis.login(userData);
   }
 
   // error throw 되는지 테스트하기

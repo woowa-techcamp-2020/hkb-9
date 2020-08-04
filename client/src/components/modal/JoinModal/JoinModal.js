@@ -1,9 +1,7 @@
 import './JoinModal.scss';
 import observer from '../../../models/observer';
 import joinModalTemplate from './template';
-import { modalController, userController } from '../../../controllers';
-import userApis from '../../../api/userApis';
-import { isEmpty } from '../../../utils/validation';
+import { userController } from '../../../controllers';
 
 export default class JoinModal {
   constructor() {
@@ -42,8 +40,8 @@ export default class JoinModal {
     };
 
     const onShowLoginModal = () => {
-      modalController.onModalVisible('joinModalVisible', false);
-      modalController.onModalVisible('loginModalVisible', true);
+      userController.onModalVisible('joinModalVisible', false);
+      userController.onModalVisible('loginModalVisible', true);
     };
 
     this.$target

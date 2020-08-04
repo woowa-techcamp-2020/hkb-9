@@ -1,6 +1,6 @@
 import './LoginModal.scss';
 import observer from '../../../models/observer';
-import { modalController } from '../../../controllers';
+import { userController } from '../../../controllers';
 import loginModalTemplate from './template';
 import userApis from '../../../api/userApis';
 
@@ -12,7 +12,7 @@ export default class LoginModal {
   init() {
     this.$target = document.querySelector('.modal');
     observer.subscribe('loginModalVisible', this, this.render.bind(this));
-    modalController.onModalVisible('loginModalVisible', true);
+    userController.onModalVisible('loginModalVisible', true);
   }
 
   render(visible) {
@@ -26,37 +26,38 @@ export default class LoginModal {
 
   bindEvent() {
     const onShowJoinModal = () => {
-      modalController.onModalVisible('loginModalVisible', false);
-      modalController.onModalVisible('joinModalVisible', true);
+      userController.onModalVisible('loginModalVisible', false);
+      userController.onModalVisible('joinModalVisible', true);
     };
     const onSubmitHandler = async () => {
-      const requestBody = {}; // loginId, password
-      this.$inputs.forEach($input => (requestBody[$input.name] = $input.value));
-      const { accessToken } = await userApis.login(requestBody);
-      if (!accessToken) {
+      const userData = {}; // loginId, password
+      this.$target
+        .querySelectorAll('input')
+        .forEach($input => (userData[$input.name] = $input.value));
+
+      const status = await userController.requestLogin(userData);
+      if (status) {
         alert('아이디 또는 비밀번호가 올바르지 않습니다.');
         return;
       }
       alert('로그인 성공 >_<');
-      window.localStorage.setItem('accessToken', accessToken);
-      this.onModalVisible('loginModal', false);
-      this.onModalVisible('header', true); // logout button show
-      this.renderApp(); // App Render()
     };
+
     const onKeyupHanlder = e => {
       if (e.key !== 'Enter') {
         return;
       }
       onSubmitHandler();
     };
+
     this.$target
       .querySelector('.password-input')
       .addEventListener('keyup', onKeyupHanlder);
     this.$target
-      .querySelector('.login-button')
+      .querySelector('button')
       .addEventListener('click', onSubmitHandler);
     this.$target
-      .querySelector('.login-nav')
+      .querySelector('nav')
       .addEventListener('click', onShowJoinModal);
   }
 }

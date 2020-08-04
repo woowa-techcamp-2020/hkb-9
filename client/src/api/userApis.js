@@ -1,9 +1,7 @@
-import { METHOD, request, requestWithReturn } from './default';
+import { METHOD, request } from './default';
 
 export const join = async userData =>
   request('/api/user', METHOD.POST(userData));
 
-export const login = async userData => {
-  const response = await fetch('/api/user/login', METHOD.POST(userData));
-  return response.json();
-};
+export const login = async userData =>
+  request('/api/user/login', METHOD.POST(userData));

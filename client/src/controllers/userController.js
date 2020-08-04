@@ -14,25 +14,29 @@ class UserController {
     this.setIsLogin(isLogin);
   }
 
+  onModalVisible(modalName, isShow) {
+    this.observer.notify(modalName, isShow);
+  }
+
   async requestJoin(userData) {
     const res = await User.fetchJoin(userData);
     if (res.ok) {
-      this.observer.notify('joinModalVisible', false);
-      this.observer.notify('loginModalVisible', true);
+      this.onModalVisible('joinModalVisible', false);
+      this.onModalVisible('loginModalVisible', true);
       return;
     }
     return res.status;
   }
 
   async requestLogin(userData) {
-    try {
-      const accessToken = await User.fetchLogin(userData);
-      window.localStorage.setItem(accessToken);
+    const res = await User.fetchLogin(userData);
+    if (res.ok) {
+      window.localStorage.setItem('accessToken', res.accessToken);
+      this.onModalVisible('loginModalVisible', false);
       this.setIsLogin(true);
-    } catch (e) {
-      alert(e.status);
-      console.error(e); // 상태코드에 따라 render 해야하는데 흠..
+      return;
     }
+    return res.status;
   }
 }
 
