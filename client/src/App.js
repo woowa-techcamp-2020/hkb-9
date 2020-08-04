@@ -1,6 +1,6 @@
 import { Header } from './components/common/Header';
-import { Navbar } from './components/common/Navbar';
-import { SelectMonth } from './components/common/SelectMonth';
+import { HkbPage } from './pages';
+
 import { Main } from './components/Main';
 import { Calendar } from './components/Calendar';
 import { LoginModal } from './components/modal/LoginModal';
@@ -14,12 +14,7 @@ class App {
   constructor() {
     // App constructor 분리해줘야함
     this.$app = document.querySelector('#App');
-    this.observer = observer;
-    this.userController = userController;
-
     this.init();
-    // new SelectMonth();
-    // this.navbar = new Navbar();
 
     // /* modal start */
     // this.loginModal = new LoginModal({
@@ -47,12 +42,17 @@ class App {
 
   init() {
     this.header = new Header();
-    this.observer.subscribe('isLogin', this, this.render.bind(this));
-    this.userController.checkIsLogin();
+    observer.subscribe('isLogin', this, this.render.bind(this));
+    userController.checkIsLogin();
   }
 
   render(isLogin) {
-    console.log(isLogin);
+    if (isLogin) {
+      new HkbPage();
+      return;
+    }
+    new LoginModal();
+    new JoinModal();
   }
 
   // onModalVisible(modalName, visible) {

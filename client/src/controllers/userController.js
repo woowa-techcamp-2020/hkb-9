@@ -14,7 +14,17 @@ class UserController {
     this.setIsLogin(isLogin);
   }
 
-  async loginController(userData) {
+  async requestJoin(userData) {
+    const res = await User.fetchJoin(userData);
+    if (res.ok) {
+      this.observer.notify('joinModalVisible', false);
+      this.observer.notify('loginModalVisible', true);
+      return;
+    }
+    return res.status;
+  }
+
+  async requestLogin(userData) {
     try {
       const accessToken = await User.fetchLogin(userData);
       window.localStorage.setItem(accessToken);

@@ -1,4 +1,4 @@
-import userApis from '../api/userApis';
+import * as userApis from '../api/userApis';
 import observer from './observer';
 
 class UserModel {
@@ -13,6 +13,11 @@ class UserModel {
     } catch (e) {
       throw e;
     }
+  }
+
+  // error throw 되는지 테스트하기
+  async fetchJoin(userData) {
+    return await userApis.join(userData);
   }
 
   async fetchLogout() {

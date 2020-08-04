@@ -1,87 +1,57 @@
 import './JoinModal.scss';
+import observer from '../../../models/observer';
 import joinModalTemplate from './template';
+import { modalController, userController } from '../../../controllers';
 import userApis from '../../../api/userApis';
 import { isEmpty } from '../../../utils/validation';
 
 export default class JoinModal {
-  constructor({ onModalVisible }) {
+  constructor() {
     this.$target = document.querySelector('.modal');
-
-    const $div = document.createElement('div');
-    $div.innerHTML = joinModalTemplate;
-    this.$target.appendChild($div);
-
-    this.$joinModal = this.$target.querySelector('.join-modal');
-    this.$inputs = this.$joinModal.querySelectorAll('input');
-    this.onModalVisible = onModalVisible;
-    this.bindEvent();
+    observer.subscribe('joinModalVisible', this, this.render.bind(this));
   }
 
   render(visible) {
     if (visible) {
-      this.$joinModal.classList.add('visible');
+      this.$target.innerHTML = joinModalTemplate;
+      this.bindEvent();
       return;
     }
-
-    this.$joinModal.classList.remove('visible');
-  }
-
-  validateInput() {
-    const $errors = this.$target.querySelectorAll('.error');
-    $errors.forEach($error => ($error.style.display = 'none')); // error 초기화
-
-    let hasError = false;
-    Array.from(this.$inputs).every($input => {
-      if (isEmpty($input.value)) {
-        const $error = $input.nextElementSibling;
-        $error.style.display = 'block';
-        hasError = true;
-        return false;
-      }
-      return true;
-    });
-
-    return hasError;
+    this.$target.innerHTML = '';
   }
 
   bindEvent() {
     const onSubmitHandler = async () => {
-      const hasError = this.validateInput();
-      if (hasError) {
+      const userData = {};
+      this.$target.querySelectorAll('input').forEach($input => {
+        userData[$input.name] = $input.value;
+      });
+
+      const status = await userController.requestJoin(userData);
+      if (status === 400) {
+        alert('올바르지 않은 요청입니당');
         return;
       }
 
-      const requestBody = {};
-      this.$inputs.forEach($input => {
-        requestBody[$input.name] = $input.value;
-      });
-      delete requestBody.passwordConfirm; // passwordConfirm은 필요 x
-      const res = await userApis.createUser(requestBody);
-      if (res.status === 409) {
+      if (status === 409) {
         alert('중복된 아이디입니다.');
         return;
       }
 
-      if (res.status !== 201) {
-        alert('회원가입 실패');
-        return;
-      }
       alert('회원가입 성공 >_<');
-      this.$inputs.forEach($input => ($input.value = '')); // input value 초기화
-      onShowLoginModal(); // login on , join off
-    }; // create user
+    };
 
     const onShowLoginModal = () => {
-      this.onModalVisible('joinModal', false); // join modal off
-      this.onModalVisible('loginModal', true); // login modal on
+      modalController.onModalVisible('joinModalVisible', false);
+      modalController.onModalVisible('loginModalVisible', true);
     };
 
     this.$target
-      .querySelector('.join-nav')
+      .querySelector('nav')
       .addEventListener('click', onShowLoginModal);
 
     this.$target
-      .querySelector('.join-button')
+      .querySelector('button')
       .addEventListener('click', onSubmitHandler);
   }
 }

@@ -1,1 +1,1 @@
-module.exports = { extends: [] };
+module.exports = { extends: [], parserOptions: { sourceType: 'module' } };
