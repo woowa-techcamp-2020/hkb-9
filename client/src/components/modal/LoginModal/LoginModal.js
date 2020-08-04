@@ -42,6 +42,7 @@ export default class LoginModal {
       alert('로그인 성공 >_<');
       window.localStorage.setItem('accessToken', accessToken);
       this.onModalVisible('loginModal', false);
+      this.onModalVisible('header', true); // logout button show
       this.renderApp(); // App Render()
     };
 

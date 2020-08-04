@@ -12,7 +12,7 @@ class App {
   constructor() {
     this.$app = document.querySelector('#App');
     this.init();
-    new Header();
+    this.header = new Header();
     new SelectMonth();
     this.navbar = new Navbar();
     this.loginModal = new LoginModal({
