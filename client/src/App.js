@@ -6,20 +6,30 @@ import { Main } from './components/Main';
 import { Calendar } from './components/Calendar';
 import { LoginModal } from './components/modal/LoginModal';
 import { JoinModal } from './components/modal/JoinModal';
-import parsePath from './utils/functions';
+import { parsePath, checkIsLogin } from './utils/functions';
 
 class App {
   constructor() {
     this.$app = document.querySelector('#App');
     this.init();
-    new Header();
+    this.header = new Header();
     new SelectMonth();
     this.navbar = new Navbar();
-    // new LoginModal();
-    new JoinModal();
-
+    this.loginModal = new LoginModal({
+      onModalVisible: this.onModalVisible.bind(this),
+      renderApp: this.render.bind(this),
+    });
+    this.joinModal = new JoinModal({
+      onModalVisible: this.onModalVisible.bind(this),
+    });
     this.bindEvent();
     const path = parsePath(window.location.href); // 새로고침할 때 기본 Url 체크
+
+    if (!checkIsLogin()) {
+      this.onModalVisible('loginModal', true); // login modal render
+      return;
+    }
+
     this.render(path);
   }
 
@@ -32,6 +42,10 @@ class App {
       <div class="modal"></div>
     `;
   }
+
+  onModalVisible(modalName, visible) {
+    this[modalName].render(visible);
+  } // modal visible management
 
   render(path) {
     if (!path) {

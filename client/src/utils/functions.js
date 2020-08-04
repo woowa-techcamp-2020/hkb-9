@@ -4,4 +4,4 @@ export const parsePath = url => {
   return path;
 };
 
-export default parsePath;
+export const checkIsLogin = () => window.localStorage.getItem('accessToken');

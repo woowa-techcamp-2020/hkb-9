@@ -14,11 +14,21 @@ Header {
   .title {
     margin-left: 47.5%;
     font-size: 2rem;
-
   }
 
   .side {
     margin-left: auto;
-    cursor: pointer
+    cursor: pointer;
+    .logout {
+      display: none;
+      color: #dedede;
+    }
+    span + span {
+      margin-left: 1rem;
+    }
+
+    .visible {
+      display: inline-block;
+    }
   }
 }

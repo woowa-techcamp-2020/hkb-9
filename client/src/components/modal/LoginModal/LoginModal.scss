@@ -1,5 +1,7 @@
 @import '../../../styles/definition';
-.gray-bg {
+
+.login-modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -35,27 +37,17 @@
         size: 40px;
       }
     }
-    .input-wrapper {
-      width: 100%;
 
-      input {
-        width: 100%;
-        height: 60px;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        font-size: 25px;
-        padding-left: 20px;
-      }
-
-      .error {
-        margin-top: 5px;
-        color: red;
-        display: none;
-      }
+    input {
+      height: 60px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      font-size: 25px;
+      padding-left: 20px;
     }
 
-    .input-wrapper + .input-wrapper {
+    input + input {
       margin-top: 15px;
     }
 
@@ -85,4 +77,8 @@
       }
     }
   }
+}
+
+.visible {
+  display: block;
 }
