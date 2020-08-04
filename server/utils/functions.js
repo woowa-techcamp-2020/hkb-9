@@ -5,3 +5,4 @@ exports.isEmpty = value =>
   value === undefined || value === null || value === '';
 
 exports.isString = value => typeof value === 'string';
+
