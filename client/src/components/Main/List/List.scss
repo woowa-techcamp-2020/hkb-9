@@ -3,13 +3,41 @@
 .list-container {
   width: 60%;
   margin: 0 auto;
+  label {
+    padding: 0 10px;
+    width: 180px;
+    font-size: 14px;
+    color: $woowa-color;
+    border-color: $woowa-color;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: $grey;
+    }
+  }
 
   form {
     text-align: center;
   }
+  .income, .expense {
+    margin: 15px 0;
+  }
 
-  .income,
-  .expense {
-    margin: 5px 0;
+  #checkbox-income,
+  #checkbox-expense {
+    margin: 5px;
+    cursor: pointer;
+    // display: none;
+    appearance: none;
+    &:checked + label{
+      color: white;
+      background-color: $woowa-color;
+    }
+  }
+
+  .total-income,
+  .total-expense {
+    margin: 0 20px;
   }
 }

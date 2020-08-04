@@ -1,4 +1,4 @@
-const inputFormTemplate = `
+const inputFormTemplate = /*html*/ `
 <div class="input-form">
   <form>
     <button class="delete-btn" type="button">내용 지우기</button>
@@ -12,7 +12,7 @@ const inputFormTemplate = `
     </div>
 
     <div class="input-form-1">
-      <label>날짜</label>
+      <label for="date">날짜</label>
       <input type="date" id="date" class="date" name="date" value="2020-08-03">
 
       <label for="category">카테고리</label>
