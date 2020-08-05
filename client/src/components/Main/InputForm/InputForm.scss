@@ -134,11 +134,18 @@
       border-color: $woowa-color;
       border-style: solid;
       border-radius: 3px;
-      cursor: pointer;
+      cursor: pointer;    
+      appearance: none;
       &:hover {
         background-color: $woowa-grey;
       }
-    }
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }      
+
+    
 
     .content {
       width: 100%;
