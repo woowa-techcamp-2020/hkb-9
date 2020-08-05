@@ -31,7 +31,7 @@ class Observer {
 
   // TODO
   notify(name, data) {
-    // eventName
+    if (!this.list[name]) return;
     console.log(`observer is notifying for '${name}' evnet`);
     this.list[name].forEach(ele => ele.func(data));
   }

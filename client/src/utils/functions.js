@@ -8,5 +8,8 @@ export const parsePath = url => {
   return path;
 };
 
+export const isEmpty = value =>
+  value === '' || value === null || value === undefined;
+
 export const html = (s, ...args) =>
   s.map((ss, i) => `${ss}${args[i] || ''}`).join('');
