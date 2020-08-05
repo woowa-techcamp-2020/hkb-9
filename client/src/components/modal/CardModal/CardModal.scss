@@ -1,0 +1,33 @@
+@import '../../../styles/definition';
+
+.card-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .modal-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border-radius: 7px;
+
+    min: {
+      width: 500px;
+      height: 500px;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    .head {
+      background: #40e1e6;
+    }
+  }
+}

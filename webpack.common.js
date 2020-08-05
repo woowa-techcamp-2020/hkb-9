@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 const config = {
-  entry: './client/src/App.js',
+  entry: './client/src/index.js',
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, './client/dist'),
