@@ -3,7 +3,22 @@
 .list-container {
   width: 60%;
   margin: 0 auto;
-  label {
+
+  .income-label {
+    padding: 0 10px;
+    width: 180px;
+    font-size: 14px;
+    color: $bong-blue;
+    border-color: $bong-blue;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: $bong-blue-grey;
+    }
+  }
+
+  .expense-label {
     padding: 0 10px;
     width: 180px;
     font-size: 14px;
@@ -13,7 +28,7 @@
     border-radius: 5px;
     cursor: pointer;
     &:hover {
-      background-color: $grey;
+      background-color: $woowa-grey;
     }
   }
 
@@ -24,20 +39,36 @@
     margin: 15px 0;
   }
 
-  #checkbox-income,
+  #checkbox-income {
+    margin: 5px;
+    cursor: pointer;
+    display: none;
+    &:checked + label{
+      color: white;
+      border: 2px solid $bong-blue;
+      background-color: $bong-blue;
+    }
+  }
   #checkbox-expense {
     margin: 5px;
     cursor: pointer;
-    // display: none;
-    appearance: none;
+    display: none;
     &:checked + label{
       color: white;
+      border: 2px solid $woowa-color;
       background-color: $woowa-color;
     }
   }
 
-  .total-income,
+  
+
+  .total-income {
+    margin: 0 20px;
+    color: $bong-blue;
+  }
+
   .total-expense {
     margin: 0 20px;
+    color: $woowa-color;
   }
 }

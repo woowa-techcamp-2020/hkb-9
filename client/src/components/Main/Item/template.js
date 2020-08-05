@@ -1,5 +1,4 @@
 const itemTemplate = `
-  <hr>
     <div class="item-header">
       <span class="date">8월 3일</span>
       <span class="day">월</span>

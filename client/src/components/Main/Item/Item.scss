@@ -1,13 +1,18 @@
 @import '../../../styles/definition';
 
+hr {
+  border:1px solid $woowa-dark-grey;
+}
 
 .item-header {
+  color: $woowa-dark-grey;
   height: 30px;
   line-height: 30px;
   position: relative;
 
   .date {
     position: absolute;
+    font-weight: bold;
   }
   .day {
     position: absolute;
@@ -15,10 +20,12 @@
   }
   .date-income {
     position: absolute;
-    right: 100px; 
+    right: 100px;
+    color: $bong-blue; 
   }
   .date-expense {
     position: absolute;
     right: 0; 
+    color: $woowa-color;
   }
 }
