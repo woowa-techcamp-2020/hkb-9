@@ -5,12 +5,13 @@ const {
   updateAccountController,
   getAccountsController,
 } = require('./account-ctrl');
+const { wrapAsync } = require('../../utils/functions');
 
 const router = Router();
 
-router.get('/', getAccountsController);
-router.post('/', createAccountController);
-router.delete('/:accountId', deleteAccountController);
-router.put('/:accountId', updateAccountController);
+router.get('/', wrapAsync(getAccountsController));
+router.post('/', wrapAsync(createAccountController));
+router.delete('/:accountId', wrapAsync(deleteAccountController));
+router.put('/:accountId', wrapAsync(updateAccountController));
 
 module.exports = router;
