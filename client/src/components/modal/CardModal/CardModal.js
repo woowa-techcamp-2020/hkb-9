@@ -10,7 +10,7 @@ export default class CardModal {
   init() {
     this.$target = document.querySelector('.modal');
     observer.subscribe('cardModalVisible', this, this.render.bind(this));
-    // observer.notify('cardModalVisible', true);
+    observer.notify('cardModalVisible', true);
   }
 
   render(visible) {
