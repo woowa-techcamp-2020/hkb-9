@@ -1,10 +1,21 @@
 import * as cardApis from '../api/cardApis';
 
 class CardModel {
-  constructor() {}
+  constructor() {
+    this.cards = [];
+  }
 
-  async createCard(name) {
-    return await cardApis.create(name);
+  set(nextCards) {
+    console.log(nextCards);
+    this.cards = nextCards.slice();
+  }
+
+  async createCard(cardName) {
+    return await cardApis.create(cardName);
+  }
+
+  async getCards() {
+    return await cardApis.getAll();
   }
 }
 

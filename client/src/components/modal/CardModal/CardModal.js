@@ -3,6 +3,7 @@ import observer from '../../../models/observer';
 import { userController, cardController } from '../../../controllers';
 import cardModalTemplate from './template';
 import { isEmpty } from '../../../utils/functions';
+import { STATUS } from '../../../utils/constants';
 import { CardList } from '../../CardList';
 
 export default class CardModal {
@@ -35,8 +36,8 @@ export default class CardModal {
         alert('등록하실 카드 이름을 입력해주세요^^');
         return;
       }
-      const errorStatus = await cardController.requestCreateCard($input.value);
-      if (errorStatus) {
+      const status = await cardController.requestCreateCard($input.value);
+      if (status !== STATUS.CREATE_SUCCESS) {
         alert('카드 등록 실패..');
         return;
       }
