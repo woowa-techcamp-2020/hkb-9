@@ -6,8 +6,8 @@ const setTokenInHeader = options => ({
   },
 });
 export const METHOD = {
-  GET(isJWT) {
-    return isJWT ? setTokenInHeader({}) : {};
+  GETWithToken() {
+    return setTokenInHeader({});
   },
   POST(body, isJWT) {
     const options = {
@@ -18,6 +18,11 @@ export const METHOD = {
       body: JSON.stringify(body),
     };
     return isJWT ? setTokenInHeader(options) : options;
+  },
+
+  DELETE() {
+    const option = { method: 'DELETE' };
+    return setTokenInHeader(option);
   },
 };
 export const request = (url, args) => fetch(url, args);

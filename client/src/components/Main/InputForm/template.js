@@ -32,7 +32,7 @@ const inputFormTemplate = html`
           id="date"
           class="date"
           name="paymentDate"
-          value="2020-08-05"
+          value="2020-08-07"
         />
 
         <label for="category">카테고리</label>
@@ -48,7 +48,7 @@ const inputFormTemplate = html`
 
       <div class="input-form-2">
         <label for="amount">금액</label>
-        <input type="number" class="amount" name="amount" />
+        <input type="text" class="amount" name="amount" />
 
         <label for="content">내용</label>
         <input type="text" class="content" name="content" />

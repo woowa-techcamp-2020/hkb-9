@@ -32,6 +32,17 @@ class CardController {
 
     return res.status;
   }
+
+  async requestDeleteCard(id) {
+    const res = await Card.deleteCard(id);
+    if (res.ok) {
+      const { cards } = await res.json();
+      Card.set(cards);
+      this.setCards(cards);
+      return;
+    }
+    return res.status;
+  }
 }
 
 export default new CardController();

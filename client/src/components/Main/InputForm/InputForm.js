@@ -1,6 +1,6 @@
 import './InputForm.scss';
 import observer from '../../../models/observer';
-import { accountController } from '../../../controllers';
+import { accountController, cardController, userController } from '../../../controllers';
 import inputFormTemplate from './template';
 
 export default class InputForm {
@@ -17,17 +17,20 @@ export default class InputForm {
   render() {
     this.$target.innerHTML = inputFormTemplate;
     this.bindEvent();
+    this.setCards();
     return;
   }
 
   bindEvent() {
     const createAccountHandler = async () => {
-      this.radioInputParser();
+      if (!this.radioInputParser()) return;
+      this.selectInputValidator();
       this.dateInputParser();
       this.textInputParser();
-      this.numberInputParser();
-      this.selectInputValidator();
-      this.selectInputParser();
+      this.amountInputParser();
+      this.monthInputParser();
+      this.categoryInputParser();
+      this.cardInputParser();
       console.log(this.accountData);
       await accountController.requestCreateAccount(this.accountData);
     };
@@ -39,16 +42,40 @@ export default class InputForm {
     this.$target
       .querySelector('.submit-btn')
       .addEventListener('click', createAccountHandler);
+
+    this.$target
+      .querySelector('.delete-btn')
+      .addEventListener('click', this.deleteInputHandler);
+
+    this.$target
+      .querySelector('.amount')
+      .addEventListener('blur', this.printNumberWithCommas);
+
+    this.$target
+      .querySelector('.amount')
+      .addEventListener('focus', this.deleteCommas);
+
+    this.$target
+      .querySelector('.amount')
+      .addEventListener('keydown', this.amountInputValidator);
+
+    this.$target
+      .querySelector('.category')
+      .addEventListener('click', this.categoryClickHandler);
   }
+
   dateInputParser() {
     const paymentDate = this.$target.querySelector('input[type=date]');
     this.accountData[paymentDate.name] = paymentDate.value;
   }
 
-  numberInputParser() {
-    this.$target.querySelectorAll('input[type=number]').forEach($input => {
-      this.accountData[$input.name] = $input.value;
-    });
+  amountInputParser() {
+    const amount = this.$target.querySelector('.amount');
+    amount.value.length
+      ? (this.accountData[amount.name] = parseInt(
+          amount.value.split(',').join('').slice(0, -1),
+        ))
+      : (this.accountData[amount.name] = 0);
   }
 
   textInputParser() {
@@ -57,22 +84,32 @@ export default class InputForm {
     });
   }
 
-  selectInputParser() {
-    this.$target.querySelectorAll('input[type=select]').forEach($input => {
-      const optionValue = $input.options[$input.selectedIndex].value;
-      $input.name === 'cardId'
-        ? (this.accountData[$input.name] = parseInt(optionValue))
-        : (this.accountData[$input.name] = optionValue);
-    });
+  monthInputParser() {
+    const paymentDate = this.$target.querySelector('input[type=date]');
+    this.accountData.month = parseInt(paymentDate.value.substr(6, 1));
+  }
+
+  categoryInputParser() {
+    const category = this.$target.querySelector('.category');
+    const selectedOptionValue = category.options[category.selectedIndex].value;
+    this.accountData.category = selectedOptionValue;
+  }
+
+  cardInputParser() {
+    const card = this.$target.querySelector('.card');
+    const selectedOptionValue = card.options[card.selectedIndex].value;
+    this.accountData.cardId = cardController.getCards().find(card => card.name === selectedOptionValue).id;
   }
 
   radioInputParser() {
     const radioElems = this.$target.querySelectorAll('input[type=radio]');
-    const radioChecked = [...radioElems].find(val => val.checked);
-    if (!radioChecked) {
+    const radioChecked = [...radioElems].find(radio => radio.checked);
+    if (radioChecked) {
+      this.accountData[radioChecked.name] = radioChecked.value;
+    } else {
       alert('수입/지출 항목을 체크해주세요');
     }
-    this.accountData[radioChecked.name] = radioChecked.value;
+    return radioChecked;
   }
 
   setCategories() {
@@ -81,19 +118,19 @@ export default class InputForm {
     const category = document.querySelector('.category');
     const incomeCategories = `
       <option selected disabled hidden>선택하세요</option>  
-      <option>월급</option>  
-      <option>용돈</option>  
-      <option>기타수입</option>  
+      <option value="salary">월급</option>  
+      <option value="pocket">용돈</option>  
+      <option value="extra">기타수입</option>  
     `;
     const expenseCategories = `
       <option selected disabled hidden>선택하세요</option>
-      <option>식비</option>
-      <option>생활</option>
-      <option>쇼핑/뷰티</option>
-      <option>교통</option>
-      <option>의료/건강</option>
-      <option>문화/여가</option>
-      <option>미분류</option>
+      <option value="food">식비</option>
+      <option value="living">생활</option>
+      <option value="shopping">쇼핑/뷰티</option>
+      <option value="transportation">교통</option>
+      <option value="health">의료/건강</option>
+      <option value="culture">문화/여가</option>
+      <option value="unclassified">미분류</option>
     `;
 
     radioChecked.className === 'income'
@@ -103,12 +140,58 @@ export default class InputForm {
 
   selectInputValidator() {
     let countUnSelected = 0;
-    this.$target.querySelectorAll('select')
-    .forEach($elem => {
-      if($elem.children[0].selected) {
+    this.$target.querySelectorAll('select').forEach($elem => {
+      if ($elem.children[0].selected) {
         countUnSelected++;
       }
-    })
-    if(countUnSelected) alert('선택항목을 입력하세요')
+    });
+    if (countUnSelected) alert('선택항목을 입력하세요');
+  }
+
+  amountInputValidator(e) {
+    e.target.value = e.target.value.replace(/[^0-9]/ ,'');
+    e.target.value = e.target.value.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/ ,'');
+    
+  }  
+
+  printNumberWithCommas(e) {
+    e.target.value =
+      e.target.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원';
+  }
+
+  deleteCommas(e) {
+    e.target.value = e.target.value.split(',').join('').slice(0, -1);
+  }
+
+  categoryClickHandler(e) {
+    if (e.target.children.length === 1) alert('수입/지출 항목을 체크해주세요');
+  }
+
+  async setCards() {
+    const card = document.querySelector('.card');
+    let options = '<option selected disabled hidden>선택하세요</option>';
+    cardController.getCards().forEach(card => {
+      options += `<option>${card.name}</option>`;
+    });
+    card.innerHTML = options;
+  }
+
+  deleteInputHandler() {
+    const amountInput = document.querySelector('.amount');
+    const contentInput = document.querySelector('.content');
+
+    amountInput.value = '';
+    contentInput.value = '';
+
+    const radioElems = document.querySelectorAll('input[type=radio]');
+    const radioChecked = [...radioElems].find(val => val.checked);
+    if (radioChecked) radioChecked.checked = false;
+
+    const date = document.querySelector('.date');
+    date.value = '1989-04-18';
+
+    document.querySelector('.category').innerHTML =
+      '<option selected disabled hidden>선택하세요</option>';
+    document.querySelector('.card').childNodes[0].selected = true;
   }
 }
