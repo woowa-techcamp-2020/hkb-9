@@ -17,18 +17,18 @@ const inputFormTemplate = /*html*/ `
 
       <label for="category">카테고리</label>
       <select name="category" class="category">
-        <option value="c1">c1</option>
-        <option value="c2">c2</option>
-        <option value="c3">c3</option>
-        <option value="c4">c4</option>
+        <option>c1</option>
+        <option>c2</option>
+        <option>c3</option>
+        <option>c4</option>
       </select>
 
       <label for="card">결제수단</label>
       <select name="card" class="card">
-        <option value="card1">card1</option>
-        <option value="card2">card2</option>
-        <option value="card3">card3</option>
-        <option value="card4">card4</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
       </select>
     </div>
 

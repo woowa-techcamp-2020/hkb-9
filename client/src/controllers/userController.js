@@ -30,6 +30,7 @@ class UserController {
   async requestLogin(userData) {
     const res = await User.fetchLogin(userData);
     if (res.ok) {
+      const { accessToken } = await res.json();
       window.localStorage.setItem('accessToken', res.accessToken);
       this.onModalVisible('loginModalVisible', false);
       this.setIsLogin(true);
