@@ -1,25 +1,25 @@
 import './CardModal.scss';
+import observer from '../../../models/observer';
 import cardModalTemplate from './template';
 
 export default class CardModal {
-  constructor({ onModalVisible }) {
+  constructor() {
+    this.init();
+  }
+
+  init() {
     this.$target = document.querySelector('.modal');
-    this.onModalVisible = onModalVisible;
-
-    const $div = document.createElement('div');
-    $div.innerHTML = cardModalTemplate;
-    this.$target.appendChild($div);
-
-    this.$cardModal = this.$target.querySelector('.card-modal');
-    this.bindEvent();
+    observer.subscribe('cardModalVisible', this, this.render.bind(this));
+    // observer.notify('cardModalVisible', true);
   }
 
   render(visible) {
     if (visible) {
-      this.$cardModal.classList.add('visible');
+      this.$target.innerHTML = cardModalTemplate;
+      this.bindEvent();
       return;
     }
-    this.$cardModal.classList.remove('visible');
+    this.$target.innerHTML = '';
   }
 
   bindEvent() {}

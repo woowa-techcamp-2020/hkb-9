@@ -1,6 +1,7 @@
 import './Header.scss';
 import observer from '../../../models/observer';
 import headerTemplate from './template';
+import { CardModal } from '../../modal/CardModal';
 import { userController } from '../../../controllers';
 
 export default class Header {
@@ -17,6 +18,7 @@ export default class Header {
     const $logoutButton = this.$target.querySelector('.logout');
     if (isLogin) {
       $logoutButton.classList.add('visible');
+      new CardModal();
       return;
     }
     $logoutButton.classList.remove('visible');
@@ -31,6 +33,12 @@ export default class Header {
       userController.requestLogout();
     };
 
+    const onCardModalVisible = () =>
+      userController.onModalVisible('cardModalVisible', true);
+
     this.$target.querySelector('.logout').addEventListener('click', onLogout);
+    this.$target
+      .querySelector('.pay')
+      .addEventListener('click', onCardModalVisible);
   }
 }

@@ -4,9 +4,10 @@ const cardModalTemplate = html`
   <div class="card-modal">
     <div class="modal-wrapper">
       <div class="head">
-        <div>
-          <i class="f7-icons close-btn">xmark_square_fill</i>
+        <div class="icon">
+          <i class="f7-icons close-btn">xmark_circle</i>
         </div>
+
         <div class="title">결제 수단 관리</div>
       </div>
       <div class="input-wrapper">

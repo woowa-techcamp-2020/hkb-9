@@ -3,7 +3,6 @@ import { SelectMonth } from '../components/common/SelectMonth';
 import { Main } from '../components/Main';
 import { Calendar } from '../components/Calendar';
 import observer from '../models/observer';
-import { routeController } from '../controllers';
 import { parsePath } from '../utils/functions';
 
 export default class HkbPage {

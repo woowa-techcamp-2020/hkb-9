@@ -6,6 +6,7 @@ class Observer {
   subscribe(name, context, func) {
     // name: eventName, context: this, func: callback
     if (!this.list[name]) {
+      // this.list = { isLogin: [] }
       this.list[name] = [];
     }
     this.list[name].push({
@@ -30,9 +31,11 @@ class Observer {
 
   // TODO
   notify(name, data) {
+    // eventName
     console.log(`observer is notifying for '${name}' evnet`);
     this.list[name].forEach(ele => ele.func(data));
   }
+
   // 해당 event를 구독하고 있는 모든 context에 등록한 callback을 실행한다.
 }
 
