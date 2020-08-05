@@ -13,21 +13,14 @@ const cardModalTemplate = html`
         <div class="input-wrapper">
           <input
             type="text"
-            name="card-input"
+            name="name"
+            class="card-input"
+            autofocus
             placeholder="카드 이름을 입력해주세용"
           />
-          <button>생성!</button>
+          <button class="create-button">생성</button>
         </div>
-        <ul class="card-list">
-          <li>
-            <div>배민 페이</div>
-            <i class="f7-icons delete-btn">xmark_circle</i>
-          </li>
-          <li>
-            <div>Bong 페이</div>
-            <i class="f7-icons delete-btn">xmark_circle</i>
-          </li>
-        </ul>
+        <ul class="card-list"></ul>
       </section>
     </div>
   </div>

@@ -8,9 +8,10 @@ exports.createCardController = async (req, res) => {
   } = req;
 
   const connection = await pool.getConnection();
-  const insertId = await Card.createCard(connection, { userId: user.id, name });
+  await Card.createCard(connection, { userId: user.id, name });
+  const cards = await Card.getCards(connection, user.id);
   connection.release();
-  res.stats(201).json({ insertId });
+  res.status(201).json({ cards });
 };
 
 exports.getCardsController = async (req, res) => {

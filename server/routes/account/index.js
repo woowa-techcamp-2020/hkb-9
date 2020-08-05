@@ -5,16 +5,11 @@ const {
   updateAccountController,
   getAccountsController,
 } = require('./account-ctrl');
-const passport = require('passport');
 
 const router = Router();
 
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  getAccountsController,
-);
-router.post('/', createAccountController); // jwt strategy, validation 추가해야해
+router.get('/', getAccountsController);
+router.post('/', createAccountController);
 router.delete('/:accountId', deleteAccountController);
 router.put('/:accountId', updateAccountController);
 
