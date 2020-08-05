@@ -1,19 +1,24 @@
 import './Header.scss';
+import observer from '../../../models/observer';
 import headerTemplate from './template';
-import { checkIsLogin } from '../../../utils/functions';
+import { CardModal } from '../../modal/CardModal';
+import { userController } from '../../../controllers';
 
 export default class Header {
   constructor() {
-    this.$target = document.querySelector('header');
-    this.$target.innerHTML = headerTemplate();
-    this.render(checkIsLogin());
+    this.init();
     this.bindEvent();
   }
-  render(visible) {
-    // logout 버튼만 rerender
+  init() {
+    this.$target = document.querySelector('header');
+    this.$target.innerHTML = headerTemplate();
+    observer.subscribe('isLogin', this, this.render.bind(this));
+  }
+  render(isLogin) {
     const $logoutButton = this.$target.querySelector('.logout');
-    if (visible) {
+    if (isLogin) {
       $logoutButton.classList.add('visible');
+      new CardModal();
       return;
     }
     $logoutButton.classList.remove('visible');
@@ -25,11 +30,15 @@ export default class Header {
       if (!isLogout) {
         return;
       }
-      window.localStorage.removeItem('accessToken');
-      window.location.href = '/';
-      window.location.reload();
+      userController.requestLogout();
     };
 
+    const onCardModalVisible = () =>
+      userController.onModalVisible('cardModalVisible', true);
+
     this.$target.querySelector('.logout').addEventListener('click', onLogout);
+    this.$target
+      .querySelector('.pay')
+      .addEventListener('click', onCardModalVisible);
   }
 }

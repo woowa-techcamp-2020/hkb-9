@@ -15,6 +15,20 @@ exports.validateUserBody = (req, res, next) => {
   next();
 };
 
+exports.validateCardBody = (req, res, next) => {
+  const { name } = req.body;
+  if (isEmpty(name)) {
+    res.status(400).json({ message: 'invalid request body' });
+    return;
+  }
+
+  if (!isString(name)) {
+    res.status(400).json({ message: 'property type must be string' });
+    return;
+  }
+  next();
+};
+
 exports.validateUserLoginBody = (req, res, next) => {
   const { loginId, password } = req.body;
   if (isEmpty(loginId) || isEmpty(password)) {
@@ -26,5 +40,6 @@ exports.validateUserLoginBody = (req, res, next) => {
     res.status(400).json({ message: 'property type must be string' });
     return;
   }
+
   next();
 };
