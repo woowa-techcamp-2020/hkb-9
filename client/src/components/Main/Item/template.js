@@ -5,6 +5,8 @@ const itemTemplate = `
       <span class="date-income">0원</span>
       <span class="date-expense">2,000원</span>
     </div>
+    <div class="item-list">
+    </div>
 `;
 
 export default itemTemplate;

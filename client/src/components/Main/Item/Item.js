@@ -4,14 +4,17 @@ import itemTemplate from './template';
 
 export default class Item {
   constructor() {
-    this.$target = document.querySelector('.list-container');
-    this.$item = document.createElement('div');
-    this.$item.classList.add('item-container');
-    this.$item.innerHTML = itemTemplate;
-    this.render();
+    this.init();
   }
-  render() {
-    this.$target.appendChild(this.$item);
+
+  init() {
+    this.$target = document.querySelector('.item-container');
+    this.render();
     new ItemContent();
+  }
+
+  render() {
+    this.$target.innerHTML = itemTemplate;
+    return;
   }
 }

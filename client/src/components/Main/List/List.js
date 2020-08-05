@@ -4,14 +4,17 @@ import { Item } from './../Item';
 
 export default class List {
   constructor() {
-    this.$target = document.querySelector('main');
-    this.$list = document.createElement('div');
-    this.$list.className = 'list-container';
-    this.$list.innerHTML = listTemplate;
+    this.init();
+  }
+
+  init() {
+    this.$target = document.querySelector('.list-container');
     this.render();
   }
+
   render() {
-    this.$target.appendChild(this.$list);
+    this.$target.innerHTML = listTemplate;
     new Item();
+    return;
   }
 }

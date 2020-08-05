@@ -1,17 +1,20 @@
 import './InputForm.scss';
+import observer from '../../../models/observer';
+import { accountController } from '../../../controllers';
 import inputFormTemplate from './template';
 
 export default class InputForm {
   constructor() {
-    this.$target = document.querySelector('main');
-    this.$target.innerHTML = inputFormTemplate;
-
-    // this.$inputForm = document.createElement('div');
-    // this.$inputForm.className = 'input-form';
-    // this.render();
+    this.init();
   }
 
-  // render() {
-  //   this.$target.appendChild(this.$inputForm);
-  // }
+  init() {
+    this.$target = document.querySelector('.input-form-container');
+    this.render();
+  }
+
+  render() {
+    this.$target.innerHTML = inputFormTemplate;
+    return;
+  }
 }
