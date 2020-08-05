@@ -1,5 +1,4 @@
 const listTemplate = `
-
     <form action="/">
       <div class="income">
         <input type="checkbox" id="checkbox-income" name="type">
@@ -12,7 +11,8 @@ const listTemplate = `
         <span class="total-expense">200원</span>
       </div>
     </form>
-
+    <div class="item-container">
+    </div>
 `;
 
 export default listTemplate;

@@ -5,12 +5,10 @@ const setTokenInHeader = options => ({
     authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
   },
 });
-
 export const METHOD = {
   GET(isJWT) {
     return isJWT ? setTokenInHeader({}) : {};
   },
-
   POST(body, isJWT) {
     const options = {
       method: 'POST',
@@ -22,8 +20,6 @@ export const METHOD = {
     return isJWT ? setTokenInHeader(options) : options;
   },
 };
-
 export const request = (url, args) => fetch(url, args);
-
 export const requestWithReturn = (url, args) =>
   request(url, args).then(res => res.json());

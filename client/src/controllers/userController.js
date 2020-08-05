@@ -31,7 +31,11 @@ class UserController {
     const res = await User.fetchLogin(userData);
     if (res.ok) {
       const { accessToken } = await res.json();
+<<<<<<< HEAD
       window.localStorage.setItem('accessToken', accessToken);
+=======
+      window.localStorage.setItem('accessToken', res.accessToken);
+>>>>>>> feat/30-fe-mainpage-additional
       this.onModalVisible('loginModalVisible', false);
       this.setIsLogin(true);
       return;

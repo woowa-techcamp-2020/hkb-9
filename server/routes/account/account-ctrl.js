@@ -4,7 +4,9 @@ const Account = require('../../model/account');
 exports.createAccountController = async (req, res, next) => {
   const connection = await pool.getConnection();
   try {
-    const insertId = await Account.createAccount(connection, req.body);
+    const options = req.body;
+    options.userId = req.user.id;
+    const insertId = await Account.createAccount(connection, options);
     connection.release();
     res.status(201).json({ insertId });
   } catch (e) {
