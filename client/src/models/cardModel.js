@@ -4,10 +4,11 @@ class CardModel {
   constructor() {
     this.cards = [];
   }
-
+  get() {
+    return this.cards;
+  }
   set(nextCards) {
-    console.log(nextCards);
-    this.cards = nextCards.slice();
+    this.cards = nextCards.concat();
   }
 
   async createCard(cardName) {

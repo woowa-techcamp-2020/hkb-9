@@ -6,6 +6,10 @@ class CardController {
     observer.notify('cardChanged', cards);
   }
 
+  getCards() {
+    return Card.get();
+  }
+
   async requestCreateCard(cardName) {
     const res = await Card.createCard(cardName);
     if (res.ok) {
