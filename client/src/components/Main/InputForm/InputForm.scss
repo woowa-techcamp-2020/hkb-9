@@ -1,0 +1,172 @@
+@import '../../../styles/definition';
+
+.input-form {
+  width: 60%;
+  justify-content: center;
+  align-items: center;
+  margin: 3% auto;
+  position: relative;
+
+  label {
+    font-size: 14px;
+    color: $woowa-dark-grey;
+  }
+
+  .delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 0;
+    width: 80px;
+    font-size: 14px;
+    color: white;
+    background-color: $woowa-color-week;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: $woowa-color;
+    }
+  }
+
+  .select-type {
+    display: block;
+    margin: 10px 0 20px 0;
+
+    .title {
+      margin-right: 20px;
+    }
+
+    .income,
+    .expense {
+      cursor: pointer;
+      color: $woowa-color;
+      border: 2px solid $woowa-color;
+      border-radius: 3px;
+      padding: 2px 15px;
+      margin: 0 3px;
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+
+    input {
+      display: none;
+      &:checked + label {
+        color: white;
+        background-color: $woowa-color;
+      }
+    }
+  }
+
+  .input-form-1 {
+    display: flex;
+    justify-content: space-between;
+    line-height: 30px;
+    margin: 20px 0;
+
+    label {
+      width: 200px;
+      vertical-align: middle;
+    }
+
+    .date {
+      width: 100%;
+      margin: 0 30px 0 0;
+      color: $woowa-color;
+      border-color: $woowa-color;
+      border-style: solid;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+
+    .category {
+      width: 100%;
+      margin: 0 30px 0 5px;
+      color: $woowa-color;
+      border: 2px;
+      border-color: $woowa-color;
+      border-style: solid;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+
+    .card {
+      width: 100%;
+      margin: 0 0 0 5px;
+      color: $woowa-color;
+      border: 2px;
+      border-color: $woowa-color;
+      border-style: solid;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+  }
+
+  .input-form-2 {
+    display: flex;
+    line-height: 30px;
+    justify-content: space-between;
+    margin: 20px 0;
+
+    label {
+      width: 103px;
+      vertical-align: middle;
+    }
+
+    .amount {
+      width: 100%;
+      margin: 0 30px 0 5px;
+      color: $woowa-color;
+      border: 2px;
+      border-color: $woowa-color;
+      border-style: solid;
+      border-radius: 3px;
+      cursor: pointer;
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+
+    .content {
+      width: 100%;
+      margin: 0 0 0 5px;
+      color: $woowa-color;
+      border-color: $woowa-color;
+      border-style: solid;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $woowa-grey;
+      }
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    margin: 10px 0;
+    color: white;
+    background-color: $woowa-color-week;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: $woowa-color;
+    }
+  }
+}
