@@ -23,6 +23,7 @@ const inputFormTemplate = html`
           value="expense"
         />
         <label for="expense" class="expense">지출</label>
+        <div class="warn">분류를 선택해주세요</div>
       </div>
 
       <div class="input-form-1">
@@ -42,7 +43,7 @@ const inputFormTemplate = html`
 
         <label for="card">결제수단</label>
         <select name="cardId" class="card">
-          <option selected disabled hidden>선택하세요</option>  
+          <option selected disabled hidden>선택하세요</option>
         </select>
       </div>
 

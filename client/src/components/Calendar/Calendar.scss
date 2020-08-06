@@ -1,27 +1,36 @@
 @import '../../styles/definition';
 
 .calendar-container {
- width: 100%;
- margin-top: 1.5rem;
- display: flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
- 
+  font-family: 궁서;
+  width: 70%;
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
   .weekdays {
     display: flex;
     width: 50%;
     color: black;
-  
+    line-height: 10px;
+
     div {
-      display: flex;
-      justify-content: start;
-      align-items: start;
+      text-align: center;
+      display: block;
       width: calc(100% / 7);
       height: 3rem;
-      // color: #eeeeee;
-      padding: 0.2rem;
+      border: 1px solid black;
+      padding: 3rem 0.2rem;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      span {
+        margin-top: 23px;
+        font-size: 16px;
+        display: block;
+      }
     }
   }
 
@@ -36,14 +45,18 @@
       width: calc(100% / 7);
       height: 5rem;
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      font-weight: bold;
+      border: 1px solid black;
+
       // text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
       transition: background-color 0.2s;
 
       &:hover:not(.today) {
         background-color: #262626;
-        border: 0.2rem solid #777;
+        border: 1px solid black;
         cursor: pointer;
         color: #eeeeee;
       }
@@ -61,5 +74,22 @@
 
   .red {
     color: red;
+  }
+  .blue {
+    color: blue;
+  }
+
+  .logo {
+    width: 50%;
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    font-style: 70px;
+    padding: 20px;
+    border: 1px solid black;
+    // display: inline;
+    .block {
+      display: block;
+    }
   }
 }
