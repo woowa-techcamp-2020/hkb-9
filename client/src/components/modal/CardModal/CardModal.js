@@ -41,7 +41,7 @@ export default class CardModal {
         alert('카드 등록 실패..');
         return;
       }
-      $input.value = ''; // input 초기화
+      $input.value = ''; // input  초기화
     };
 
     this.$target

@@ -6,3 +6,5 @@ export const STATUS = {
   NOT_FOUND: 404,
   DUPLICATED: 409,
 };
+
+export const API_URL = 'https://localhost:3000';
