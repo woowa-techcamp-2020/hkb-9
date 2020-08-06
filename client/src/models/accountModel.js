@@ -6,6 +6,9 @@ class AccountModel {
     this.currentMonth = new Date().getMonth() + 1;
     this.accounts = [];
     this.monthlyAccounts = [];
+    this.monthlyTotal = 0;
+    this.monthlyIncome = 0;
+    this.monthlyExpense = 0;
   }
 
   get(keyName) {
@@ -27,6 +30,14 @@ class AccountModel {
       ({ month, year }) =>
         month === this.currentMonth && year === this.currentYear,
     );
+    this.monthlyTotal = this.monthlyAccounts.reduce(
+      (acc, cur) => acc + cur.amount,
+      0,
+    );
+    this.monthlyIncome = this.monthlyAccounts
+      .filter(account => account.type === 'income')
+      .reduce((acc, cur) => acc + cur.amount, 0);
+    this.monthlyExpense = this.monthlyTotal - this.monthlyIncome;
   }
 
   async getAccounts() {

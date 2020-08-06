@@ -2,6 +2,7 @@
 import './Main.scss';
 import mainTemplate from './template';
 import { InputForm } from './InputForm';
+import { Amount } from '../Amount';
 import { List } from './List';
 
 export default class Main {
@@ -11,15 +12,9 @@ export default class Main {
 
   init() {
     this.$target = document.querySelector('main');
-    this.render();
-    new InputForm();
-    new List();
-  }
-
-  render() {
     this.$target.innerHTML = mainTemplate;
-    // new InputForm();
-    // new List();
-    return;
+    new InputForm();
+    new Amount({ selector: '.amount-container' });
+    new List();
   }
 }
