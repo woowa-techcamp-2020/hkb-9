@@ -11,7 +11,7 @@ module.exports = merge(commonConfig, {
     port: 9000,
     hot: true,
     proxy: {
-      '/api': 'http://localhost:4000', // 프록시
+      '/api': 'http://localhost:3000', // 프록시
     },
   },
 });

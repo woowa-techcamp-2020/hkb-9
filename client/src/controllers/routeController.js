@@ -1,8 +1,8 @@
-import observer from '../models/observer';
+import Observer from '../models/observer';
 
-class RouteController {
+class RouteController extends Observer {
   setPage(path) {
-    observer.notify('pageChange', path);
+    this.notify('pageChange', path);
   }
 
   pushState(path) {

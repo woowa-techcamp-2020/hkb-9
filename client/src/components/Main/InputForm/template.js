@@ -1,6 +1,6 @@
 import { html } from '../../../utils/functions';
 
-const inputFormTemplate = html`
+export const inputFormTemplate = html`
   <div class="input-form">
     <form>
       <button class="delete-btn" type="button">내용 지우기</button>
@@ -38,7 +38,7 @@ const inputFormTemplate = html`
 
         <label for="category">카테고리</label>
         <select name="category" class="category">
-        <option selected disabled hidden>선택하세요</option>
+          <option selected disabled hidden>선택하세요</option>
         </select>
 
         <label for="card">결제수단</label>
@@ -60,4 +60,27 @@ const inputFormTemplate = html`
   </div>
 `;
 
-export default inputFormTemplate;
+export const incomeCategoryTemplate = html`
+  <option selected disabled hidden>선택하세요</option>
+  <option value="salary">월급</option>
+  <option value="pocket">용돈</option>
+  <option value="extra">기타수입</option>
+`;
+
+export const expenseCategoryTemplate = html`
+  <option selected disabled hidden>선택하세요</option>
+  <option value="food">식비</option>
+  <option value="living">생활</option>
+  <option value="shopping">쇼핑/뷰티</option>
+  <option value="transportation">교통</option>
+  <option value="health">의료/건강</option>
+  <option value="culture">문화/여가</option>
+  <option value="unclassified">미분류</option>
+`;
+
+export const initCardOptionTemplate = html`<option selected disabled hidden
+  >선택하세요</option
+>`;
+
+export const cardOptionTemplate = (id, name) =>
+  html`<option value=${id}>${name}</option>`;

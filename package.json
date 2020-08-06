@@ -54,7 +54,7 @@
     "dev:client": "webpack-dev-server --open --config webpack.dev.js",
     "dev": "npm-run-all --parallel dev:client dev:server",
     "production:server": "cp .env.prod .env && pm2 start ./server/index.js",
-    "production:client": "webpack --watch --config webpack.prod.js",
+    "production:client": "webpack --config webpack.prod.js",
     "production": "npm-run-all --parallel production:client production:server"
   },
   "repository": {
