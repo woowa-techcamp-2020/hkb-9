@@ -23,6 +23,7 @@ export const inputFormTemplate = html`
           value="expense"
         />
         <label for="expense" class="expense">지출</label>
+        <div class="warn">분류를 선택해주세요</div>
       </div>
 
       <div class="input-form-1">
