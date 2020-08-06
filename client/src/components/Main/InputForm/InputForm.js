@@ -1,5 +1,4 @@
 import './InputForm.scss';
-import observer from '../../../models/observer';
 import { accountController, cardController } from '../../../controllers';
 import {
   inputFormTemplate,
@@ -15,6 +14,7 @@ import {
   deleteCommas,
   returnDateFormat,
 } from '../../../utils/functions';
+import { STATUS } from '../../../utils/constants';
 
 const messages = {
   typeError: '입/지출 항목을 체크해주세요',
@@ -115,7 +115,12 @@ export default class InputForm {
       this.monthInputParser();
       this.categoryInputParser();
       this.cardInputParser();
-      await accountController.requestCreateAccount(this.accountData);
+      const status = await accountController.requestCreateAccount(
+        this.accountData,
+      );
+      if (status !== STATUS.CREATE_SUCCESS) {
+        alert('생성 실패');
+      }
     };
 
     this.$selectType.addEventListener('change', setCategoryHandler);
@@ -154,10 +159,10 @@ export default class InputForm {
   amountInputParser() {
     const { name, value } = this.$amountInput;
     if (value.length) {
-      this.accountData[name] = 0;
+      this.accountData[name] = parseInt(deleteCommas(value));
       return;
     }
-    this.accountData[name] = parseInt(deleteCommas(value));
+    this.accountData[name] = 0;
     return deleteCommas(value);
   }
 
