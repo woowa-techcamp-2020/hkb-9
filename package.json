@@ -16,7 +16,6 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pm2": "^4.4.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -54,7 +53,7 @@
     "dev:client": "webpack-dev-server --open --config webpack.dev.js",
     "dev": "npm-run-all --parallel dev:client dev:server",
     "production:server": "cp .env.prod .env && pm2 start ./server/index.js",
-    "production:client": "webpack --watch --config webpack.prod.js",
+    "production:client": "webpack --config webpack.prod.js",
     "production": "npm-run-all --parallel production:client production:server"
   },
   "repository": {
