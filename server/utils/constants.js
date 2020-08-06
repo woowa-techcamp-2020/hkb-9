@@ -1,4 +1,4 @@
-const SERVER_PORT = 4000;
+const SERVER_PORT = 3000;
 
 module.exports = {
   SERVER_PORT,

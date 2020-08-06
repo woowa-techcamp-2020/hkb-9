@@ -39,4 +39,4 @@ class Observer {
   // 해당 event를 구독하고 있는 모든 context에 등록한 callback을 실행한다.
 }
 
-export default new Observer();
+export default Observer;

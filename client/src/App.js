@@ -13,7 +13,7 @@ class App {
 
   init() {
     this.header = new Header();
-    observer.subscribe('isLogin', this, this.render.bind(this));
+    userController.subscribe('isLogin', this, this.render.bind(this));
     userController.checkIsLogin();
   }
 

@@ -1,9 +1,9 @@
-import observer from '../models/observer';
+import Observer from '../models/observer';
 import Card from '../models/cardModel';
 
-class CardController {
+class CardController extends Observer {
   setCards(cards) {
-    observer.notify('cardChanged', cards);
+    this.notify('cardChanged', cards);
   }
 
   getCards() {
