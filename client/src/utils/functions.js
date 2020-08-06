@@ -53,3 +53,31 @@ export const mapForIterator = (iterator, func) => {
   }
   return res;
 };
+
+export const convertCategoryToKorean = category => {
+  console.log(category);
+  switch (category) {
+    case 'salary':
+      return '월급';
+    case 'pocket':
+      return '용돈';
+    case 'extra':
+      return '기타수입';
+    case 'food':
+      return '식비';
+    case 'living':
+      return '생활';
+    case 'shopping':
+      return '쇼핑/뷰티';
+    case 'transportation':
+      return '교통';
+    case 'health':
+      return '의료/건강';
+    case 'culture':
+      return '문화/여가';
+    case 'unclassified':
+      return '미분류';
+    default:
+      return 'gkdl';
+  }
+};

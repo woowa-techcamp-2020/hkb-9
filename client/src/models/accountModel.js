@@ -50,17 +50,18 @@ class AccountModel {
     /* render data parse start */
     const items = new Map();
     accountsFilterByMonth.forEach(account => {
-      const { date, type, amount } = account;
+      const { date, type, amount, payment_date } = account;
       if (items.has(date)) {
         const item = items.get(date);
         item[type] += amount;
+        item.day = getDayName(parseDatetime(payment_date).day - 1);
         item.contents.push(account);
         return;
       }
       items.set(date, {
         income: type === 'income' ? amount : 0,
         expense: type === 'expense' ? amount : 0,
-        day: getDayName(parseDatetime(date).day),
+        day: getDayName(parseDatetime(payment_date).day - 1),
         contents: [account],
       });
     });

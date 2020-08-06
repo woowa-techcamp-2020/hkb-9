@@ -1,4 +1,8 @@
-import { html, printNumberWithCommas } from '../../../utils/functions';
+import {
+  html,
+  printNumberWithCommas,
+  convertCategoryToKorean,
+} from '../../../utils/functions';
 
 export const itemTemplate = ({ month, date, income, expense, day }) => html`
   <div class="item-header">
@@ -10,11 +14,23 @@ export const itemTemplate = ({ month, date, income, expense, day }) => html`
   <div class="item-list" id="item-list-${date}"></div>
 `;
 
-export const itemContentTemplate = () => html`
-  <div class="item-content-container">
-    <span class="item-category">쇼핑/뷰티</span>
-    <span class="item-content">미용실</span>
-    <span class="item-card">현대카드</span>
-    <span class="item-amount">2,000원</span>
+export const itemContentTemplate = ({
+  id,
+  type,
+  content,
+  category,
+  payMethod,
+  amount,
+}) => html`
+  <div class="item-content-container" data-id=${id}>
+    <span class="item-category ${type === 'expense' ? 'item-type-expense' : ''}"
+      >${convertCategoryToKorean(category)}</span
+    >
+    <span class="item-content">${content}</span>
+    <span class="item-card">${payMethod}</span>
+    <span class="item-amount ${type === 'expense' ? 'item-color-expense' : ''}"
+      >${(type === 'income' ? '+' : '-') +
+      printNumberWithCommas(amount)}원</span
+    >
   </div>
 `; // date-id 설정하기
