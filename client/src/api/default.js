@@ -19,7 +19,6 @@ export const METHOD = {
     };
     return isJWT ? setTokenInHeader(options) : options;
   },
-
   DELETE() {
     const option = { method: 'DELETE' };
     return setTokenInHeader(option);
