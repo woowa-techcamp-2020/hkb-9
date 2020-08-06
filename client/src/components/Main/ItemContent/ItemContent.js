@@ -1,4 +1,4 @@
-import './ItemContent.scss';
+// import './ItemContent.scss';
 import itemContentTemplate from './template';
 
 export default class ItemContent {
@@ -16,6 +16,5 @@ export default class ItemContent {
 
   render() {
     this.$target.appendChild(this.$itemContent);
-    return;
   }
 }

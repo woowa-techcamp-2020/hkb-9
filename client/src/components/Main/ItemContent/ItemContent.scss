@@ -1,9 +1,5 @@
 @import '../../../styles/definition';
 
-hr {
-  border: 1px solid $woowa-dark-grey;
-}
-
 .item-content {
   height: 30px;
   line-height: 30px;
@@ -27,7 +23,7 @@ hr {
     position: absolute;
     right: 100px;
   }
-  
+
   .item-amount {
     position: absolute;
     right: 0;

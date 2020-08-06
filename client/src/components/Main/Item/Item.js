@@ -1,7 +1,6 @@
 import './Item.scss';
-import { ItemContent } from './../ItemContent';
 import { accountController } from '../../../controllers';
-import itemTemplate from './template';
+import { itemTemplate, itemContentTemplate } from './template';
 
 export default class Item {
   constructor({ account, date }) {
@@ -21,6 +20,9 @@ export default class Item {
       income,
       expense,
     });
-    // new ItemContent();
+
+    this.$target.querySelector(
+      `#item-list-${this.date}`,
+    ).innerHTML = contents.map(itemContentTemplate).join('');
   }
 }
