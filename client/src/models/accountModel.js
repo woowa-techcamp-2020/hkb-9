@@ -1,9 +1,12 @@
 import * as accountApis from '../api/accountApis';
-import observer from './observer';
 
 class AccountModel {
   constructor() {
-    this.observer = observer;
+    this.accounts = [];
+  }
+
+  set(nextData) {
+    this.accounts = nextData.concat();
   }
 
   async fetchCreateAccount(accountData) {

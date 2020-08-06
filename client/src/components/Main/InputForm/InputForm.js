@@ -1,10 +1,6 @@
 import './InputForm.scss';
 import observer from '../../../models/observer';
-import {
-  accountController,
-  cardController,
-  userController,
-} from '../../../controllers';
+import { accountController, cardController } from '../../../controllers';
 import {
   inputFormTemplate,
   incomeCategoryTemplate,

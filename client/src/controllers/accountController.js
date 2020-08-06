@@ -2,17 +2,18 @@ import Observer from '../models/observer';
 import Account from '../models/accountModel';
 
 class AccountController extends Observer {
-  setIsLogin(isLogin) {
-    this.notify('isLogin', isLogin);
-  }
-
-  checkIsLogin() {
-    const isLogin = window.localStorage.getItem('accessToken') ? true : false;
-    this.setIsLogin(isLogin);
+  setAccounts(accounts) {
+    this.notify('accountChanged', accounts);
   }
 
   async requestCreateAccount(accountData) {
     const res = await Account.fetchCreateAccount(accountData);
+    if (res.ok) {
+      const { accounts } = await res.json();
+      Account.set(accounts);
+      this.setAccounts(accounts);
+    }
+    return res.status;
   }
 }
 
