@@ -11,7 +11,7 @@ export default class ItemContent {
     this.$itemContent = document.createElement('div');
     this.$itemContent.className = 'item-content';
     this.$itemContent.innerHTML = itemContentTemplate;
-    this.render();
+    // this.render();
   }
 
   render() {

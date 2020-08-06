@@ -22,8 +22,8 @@ export default class List {
 
   render(accounts) {
     this.$target.innerHTML = mapForIterator(accounts, listTemplate).join('');
-    for (const account of accounts) {
-      new Item({ account, date: account[0] });
+    for (const [date, account] of accounts) {
+      new Item({ date, account });
     }
   }
 }
