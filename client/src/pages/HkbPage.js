@@ -10,12 +10,13 @@ export default class HkbPage {
   constructor() {
     this.init();
   }
-  init() {
+  async init() {
     new Navbar();
     new SelectMonth();
+    await cardController.requestGetCards();
     observer.subscribe('pageChange', this, this.render.bind(this));
+
     this.render(parsePath(window.location.href)); // 새로고침 > 기본 경로 체크
-    cardController.requestGetCards();
   }
 
   render(path) {
