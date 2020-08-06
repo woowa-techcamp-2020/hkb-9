@@ -8,23 +8,55 @@ Header {
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
-  color: #eeeeee;
+  color: $woowa-color;
   font-weight: 600;
 
   .title {
-    margin-left: 47.5%;
     font-size: 2rem;
   }
+  .logo {
+    .logo-1 {
+      font-size: 15px;
+      padding: 7px;
+      border-radius: 25px;
+      background-color: white;
+      color: $woowa-color;
+    }
+    .logo-2 {
+      color: white;
+      font-size: 15px;
+      background-color: $woowa-color-week;
+    }
+  }
+
+
 
   .side {
     margin-left: auto;
     cursor: pointer;
+    font-size: 13px;
     .logout {
       display: none;
-      color: #dedede;
+      background-color: white;
+      color: $woowa-color;
+      padding: 10px;
+      border-radius: 5px;
+      &:hover {
+        background-color: $woowa-grey;
+        color: $woowa-dark-grey;
+      }
+    }
+    .pay {
+      background-color: white;
+      padding: 6px;
+      border-radius: 5px;
+      &:hover {
+        background-color: $woowa-grey;
+        color: $woowa-dark-grey;
+      }
     }
     span + span {
-      margin-left: 1rem;
+      margin-left: 0.5rem;
     }
 
     .visible {

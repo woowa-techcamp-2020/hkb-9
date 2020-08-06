@@ -8,24 +8,27 @@
   margin-top: 1.5rem;
   
   .filter-box {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     a {
-      width: 30%;
-      background-color: $woowa-color-week;
-      color: #eeeeee;
-      border: none;
+      width: 33%;
+      background-color: $woowa-grey;
+      border: 2px solid $woowa-color;
+      color: $woowa-dark-grey;
       border-radius: 5px;
       padding: 10px 20px;
-      font-size: 1.5rem;
+      font-size: 1rem;
       text-align: center;
       cursor: pointer;
 
       &:hover {
         background-color: $woowa-color;
+        color: white;
+        width: 40%;
+        transition: width 0.3s;
       }
     }
   
