@@ -40,14 +40,13 @@
     flex-wrap: wrap;
 
     div {
-      font-size: 1.4rem;
       padding: 0.2rem;
       width: calc(100% / 7);
       height: 5rem;
       display: flex;
       justify-content: center;
-      align-items: center;
-      font-size: 50px;
+      // align-items: center;
+      font-size: 30px;
       font-weight: bold;
       border: 1px solid black;
 
@@ -82,7 +81,7 @@
   .logo {
     width: 50%;
     color: black;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     font-style: 70px;
     padding: 20px;
@@ -90,6 +89,7 @@
     // display: inline;
     .block {
       display: block;
+      margin: 3px 0;
     }
   }
 }

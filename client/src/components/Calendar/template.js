@@ -12,8 +12,8 @@ const calendarTemplate = `
     <div class="days">
     </div>
     <div class="logo">
-      <span class="block">크롱 중고컴퓨터 판매/수리 <span class="red">1588-5555</span></span>
-      <span class="block">호눅스 컴퓨터학원       <span class="blue">1577-1577</span></span>
+      <span class="block">혼욱스 중고컴퓨터 판매/수리 <span class="red">1588-5555</span></span>
+      <span class="block">클옹 컴퓨터학원 8월 수강생 大모집<span class="blue">1577-1577</span></span>
     
     </div>
   </div>

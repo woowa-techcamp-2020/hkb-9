@@ -21,8 +21,9 @@ import {
 } from '../../../utils/functions';
 
 const messages = {
-  typeError: '입/지출 항목을 체크해주세요',
-  selectError: '선택사항을 입력해주세요.',
+  typeError: '분류를 선택해주세요',
+  categoryError: '카테고리를 선택해주세요.',
+  cardError: '결제수단을 선택해주세요.',
   amountError: '금액을 입력해주세요.',
   contentError: '내용을 입력해주세요.',
 };
@@ -31,7 +32,7 @@ export default class InputForm {
   constructor() {
     this.$target = document.querySelector('.input-form-container');
     this.$target.innerHTML = inputFormTemplate;
-    this.isCategorySelected = false;
+    this.isTypeSelected = false;
     this.accountData = {};
     this.bindElement();
     this.bindEvent();
@@ -43,7 +44,7 @@ export default class InputForm {
     this.$selectType = this.$target.querySelector('.select-type');
     this.$radioElements = this.$target.querySelectorAll('input[type=radio]');
     this.$textInputs = this.$target.querySelectorAll('input[type=text]');
-    this.$selectElements = this.$target.querySelectorAll('select');
+    // this.$selectElements = this.$target.querySelectorAll('select');
     this.$dateInput = this.$target.querySelector('input[type=date]');
     this.$amountInput = this.$target.querySelector('.amount');
     this.$cardInput = this.$target.querySelector('.card');
@@ -51,6 +52,11 @@ export default class InputForm {
 
     this.$deleteButton = this.$target.querySelector('.delete-btn');
     this.$submitButton = this.$target.querySelector('.submit-btn');
+    this.$typeWarningMsg = this.$target.querySelector('.warn-type');
+    this.$categoryWarningMsg = this.$target.querySelector('.warn-category');
+    this.$cardWarningMsg = this.$target.querySelector('.warn-card');
+    this.$amountWarningMsg = this.$target.querySelector('.warn-amount');
+    this.$contentWarningMsg = this.$target.querySelector('.warn-content');
   }
 
   bindEvent() {
@@ -58,13 +64,15 @@ export default class InputForm {
       (target.value = printNumberWithCommas(target.value) + '원');
 
     const setCategoryHandler = () => {
-      this.isCategorySelected = true;
+      this.isTypeSelected = true;
       const $radioChecked = getCheckedRadioElement(this.$radioElements);
       if ($radioChecked.className === 'income') {
         this.$category.innerHTML = incomeCategoryTemplate;
+        this.$typeWarningMsg.style.display = 'none';
         return;
       }
       this.$category.innerHTML = expenseCategoryTemplate;
+      this.$typeWarningMsg.style.display = 'none';
     };
 
     const deleteCommaHandler = ({ target }) =>
@@ -75,7 +83,7 @@ export default class InputForm {
     };
 
     const deleteInputHandler = () => {
-      this.isCategorySelected = false;
+      this.isTypeSelected = false;
       this.$amountInput.value = '';
       this.$contentInput.value = '';
       this.$dateInput.value = returnDateFormat(new Date());
@@ -88,37 +96,62 @@ export default class InputForm {
     };
 
     const categoryClickHandler = () => {
-      if (this.isCategorySelected) {
+      if (this.isTypeSelected) {
+        this.$typeWarningMsg.style.display = 'none';
+        this.$categoryWarningMsg.style.display = 'none';
         return;
       }
-      alert(messages.typeError);
+      this.$typeWarningMsg.innerHTML = messages.typeError;
+      this.$typeWarningMsg.style.display = 'block';
     };
+
+    const cardChangeHandler = () => {
+      // console.log(this.$cardInput.children[0])
+      if (this.$cardInput.children[0].selected) {
+        this.$cardWarningMsg.innerHTML = messages.cardError;
+        this.$cardWarningMsg.style.display = 'block';
+        return;
+      }
+      this.$cardWarningMsg.style.display = 'none';
+    };
+
+    const amountKeyDownHandler = () => {
+      if (this.$amountInput) {
+        this.$amountWarningMsg.style.display = 'none';
+        return;
+      }
+      this.$amountWarningMsg.innerHTML = messages.amountError;
+      this.$amountWarningMsg.style.display = 'block';
+      return;
+    }
 
     const createAccountHandler = async () => {
       if (!this.radioInputParser()) {
         return;
       }
 
-      if (!this.selectInputValidator()) {
+      if (!this.categoryInputValidator()) {
         return;
       }
 
-      if (!deleteCommas(this.$amountInput.value)) {
-        alert(messages.amountError);
+      if (!this.cardInputValidator()) {
         return;
       }
 
-      if (!this.$contentInput.value) {
-        alert(messages.contentError);
+      if (!this.amountInputValidator()) {
+        return;
+      }
+
+      if (!this.contentInputValidator()) {
         return;
       }
 
       this.dateInputParser();
       this.textInputParser();
-      this.amountInputParser();
-      this.monthInputParser();
       this.categoryInputParser();
       this.cardInputParser();
+      this.amountInputParser();
+      this.monthInputParser();
       await accountController.requestCreateAccount(this.accountData);
     };
 
@@ -127,22 +160,67 @@ export default class InputForm {
     this.$amountInput.addEventListener('focus', deleteCommaHandler);
     this.$amountInput.addEventListener('change', changeStringToNumberHanlder);
     this.$category.addEventListener('click', categoryClickHandler);
+    this.$cardInput.addEventListener('change', cardChangeHandler);
+    this.$amountInput.addEventListener('keydown', amountKeyDownHandler);
     this.$deleteButton.addEventListener('click', deleteInputHandler);
     this.$submitButton.addEventListener('click', createAccountHandler);
   }
 
-  selectInputValidator() {
-    let isValidate = true;
-    Array.from(this.$selectElements).forEach($elemment => {
-      if ($elemment.children[0].selected) {
-        isValidate = false;
-        return true;
-      }
-    });
-    if (!isValidate) {
-      alert(messages.selectError);
+  // selectInputValidator() {
+  //   let isValid = true;
+  //   Array.from(this.$selectElements).forEach($element => {
+  //     if ($element.children[0].selected) {
+  //       isValid = false;
+  //       if(!isValid) {
+  //         console.log($element.className)
+  //       }
+  //       return true;
+  //     }
+  //   });
+  //   if (!isValid) {
+  //     this.$categoryWarningMsg.innerHTML = messages.selectError;
+  //     this.$categoryWarningMsg.style.display = 'block';
+  //   }
+  //   return isValid;
+  // }
+
+  categoryInputValidator() {
+    if (this.$category.children[0].selected) {
+      this.$categoryWarningMsg.innerHTML = messages.categoryError;
+      this.$categoryWarningMsg.style.display = 'block';
+      return false;
     }
-    return isValidate;
+    return true;
+  }
+
+  cardInputValidator() {
+    if (this.$cardInput.children[0].selected) {
+      // console.log(this.$cardInput.children[0])
+      this.$cardWarningMsg.innerHTML = messages.cardError;
+      this.$cardWarningMsg.style.display = 'block';
+      return false;
+    }
+    return true;
+  }
+
+  amountInputValidator() {
+    if (deleteCommas(this.$amountInput.value)) {
+      this.$amountWarningMsg.style.display = 'none';
+      return true;
+    }
+    this.$amountWarningMsg.innerHTML = messages.amountError;
+    this.$amountWarningMsg.style.display = 'block';
+    return false;
+  }
+  
+  contentInputValidator() {
+    if(this.$contentInput.value) {
+      this.$contentWarningMsg.style.display = 'none';
+      return true;
+    }
+    this.$contentWarningMsg.innerHTML = messages.contentError;
+    this.$contentWarningMsg.style.display = 'block';
+    return false;
   }
 
   dateInputParser() {
@@ -172,8 +250,14 @@ export default class InputForm {
   }
 
   categoryInputParser() {
-    const { value } = this.$category;
-    this.accountData.category = value;
+    if (this.isTypeSelected) {
+      this.$categoryWarningMsg.style.display = 'none';
+      const { value } = this.$category;
+      this.accountData.category = value;
+      return;
+    }
+    // this.$categoryWarningMsg.innerHTML = messages.categoryError;
+    // this.$categoryWarningMsg.style.display = 'block';
   }
 
   cardInputParser() {
@@ -184,7 +268,8 @@ export default class InputForm {
   radioInputParser() {
     const $radioChecked = getCheckedRadioElement(this.$radioElements);
     if (!$radioChecked) {
-      alert(messages.typeError);
+      this.$typeWarningMsg.style.display = 'block';
+      this.$typeWarningMsg.innerHTML = messages.typeError;
       return;
     }
     this.accountData[$radioChecked.name] = $radioChecked.value;

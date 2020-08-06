@@ -7,11 +7,38 @@
   margin: 3% auto;
   position: relative;
 
-  .warn {
+  .warn-type, .warn-category, .warn-card, .warn-amount, .warn-content {
+    position: absolute;
     font-size: 12px;
     color: red;
-    margin: 10px 0 0 50px;
+    display: none;
   }
+
+  .warn-type {
+    top: 2%;
+    left: 11vw;
+  }
+
+  .warn-category {
+    top: 4.1vw;
+    left: 24vw;
+  }
+
+  .warn-card {
+    top: 4.1vw;
+    left: 44.6vw;
+  }  
+
+  .warn-amount {
+    top: 7.1vw;
+    left: 3vw;
+  }  
+
+  .warn-content {
+    top: 7.1vw;
+    left: 34vw;
+  }
+
 
   label {
     font-size: 14px;
