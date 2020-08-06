@@ -13,3 +13,20 @@ export const isEmpty = value =>
 
 export const html = (s, ...args) =>
   s.map((ss, i) => `${ss}${args[i] || ''}`).join('');
+
+export const printNumberWithCommas = value =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+export const deleteCommas = value => value.split(',').join('').slice(0, -1);
+
+export const returnDateFormat = date => {
+  let d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-'); // return YYYY-MM-DD
+};

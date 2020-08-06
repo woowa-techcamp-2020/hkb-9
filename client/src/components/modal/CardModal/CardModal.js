@@ -13,7 +13,7 @@ export default class CardModal {
 
   init() {
     this.$target = document.querySelector('.modal');
-    observer.subscribe('cardModalVisible', this, this.render.bind(this));
+    userController.subscribe('cardModalVisible', this, this.render.bind(this));
   }
 
   render(visible) {
@@ -41,7 +41,7 @@ export default class CardModal {
         alert('카드 등록 실패..');
         return;
       }
-      $input.value = ''; // input 초기화
+      $input.value = ''; // input  초기화
     };
 
     this.$target

@@ -1,11 +1,8 @@
-import observer from '../models/observer';
+import Observer from '../models/observer';
 import User from '../models/userModel';
-class UserController {
-  constructor() {
-    this.observer = observer;
-  }
+class UserController extends Observer {
   setIsLogin(isLogin) {
-    this.observer.notify('isLogin', isLogin);
+    this.notify('isLogin', isLogin);
   }
 
   checkIsLogin() {
@@ -14,7 +11,7 @@ class UserController {
   }
 
   onModalVisible(modalName, isShow) {
-    this.observer.notify(modalName, isShow);
+    this.notify(modalName, isShow);
   }
 
   async requestJoin(userData) {

@@ -12,7 +12,7 @@ export default class CardList {
 
   init() {
     this.$target = document.querySelector('.card-list');
-    observer.subscribe('cardChanged', this, this.render.bind(this));
+    cardController.subscribe('cardChanged', this, this.render.bind(this));
     this.render(cardController.getCards());
   }
 
