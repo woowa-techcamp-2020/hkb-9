@@ -1,5 +1,6 @@
 import './InputForm.scss';
 import observer from '../../../models/observer';
+import { ItemContent } from './../ItemContent';
 import {
   accountController,
   cardController,
@@ -93,6 +94,12 @@ export default class InputForm {
       if ($radioChecked) {
         $radioChecked.checked = false;
       }
+      this.$typeWarningMsg.style.display = 'none';
+      this.$categoryWarningMsg.style.display = 'none';
+      this.$cardWarningMsg.style.display = 'none';
+      this.$amountWarningMsg.style.display = 'none';
+      this.$contentWarningMsg.style.display = 'none';
+
     };
 
     const categoryClickHandler = () => {
@@ -106,7 +113,6 @@ export default class InputForm {
     };
 
     const cardChangeHandler = () => {
-      // console.log(this.$cardInput.children[0])
       if (this.$cardInput.children[0].selected) {
         this.$cardWarningMsg.innerHTML = messages.cardError;
         this.$cardWarningMsg.style.display = 'block';
@@ -123,7 +129,7 @@ export default class InputForm {
       this.$amountWarningMsg.innerHTML = messages.amountError;
       this.$amountWarningMsg.style.display = 'block';
       return;
-    }
+    };
 
     const createAccountHandler = async () => {
       if (!this.radioInputParser()) {
@@ -152,6 +158,7 @@ export default class InputForm {
       this.cardInputParser();
       this.amountInputParser();
       this.monthInputParser();
+      console.log(this.accountData);
       await accountController.requestCreateAccount(this.accountData);
     };
 
@@ -166,24 +173,6 @@ export default class InputForm {
     this.$submitButton.addEventListener('click', createAccountHandler);
   }
 
-  // selectInputValidator() {
-  //   let isValid = true;
-  //   Array.from(this.$selectElements).forEach($element => {
-  //     if ($element.children[0].selected) {
-  //       isValid = false;
-  //       if(!isValid) {
-  //         console.log($element.className)
-  //       }
-  //       return true;
-  //     }
-  //   });
-  //   if (!isValid) {
-  //     this.$categoryWarningMsg.innerHTML = messages.selectError;
-  //     this.$categoryWarningMsg.style.display = 'block';
-  //   }
-  //   return isValid;
-  // }
-
   categoryInputValidator() {
     if (this.$category.children[0].selected) {
       this.$categoryWarningMsg.innerHTML = messages.categoryError;
@@ -195,7 +184,6 @@ export default class InputForm {
 
   cardInputValidator() {
     if (this.$cardInput.children[0].selected) {
-      // console.log(this.$cardInput.children[0])
       this.$cardWarningMsg.innerHTML = messages.cardError;
       this.$cardWarningMsg.style.display = 'block';
       return false;
@@ -212,9 +200,9 @@ export default class InputForm {
     this.$amountWarningMsg.style.display = 'block';
     return false;
   }
-  
+
   contentInputValidator() {
-    if(this.$contentInput.value) {
+    if (this.$contentInput.value) {
       this.$contentWarningMsg.style.display = 'none';
       return true;
     }
@@ -256,8 +244,6 @@ export default class InputForm {
       this.accountData.category = value;
       return;
     }
-    // this.$categoryWarningMsg.innerHTML = messages.categoryError;
-    // this.$categoryWarningMsg.style.display = 'block';
   }
 
   cardInputParser() {
