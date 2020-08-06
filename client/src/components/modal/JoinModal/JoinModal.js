@@ -6,7 +6,7 @@ import { userController } from '../../../controllers';
 export default class JoinModal {
   constructor() {
     this.$target = document.querySelector('.modal');
-    observer.subscribe('joinModalVisible', this, this.render.bind(this));
+    userController.subscribe('joinModalVisible', this, this.render.bind(this));
   }
 
   render(visible) {

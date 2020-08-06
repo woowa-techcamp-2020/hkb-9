@@ -12,7 +12,7 @@ export default class Header {
   init() {
     this.$target = document.querySelector('header');
     this.$target.innerHTML = headerTemplate();
-    observer.subscribe('isLogin', this, this.render.bind(this));
+    userController.subscribe('isLogin', this, this.render.bind(this));
   }
   render(isLogin) {
     const $logoutButton = this.$target.querySelector('.logout');

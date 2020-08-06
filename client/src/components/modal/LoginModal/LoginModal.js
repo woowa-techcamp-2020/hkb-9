@@ -11,7 +11,7 @@ export default class LoginModal {
 
   init() {
     this.$target = document.querySelector('.modal');
-    observer.subscribe('loginModalVisible', this, this.render.bind(this));
+    userController.subscribe('loginModalVisible', this, this.render.bind(this));
     userController.onModalVisible('loginModalVisible', true);
   }
 
