@@ -20,16 +20,19 @@ import {
   returnDateFormat,
 } from '../../../utils/functions';
 
+const messages = {
+  typeError: '입/지출 항목을 체크해주세요',
+  selectError: '선택사항을 입력해주세요.',
+  amountError: '금액을 입력해주세요.',
+  contentError: '내용을 입력해주세요.',
+};
+
 export default class InputForm {
   constructor() {
-    this.init();
-    this.accountData = {};
-  }
-
-  init() {
     this.$target = document.querySelector('.input-form-container');
     this.$target.innerHTML = inputFormTemplate;
     this.isCategorySelected = false;
+    this.accountData = {};
     this.bindElement();
     this.bindEvent();
     this.setCardList();
@@ -67,7 +70,7 @@ export default class InputForm {
     const deleteCommaHandler = ({ target }) =>
       (target.value = deleteCommas(target.value));
 
-    const amountInputValidator = ({ target }) => {
+    const changeStringToNumberHanlder = ({ target }) => {
       target.value = target.value.replace(/[^0-9]+/g, '');
     };
 
@@ -88,7 +91,7 @@ export default class InputForm {
       if (this.isCategorySelected) {
         return;
       }
-      alert('수입/지출 항목을 체크해주세요');
+      alert(messages.typeError);
     };
 
     const createAccountHandler = async () => {
@@ -101,12 +104,12 @@ export default class InputForm {
       }
 
       if (!deleteCommas(this.$amountInput.value)) {
-        alert('금액을 입력해주세요.');
+        alert(messages.amountError);
         return;
       }
 
       if (!this.$contentInput.value) {
-        alert('내용을 입력해주세요.');
+        alert(messages.contentError);
         return;
       }
 
@@ -122,7 +125,7 @@ export default class InputForm {
     this.$selectType.addEventListener('change', setCategoryHandler);
     this.$amountInput.addEventListener('blur', changeWithCommaHandler);
     this.$amountInput.addEventListener('focus', deleteCommaHandler);
-    this.$amountInput.addEventListener('change', amountInputValidator);
+    this.$amountInput.addEventListener('change', changeStringToNumberHanlder);
     this.$category.addEventListener('click', categoryClickHandler);
     this.$deleteButton.addEventListener('click', deleteInputHandler);
     this.$submitButton.addEventListener('click', createAccountHandler);
@@ -137,7 +140,7 @@ export default class InputForm {
       }
     });
     if (!isValidate) {
-      alert('선택사항을 입력해주세요.');
+      alert(messages.selectError);
     }
     return isValidate;
   }
@@ -181,7 +184,7 @@ export default class InputForm {
   radioInputParser() {
     const $radioChecked = getCheckedRadioElement(this.$radioElements);
     if (!$radioChecked) {
-      alert('입/지출 항목을 체크해주세요');
+      alert(messages.typeError);
       return;
     }
     this.accountData[$radioChecked.name] = $radioChecked.value;
