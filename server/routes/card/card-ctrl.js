@@ -25,9 +25,11 @@ exports.getCardsController = async (req, res) => {
 exports.deleteCardController = async (req, res) => {
   const {
     params: { cardId },
+    user,
   } = req;
   const connection = await pool.getConnection();
-  const affectedRows = await Card.deleteCard(connection, cardId);
+  await Card.deleteCard(connection, cardId);
+  const cards = await Card.getCards(connection, user.id);
   connection.release();
-  res.stats(200).json({ affectedRows });
+  res.status(200).json({ cards });
 };

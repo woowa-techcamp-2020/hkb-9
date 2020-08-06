@@ -18,6 +18,10 @@ class CardModel {
   async getCards() {
     return await cardApis.getAll();
   }
+
+  async deleteCard(id) {
+    return await cardApis.deleteOne(id);
+  }
 }
 
 export default new CardModel();
