@@ -2,6 +2,7 @@ import './List.scss';
 import listTemplate from './template';
 import { accountController } from '../../../controllers';
 import { Item } from './../Item';
+import { mapForIterator } from '../../../utils/functions';
 
 export default class List {
   constructor() {
@@ -11,11 +12,18 @@ export default class List {
   init() {
     this.$target = document.querySelector('.list-container');
     accountController.subscribe('accountChanged', this, this.render.bind(this));
-    this.render();
+    accountController.subscribe(
+      'listTypeChanged',
+      this,
+      this.render.bind(this),
+    );
+    this.render(accountController.get('monthlyAccounts'));
   }
 
   render(accounts) {
-    this.$target.innerHTML = listTemplate;
-    new Item();
+    this.$target.innerHTML = mapForIterator(accounts, listTemplate).join('');
+    for (const account of accounts) {
+      new Item({ account, date: account[0] });
+    }
   }
 }

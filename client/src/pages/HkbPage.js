@@ -19,7 +19,6 @@ export default class HkbPage {
     await cardController.requestGetCards();
     await accountController.requestGetAccounts();
     routeController.subscribe('pageChange', this, this.render.bind(this));
-
     this.render(parsePath(window.location.href)); // 새로고침 > 기본 경로 체크
   }
 

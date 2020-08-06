@@ -30,3 +30,26 @@ export const returnDateFormat = date => {
 
   return [year, month, day].join('-'); // return YYYY-MM-DD
 };
+
+export const parseDatetime = datetime => {
+  const date = new Date(datetime);
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    date: date.getDate(),
+    day: date.getDay(),
+  };
+};
+
+export const getDayName = day => {
+  const name = ['일', '월', '화', '수', '목', '금', '토'];
+  return name[day];
+};
+
+export const mapForIterator = (iterator, func) => {
+  const res = [];
+  for (const v of iterator) {
+    res.push(func(v));
+  }
+  return res;
+};

@@ -7,7 +7,12 @@ class AccountController extends Observer {
 
     // 파싱한 거 가져와야하네
 
-    this.notify('accountChanged', accounts.concat());
+    this.notify('accountChanged', accounts.concat()); // 이거 필요한가?
+    this.setAmount(Account.get('monthlyIncome'), Account.get('monthlyExpense'));
+  }
+
+  setAmount(income, expense) {
+    this.notify('amountChanged', { income, expense });
   }
 
   setMonth(month) {

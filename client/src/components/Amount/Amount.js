@@ -1,5 +1,6 @@
 import './Amount.scss';
 import amountTemplate from './template';
+import { accountController } from '../../controllers';
 
 export default class Amount {
   constructor({ selector }) {
@@ -9,10 +10,13 @@ export default class Amount {
 
   init() {
     this.$target = document.querySelector(this.selector);
-    this.render();
+    accountController.subscribe('amountChanged', this, this.render.bind(this));
+    const income = accountController.get('monthlyIncome');
+    const expense = accountController.get('monthlyExpense');
+    this.render({ income, expense });
   }
 
-  render() {
-    this.$target.innerHTML = amountTemplate;
+  render({ income, expense }) {
+    this.$target.innerHTML = amountTemplate(income, expense);
   }
 }

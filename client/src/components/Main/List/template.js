@@ -1,5 +1,7 @@
 import { html } from '../../../utils/functions';
 
-const listTemplate = html` <div class="item-container"></div> `;
+const listTemplate = account => {
+  return html` <div class="item-container" id="date-${account[0]}"></div> `;
+};
 
 export default listTemplate;
