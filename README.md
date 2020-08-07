@@ -1,10 +1,14 @@
-## 홍봉 가계부
+## 😆 홍봉 가계부
+![image](https://user-images.githubusercontent.com/39187116/89608631-a7d7c180-d8b0-11ea-93da-a2b7b722b6ee.png)
 
-### 배포 서버 주소
-http://13.125.230.171:3000/
+## 😎 배포 서버 주소
+[여기](http://13.125.230.171:3000) 😊
 
+## ✋Team Member
+- 정봉근
+- 홍동욱
 
-### 디렉토리 구조
+## 🤔 디렉토리 구조
 
 ```bash
 ├  client  
@@ -31,21 +35,42 @@ http://13.125.230.171:3000/
  ├  index.js  # 서버 엔트리 파일
 ```
 
+## 🏅 Skills
+
+**Frontend**
+
+- javascript
+- scss
+- enthusiasm
+- MVC Pattern(Observer)
+
+**Backend**
+
+- express
+- mysql2
+- JWT + Passport
+- AWS EC2
+- MVC Pattern
 
 
-### 설치
+## 🏃‍♂️Quick Start
+
+### Clone & Install packages
 
 ```bash
+git clone https://github.com/woowa-techcamp-2020/hkb-9.git
+
 npm install
 ```
 
 
+### Write db config
 
-### 환경변수 설정
+1. create a `.env` ( empty file)
 
-- 최상위 디렉토리의 .env 파일을 아래를 참고하여 수정해주세요.
+2. write a config to `.env.dev`
 
-```bash
+```json
 DB_HOST=데이터베이스 호스트
 DB_USER=데이터베이스 유저
 DB_NAME=데이터베이스 이름
@@ -55,16 +80,17 @@ JWT_SECRET=아무거나
 ```
 
 
-
-### 실행
+### Run server
 
 ```bash
-npm run production
+npm run dev
 ```
 
+Then, you can access to your server http://localhost:9000 or http://127.0.0.1:9000
 
 
-## 프로젝트 기록
+
+## 😍 프로젝트 기록
 
 
 ### [🍗 Ground Rule](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Ground-Rule)
