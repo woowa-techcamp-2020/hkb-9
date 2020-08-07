@@ -42,6 +42,7 @@ export const parseDatetime = datetime => {
 };
 
 export const getDayName = day => {
+  day = day === -1 ? 6 : day;
   const name = ['일', '월', '화', '수', '목', '금', '토'];
   return name[day];
 };
@@ -55,7 +56,6 @@ export const mapForIterator = (iterator, func) => {
 };
 
 export const convertCategoryToKorean = category => {
-  console.log(category);
   switch (category) {
     case 'salary':
       return '월급';
@@ -78,6 +78,6 @@ export const convertCategoryToKorean = category => {
     case 'unclassified':
       return '미분류';
     default:
-      return 'gkdl';
+      return '기타';
   }
 };
