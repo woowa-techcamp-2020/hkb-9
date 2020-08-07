@@ -1,4 +1,4 @@
-**# 홍봉 가계부**
+# 홍봉 가계부
 
 ### 서비스 Overview
 
@@ -70,19 +70,19 @@ npm run production
 
 ### 프로젝트 기록
 
-**### [🍗 Ground Rule](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Ground-Rule)**
+### [🍗 Ground Rule](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Ground-Rule)**
 
 
 
-**### [🥟 Convention](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Convention)**
+### [🥟 Convention](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Convention)**
 
 
 
-**### [🔯 ERD & DB Schema](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Schema)**
+### [🔯 ERD & DB Schema](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Schema)**
 
 
 
-**### 🍕 스크럼**
+### 🍕 스크럼**
 
 \- [1주차 스크럼](https://github.com/woowa-techcamp-2020/hkb-9/wiki/1%EC%A3%BC%EC%B0%A8-%EC%8A%A4%ED%81%AC%EB%9F%BC)
 
@@ -90,7 +90,7 @@ npm run production
 
 
 
-**### 🍔 회고**
+### 🍔 회고**
 
 \- [1주차 회고](https://github.com/woowa-techcamp-2020/hkb-9/wiki/1%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EA%B3%A0)
 
@@ -98,7 +98,7 @@ npm run production
 
 
 
-**### 🍣 기술 블로그**
+### 🍣 기술 블로그**
 
 \- [ESLint & Prettier](https://github.com/woowa-techcamp-2020/hkb-9/wiki/ESLint,-Prettier%EA%B0%80-%EB%AD%98%EA%B9%8C%3F)
 
@@ -110,4 +110,4 @@ npm run production
 
 \- [Passport, JWT and Salt](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Passport,-JWT-and-Salt)
 
-\- [VanilaJS로 달력 구현하기](
+\- [VanilaJS로 달력 구현하기](https://github.com/woowa-techcamp-2020/hkb-9/wiki/%EB%8B%AC%EB%A0%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
