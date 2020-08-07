@@ -19,6 +19,11 @@ class AccountModel {
     this[keyName] = value;
   }
 
+  setMonth(month) {
+    this.currentMonth = month;
+    this.setAccounts(this.accounts);
+  }
+
   setAccounts(accounts) {
     this.accounts = accounts.map(account => {
       const dateObj = parseDatetime(account.payment_date);
