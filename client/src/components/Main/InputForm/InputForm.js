@@ -1,11 +1,5 @@
 import './InputForm.scss';
-import observer from '../../../models/observer';
-import { ItemContent } from './../ItemContent';
-import {
-  accountController,
-  cardController,
-  userController,
-} from '../../../controllers';
+import { accountController, cardController } from '../../../controllers';
 import {
   inputFormTemplate,
   incomeCategoryTemplate,
@@ -20,6 +14,7 @@ import {
   deleteCommas,
   returnDateFormat,
 } from '../../../utils/functions';
+import { STATUS } from '../../../utils/constants';
 
 const messages = {
   typeError: '분류를 선택해주세요',
@@ -31,13 +26,72 @@ const messages = {
 
 export default class InputForm {
   constructor() {
+    this.init();
+    this.bindElement();
+    this.bindEvent();
+    this.setCardList();
+  }
+
+  init() {
     this.$target = document.querySelector('.input-form-container');
     this.$target.innerHTML = inputFormTemplate;
     this.isTypeSelected = false;
     this.accountData = {};
-    this.bindElement();
-    this.bindEvent();
-    this.setCardList();
+  }
+  setEditMode(accountData) {
+    const {
+      id,
+      amount,
+      category,
+      type,
+      content,
+      payment_date,
+      payMethod,
+      card_id,
+    } = accountData;
+    this.targetEditId = id; // 수정 삭제 위해 저장
+    this.accountData = accountData;
+    this.$radioElements.forEach($element => {
+      if ($element.className === type) {
+        $element.checked = true;
+      }
+    });
+    this.setCategoryHandler();
+    this.$amountInput.value = amount;
+    this.$category.value = category;
+    this.$contentInput.value = content;
+
+    let targetIndex = 0;
+    Array.from(this.$cardInput.options).forEach((option, index) => {
+      if (Number(option.value) === card_id) {
+        targetIndex = index;
+      }
+    });
+    this.$cardInput.selectedIndex = targetIndex;
+
+    this.$dateInput.value = returnDateFormat(payment_date);
+    this.$deleteButton.classList.add('item-delete');
+    this.$deleteButton.innerHTML = '삭제';
+    this.$submitButton.classList.add('item-modify');
+    this.$submitButton.innerHTML = '수정하기';
+  }
+
+  reset() {
+    this.$deleteButton.classList.remove('item-delete');
+    this.$deleteButton.innerHTML = '내용 지우기';
+    this.$submitButton.classList.remove('item-modify');
+    this.$submitButton.innerHTML = '확인';
+
+    this.isCategorySelected = false;
+    this.$amountInput.value = '';
+    this.$contentInput.value = '';
+    this.$dateInput.value = returnDateFormat(new Date());
+    this.$category.innerHTML = initCardOptionTemplate;
+    this.$cardInput.childNodes[0].selected = true;
+    const $radioChecked = getCheckedRadioElement(this.$radioElements);
+    if ($radioChecked) {
+      $radioChecked.checked = false;
+    }
   }
 
   bindElement() {
@@ -45,7 +99,7 @@ export default class InputForm {
     this.$selectType = this.$target.querySelector('.select-type');
     this.$radioElements = this.$target.querySelectorAll('input[type=radio]');
     this.$textInputs = this.$target.querySelectorAll('input[type=text]');
-    // this.$selectElements = this.$target.querySelectorAll('select');
+    this.$selectElements = this.$target.querySelectorAll('select');
     this.$dateInput = this.$target.querySelector('input[type=date]');
     this.$amountInput = this.$target.querySelector('.amount');
     this.$cardInput = this.$target.querySelector('.card');
@@ -58,23 +112,26 @@ export default class InputForm {
     this.$cardWarningMsg = this.$target.querySelector('.warn-card');
     this.$amountWarningMsg = this.$target.querySelector('.warn-amount');
     this.$contentWarningMsg = this.$target.querySelector('.warn-content');
+    accountController.subscribe(
+      'isEditMode',
+      this,
+      this.setEditMode.bind(this),
+    );
+  }
+
+  setCategoryHandler() {
+    this.isCategorySelected = true;
+    const $radioChecked = getCheckedRadioElement(this.$radioElements);
+    if ($radioChecked.className === 'income') {
+      this.$category.innerHTML = incomeCategoryTemplate;
+      return;
+    }
+    this.$category.innerHTML = expenseCategoryTemplate;
   }
 
   bindEvent() {
     const changeWithCommaHandler = ({ target }) =>
       (target.value = printNumberWithCommas(target.value) + '원');
-
-    const setCategoryHandler = () => {
-      this.isTypeSelected = true;
-      const $radioChecked = getCheckedRadioElement(this.$radioElements);
-      if ($radioChecked.className === 'income') {
-        this.$category.innerHTML = incomeCategoryTemplate;
-        this.$typeWarningMsg.style.display = 'none';
-        return;
-      }
-      this.$category.innerHTML = expenseCategoryTemplate;
-      this.$typeWarningMsg.style.display = 'none';
-    };
 
     const deleteCommaHandler = ({ target }) =>
       (target.value = deleteCommas(target.value));
@@ -83,23 +140,21 @@ export default class InputForm {
       target.value = target.value.replace(/[^0-9]+/g, '');
     };
 
-    const deleteInputHandler = () => {
-      this.isTypeSelected = false;
-      this.$amountInput.value = '';
-      this.$contentInput.value = '';
-      this.$dateInput.value = returnDateFormat(new Date());
-      this.$category.innerHTML = initCardOptionTemplate;
-      this.$cardInput.childNodes[0].selected = true;
-      const $radioChecked = getCheckedRadioElement(this.$radioElements);
-      if ($radioChecked) {
-        $radioChecked.checked = false;
+    const deleteInputHandler = async ({ target }) => {
+      if (target.classList.contains('item-delete')) {
+        const status = await accountController.requestDeleteAccount(
+          this.targetEditId,
+        );
+        if (status !== STATUS.SUCCESS) {
+          alert('삭제 실패');
+        }
+        this.reset();
       }
       this.$typeWarningMsg.style.display = 'none';
       this.$categoryWarningMsg.style.display = 'none';
       this.$cardWarningMsg.style.display = 'none';
       this.$amountWarningMsg.style.display = 'none';
       this.$contentWarningMsg.style.display = 'none';
-
     };
 
     const categoryClickHandler = () => {
@@ -131,7 +186,7 @@ export default class InputForm {
       return;
     };
 
-    const createAccountHandler = async () => {
+    const createAccountHandler = async ({ target }) => {
       if (!this.radioInputParser()) {
         return;
       }
@@ -156,13 +211,30 @@ export default class InputForm {
       this.textInputParser();
       this.categoryInputParser();
       this.cardInputParser();
-      this.amountInputParser();
-      this.monthInputParser();
-      console.log(this.accountData);
-      await accountController.requestCreateAccount(this.accountData);
+
+      if (target.classList.contains('item-modify')) {
+        const status = await accountController.requestModifyAccount(
+          this.accountData,
+        );
+        if (status != STATUS.SUCCESS) {
+          alert('수정 실패');
+        }
+        this.reset();
+
+        return;
+      } // modify
+      const status = await accountController.requestCreateAccount(
+        this.accountData,
+      );
+      if (status !== STATUS.CREATE_SUCCESS) {
+        alert('생성 실패');
+      }
     };
 
-    this.$selectType.addEventListener('change', setCategoryHandler);
+    this.$selectType.addEventListener(
+      'change',
+      this.setCategoryHandler.bind(this),
+    );
     this.$amountInput.addEventListener('blur', changeWithCommaHandler);
     this.$amountInput.addEventListener('focus', deleteCommaHandler);
     this.$amountInput.addEventListener('change', changeStringToNumberHanlder);
@@ -224,10 +296,10 @@ export default class InputForm {
   amountInputParser() {
     const { name, value } = this.$amountInput;
     if (value.length) {
-      this.accountData[name] = 0;
+      this.accountData[name] = parseInt(deleteCommas(value));
       return;
     }
-    this.accountData[name] = parseInt(deleteCommas(value));
+    this.accountData[name] = 0;
     return deleteCommas(value);
   }
 

@@ -20,7 +20,7 @@ exports.createAccount = async (connection, options) => {
 
 exports.getAccounts = async (connection, userId) => {
   const [rows] = await connection.query(
-    `SELECT A.*, C.name FROM account as A JOIN card as C on A.card_id = C.id WHERE A.user_id=${userId}`,
+    `SELECT A.*, C.name as payMethod FROM account as A JOIN card as C on A.card_id = C.id WHERE A.user_id=${userId}`,
   );
   return rows;
 };
@@ -41,13 +41,13 @@ exports.updateAccount = async (connection, id, options) => {
     month,
     paymentDate,
     cardId,
-    userId,
+    user_id,
   } = options;
 
   const [{ affectedRows }] = await connection.query(
     `UPDATE account SET type='${type}', category='${category}', 
-    amount=${amount}, content='${content}', month=${month}, payment_date=${paymentDate},
-    card_id=${cardId}, user_id=${userId} WHERE id=${id}`,
+    amount=${amount}, content='${content}', month=${month}, payment_date='${paymentDate}',
+    card_id=${Number(cardId)}, user_id=${user_id} WHERE id=${id}`,
   );
 
   return affectedRows;

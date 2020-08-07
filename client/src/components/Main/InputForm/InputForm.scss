@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   margin: 3% auto;
+  margin-bottom: 0;
   position: relative;
 
   .warn-type, .warn-category, .warn-card, .warn-amount, .warn-content {
@@ -167,11 +168,11 @@
       border-color: $woowa-color;
       border-style: solid;
       border-radius: 3px;
-      cursor: pointer;    
+      cursor: pointer;
       appearance: none;
 
       &:after {
-        content: "won";
+        content: 'won';
       }
 
       &:hover {
@@ -181,9 +182,7 @@
         -webkit-appearance: none;
         margin: 0;
       }
-    }      
-
-    
+    }
 
     .content {
       width: 100%;
@@ -210,10 +209,10 @@
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: all .4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     &:hover {
       background-color: $woowa-color;
-      transform: scaleY(1.03)
+      transform: scaleY(1.03);
     }
     transition: t;
   }

@@ -19,11 +19,22 @@ export const METHOD = {
     };
     return isJWT ? setTokenInHeader(options) : options;
   },
+  PUT(body, isJWT) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    };
+    return isJWT ? setTokenInHeader(options) : options;
+  },
   DELETE() {
     const option = { method: 'DELETE' };
     return setTokenInHeader(option);
   },
 };
+
 export const request = (url, args) => fetch(url, args);
 export const requestWithReturn = (url, args) =>
   request(url, args).then(res => res.json());
