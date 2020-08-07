@@ -4,3 +4,6 @@ export const createAccount = accountData =>
   request('/api/account', METHOD.POST(accountData, true));
 
 export const getAccounts = () => request('/api/account', METHOD.GETWithToken());
+
+export const deleteAccount = id =>
+  request(`/api/account/${id}`, METHOD.DELETE());

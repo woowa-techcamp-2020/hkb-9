@@ -25,13 +25,35 @@ const messages = {
 
 export default class InputForm {
   constructor() {
+    this.init();
+    this.bindElement();
+    this.bindEvent();
+    this.setCardList();
+  }
+
+  init() {
     this.$target = document.querySelector('.input-form-container');
     this.$target.innerHTML = inputFormTemplate;
     this.isCategorySelected = false;
     this.accountData = {};
-    this.bindElement();
-    this.bindEvent();
-    this.setCardList();
+  }
+  setEditMode(accountData) {
+    const { id, amount, category, type, content, payment_date } = accountData;
+    this.targetEditId = id; // 수정 삭제 위해 저장
+
+    this.$radioElements.forEach($element => {
+      if ($element.className === type) {
+        $element.checked = true;
+      }
+    });
+    this.setCategoryHandler();
+    this.$amountInput.value = amount;
+    this.$category.value = category;
+    this.$contentInput.value = content;
+    this.$dateInput.value = returnDateFormat(payment_date);
+
+    this.$deleteButton.classList.add('item-delete');
+    this.$deleteButton.innerHTML = '삭제';
   }
 
   bindElement() {
@@ -47,21 +69,26 @@ export default class InputForm {
 
     this.$deleteButton = this.$target.querySelector('.delete-btn');
     this.$submitButton = this.$target.querySelector('.submit-btn');
+    accountController.subscribe(
+      'isEditMode',
+      this,
+      this.setEditMode.bind(this),
+    );
+  }
+
+  setCategoryHandler() {
+    this.isCategorySelected = true;
+    const $radioChecked = getCheckedRadioElement(this.$radioElements);
+    if ($radioChecked.className === 'income') {
+      this.$category.innerHTML = incomeCategoryTemplate;
+      return;
+    }
+    this.$category.innerHTML = expenseCategoryTemplate;
   }
 
   bindEvent() {
     const changeWithCommaHandler = ({ target }) =>
       (target.value = printNumberWithCommas(target.value) + '원');
-
-    const setCategoryHandler = () => {
-      this.isCategorySelected = true;
-      const $radioChecked = getCheckedRadioElement(this.$radioElements);
-      if ($radioChecked.className === 'income') {
-        this.$category.innerHTML = incomeCategoryTemplate;
-        return;
-      }
-      this.$category.innerHTML = expenseCategoryTemplate;
-    };
 
     const deleteCommaHandler = ({ target }) =>
       (target.value = deleteCommas(target.value));
@@ -70,7 +97,12 @@ export default class InputForm {
       target.value = target.value.replace(/[^0-9]+/g, '');
     };
 
-    const deleteInputHandler = () => {
+    const deleteInputHandler = async ({ target }) => {
+      if (target.classList.contains('item-delete')) {
+        const status = await accountController.requestDeleteAccount(
+          this.targetEditId,
+        );
+      }
       this.isCategorySelected = false;
       this.$amountInput.value = '';
       this.$contentInput.value = '';
@@ -123,7 +155,10 @@ export default class InputForm {
       }
     };
 
-    this.$selectType.addEventListener('change', setCategoryHandler);
+    this.$selectType.addEventListener(
+      'change',
+      this.setCategoryHandler.bind(this),
+    );
     this.$amountInput.addEventListener('blur', changeWithCommaHandler);
     this.$amountInput.addEventListener('focus', deleteCommaHandler);
     this.$amountInput.addEventListener('change', changeStringToNumberHanlder);

@@ -34,6 +34,7 @@
     padding: 10px 0;
     border-top: 1px solid $woowa-color;
     color: $woowa-dark-grey;
+    cursor: pointer;
 
     .item-category {
       // position: absolute;
@@ -41,6 +42,13 @@
       border-radius: 5px;
       padding: 0px 5px;
       color: white;
+    }
+
+    .item-modify {
+      position: absolute;
+      display: none;
+      left: 50%;
+      color: $woowa-dark-grey;
     }
 
     .item-content {
@@ -65,6 +73,13 @@
 
     .item-color-expense {
       color: #1e1ee6ad;
+    }
+
+    &:hover {
+      background-color: $woowa-color-week;
+      .item-modify {
+        display: inline;
+      }
     }
   }
 }

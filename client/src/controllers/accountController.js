@@ -4,9 +4,7 @@ import Account from '../models/accountModel';
 class AccountController extends Observer {
   setAccounts(accounts) {
     Account.setAccounts(accounts); // accounts는 할게 많으니 특별히 model에 setAccounts 만듬
-
     // 파싱한 거 가져와야하네
-
     this.notify('accountChanged', Account.get('monthlyAccounts'));
     this.setAmount(Account.get('monthlyIncome'), Account.get('monthlyExpense'));
   }
@@ -18,6 +16,10 @@ class AccountController extends Observer {
   setMonth(month) {
     Account.set('currentMonth', month);
     this.notify('monthChanged', month);
+  }
+
+  setEditMode(accountData) {
+    this.notify('isEditMode', accountData);
   }
 
   get(keyName) {
@@ -43,6 +45,13 @@ class AccountController extends Observer {
     this.setMonth(currentMonth + 1);
   }
 
+  onClickModifyButton(accountId) {
+    const targetElement = Account.get('accounts').find(
+      ({ id }) => id === accountId,
+    );
+    this.setEditMode(targetElement);
+  }
+
   async requestGetAccounts() {
     const res = await Account.getAccounts();
     if (!res.ok) {
@@ -54,6 +63,15 @@ class AccountController extends Observer {
 
   async requestCreateAccount(accountData) {
     const res = await Account.createAccount(accountData);
+    if (res.ok) {
+      const { accounts } = await res.json();
+      this.setAccounts(accounts);
+    }
+    return res.status;
+  }
+
+  async requestDeleteAccount(targetId) {
+    const res = await Account.deleteAccount(targetId);
     if (res.ok) {
       const { accounts } = await res.json();
       this.setAccounts(accounts);
