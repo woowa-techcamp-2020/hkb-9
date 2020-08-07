@@ -5,9 +5,11 @@ exports.createAccountController = async (req, res, next) => {
   const connection = await pool.getConnection();
   const options = req.body;
   options.userId = req.user.id;
-  const insertId = await Account.createAccount(connection, options);
+  console.log(options.category);
+  await Account.createAccount(connection, options);
+  const accounts = await Account.getAccounts(connection, req.user.id);
   connection.release();
-  res.status(201).json({ insertId });
+  res.status(201).json({ accounts });
 };
 
 exports.getAccountsController = async (req, res, next) => {

@@ -20,7 +20,7 @@ exports.createAccount = async (connection, options) => {
 
 exports.getAccounts = async (connection, userId) => {
   const [rows] = await connection.query(
-    `SELECT A.*, C.name FROM account as A JOIN card as C on A.card_id = C.id WHERE A.user_id=${userId}`,
+    `SELECT A.*, C.name as payMethod FROM account as A JOIN card as C on A.card_id = C.id WHERE A.user_id=${userId}`,
   );
   return rows;
 };

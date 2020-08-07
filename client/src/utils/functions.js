@@ -30,3 +30,54 @@ export const returnDateFormat = date => {
 
   return [year, month, day].join('-'); // return YYYY-MM-DD
 };
+
+export const parseDatetime = datetime => {
+  const date = new Date(datetime);
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    date: date.getDate(),
+    day: date.getDay(),
+  };
+};
+
+export const getDayName = day => {
+  day = day === -1 ? 6 : day;
+  const name = ['일', '월', '화', '수', '목', '금', '토'];
+  return name[day];
+};
+
+export const mapForIterator = (iterator, func) => {
+  const res = [];
+  for (const v of iterator) {
+    res.push(func(v));
+  }
+  return res;
+};
+
+export const convertCategoryToKorean = category => {
+  switch (category) {
+    case 'salary':
+      return '월급';
+    case 'pocket':
+      return '용돈';
+    case 'extra':
+      return '기타수입';
+    case 'food':
+      return '식비';
+    case 'living':
+      return '생활';
+    case 'shopping':
+      return '쇼핑/뷰티';
+    case 'transportation':
+      return '교통';
+    case 'health':
+      return '의료/건강';
+    case 'culture':
+      return '문화/여가';
+    case 'unclassified':
+      return '미분류';
+    default:
+      return '기타';
+  }
+};

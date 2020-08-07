@@ -1,32 +1,34 @@
 import './SelectMonth.scss';
+import { accountController } from '../../../controllers';
 import HTMLTemplate from './template';
 export default class SelectMonth {
   constructor() {
     this.$target = document.querySelector(`.select-month`);
-    this.month = new Date().getMonth();
-    this.render();
+    this.init();
     this.bindEvent();
   }
 
-  render() {
-    this.$target.innerHTML = HTMLTemplate(this.month);
-  };
+  init() {
+    this.$target = document.querySelector(`.select-month`);
+    accountController.subscribe('monthChanged', this, this.render.bind(this));
+    this.render(accountController.get('currentMonth'));
+  }
+
+  render(month) {
+    const year = accountController.get('currentYear');
+    this.$target.innerHTML = HTMLTemplate(year, month);
+  }
 
   bindEvent() {
-    this.$target.addEventListener('click', (e) => {
+    this.$target.addEventListener('click', e => {
       if (e.target.classList.contains('prev')) {
-        this.month = this.month - 1 === 0 ? 12 : this.month - 1;
-        this.render();
-        // onClickButton('prev');
+        accountController.changeMonth('prev');
         return;
       }
 
       if (e.target.classList.contains('next')) {
-        this.month = this.month + 1 === 13 ? 1 : this.month + 1;
-        this.render();
-
-        // onClickButton('next');
+        accountController.changeMonth('next');
       }
     });
-  };
+  }
 }

@@ -1,14 +1,11 @@
 @import '../../../styles/definition';
 
-hr {
-  border:1px solid $woowa-dark-grey;
-}
-
 .item-header {
   color: $woowa-dark-grey;
   height: 30px;
   line-height: 30px;
   position: relative;
+  margin-bottom: 10px;
 
   .date {
     position: absolute;
@@ -16,16 +13,58 @@ hr {
   }
   .day {
     position: absolute;
-    left: 80px; 
+    left: 80px;
   }
   .date-income {
     position: absolute;
     right: 100px;
-    color: $bong-blue; 
+    color: $bong-blue;
   }
   .date-expense {
     position: absolute;
-    right: 0; 
+    right: 0;
     color: $woowa-color;
+  }
+}
+
+.item-list {
+  .item-content-container {
+    line-height: 30px;
+    position: relative;
+    padding: 10px 0;
+    border-top: 1px solid $woowa-color;
+    color: $woowa-dark-grey;
+
+    .item-category {
+      // position: absolute;
+      background-color: $woowa-color-week;
+      border-radius: 5px;
+      padding: 0px 5px;
+      color: white;
+    }
+
+    .item-content {
+      // position: absolute;
+      left: 80px;
+    }
+
+    .item-card {
+      position: absolute;
+      right: 100px;
+    }
+
+    .item-amount {
+      position: absolute;
+      right: 0;
+      color: $woowa-color;
+      font-weight: bold;
+    }
+    .item-type-expense {
+      background-color: #1e1ee6ad;
+    }
+
+    .item-color-expense {
+      color: #1e1ee6ad;
+    }
   }
 }

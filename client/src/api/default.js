@@ -24,6 +24,7 @@ export const METHOD = {
     return setTokenInHeader(option);
   },
 };
+
 export const request = (url, args) => fetch(url, args);
 export const requestWithReturn = (url, args) =>
   request(url, args).then(res => res.json());
