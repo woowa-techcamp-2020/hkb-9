@@ -1,0 +1,71 @@
+{
+  "name": "hkb-9",
+  "version": "1.0.0",
+  "description": "🤮 Bong and Hong  🤑",
+  "main": ".prettierrc.js",
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/runtime": "^7.11.0",
+    "app-root-path": "^3.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
+    "node-sass": "^4.14.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pm2": "^4.4.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.0.9"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "prettier"
+    ],
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
+  "scripts": {
+    "dev:server": "cp .env.dev .env && nodemon ./server/index",
+    "dev:client": "webpack-dev-server --open --config webpack.dev.js",
+    "dev": "npm-run-all --parallel dev:client dev:server",
+    "production:server": "cp .env.prod .env && pm2 start ./server/index.js",
+    "production:client": "webpack --config webpack.prod.js",
+    "production": "npm-run-all --parallel production:client production:server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowa-techcamp-2020/hkb-9.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woowa-techcamp-2020/hkb-9/issues"
+  },
+  "homepage": "https://github.com/woowa-techcamp-2020/hkb-9#readme"
+}

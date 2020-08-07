@@ -1,0 +1,29 @@
+import { html } from '../../../utils/functions';
+
+const cardModalTemplate = html`
+  <div class="card-modal">
+    <div class="modal-wrapper">
+      <div class="head">
+        <div class="icon">
+          <i class="f7-icons close-btn">xmark_circle</i>
+        </div>
+        <div class="title">결제 수단 관리</div>
+      </div>
+      <section class="main">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            name="name"
+            class="card-input"
+            autofocus
+            placeholder="카드 이름을 입력해주세용"
+          />
+          <button class="create-button">생성</button>
+        </div>
+        <ul class="card-list"></ul>
+      </section>
+    </div>
+  </div>
+`;
+
+export default cardModalTemplate;

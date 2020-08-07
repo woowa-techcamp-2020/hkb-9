@@ -1,0 +1,109 @@
+@import '../../styles/definition';
+
+.calendar-container {
+  font-family: 궁서;
+  width: 70%;
+  margin: 1.5rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .weekdays {
+    display: flex;
+    width: 50%;
+    color: black;
+    line-height: 10px;
+
+    div {
+      text-align: center;
+      display: block;
+      width: calc(100% / 7);
+      height: 3rem;
+      border: 1px solid black;
+      padding: 3rem 0.2rem;
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 10px;
+
+      span {
+        margin-top: 23px;
+        font-size: 16px;
+        display: block;
+      }
+    }
+  }
+
+  .days {
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+      padding: 0.2rem;
+      width: calc(100% / 7);
+      height: 5rem;
+      display: block;
+      text-align: center;
+      // justify-content: center;
+      // align-items: center;
+      font-size: 40px;
+      font-weight: bold;
+      border: 1px solid black;
+
+      // text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+      transition: background-color 0.2s;
+
+      &:hover:not(.today) {
+        background-color: #262626;
+        border: 1px solid black;
+        cursor: pointer;
+        color: #eeeeee;
+      }
+
+      .income, .expense {
+        font-size: 12px;
+        display: block;
+        text-align: start;
+        margin: 2px 3px;
+        color: $woowa-dark-grey;
+
+      }
+      .income {
+        margin-top: 3px;
+        color: black;
+      }
+    }
+
+    .today {
+      color: $woowa-color;
+    }
+
+    .prev-date,
+    .next-date {
+      opacity: 0.5;
+    }
+  }
+
+  .red {
+    color: red;
+  }
+  .blue {
+    color: blue;
+  }
+
+  .logo {
+    width: 50%;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    font-style: 70px;
+    padding: 20px;
+    border: 1px solid black;
+    // display: inline;
+    .block {
+      display: block;
+      margin: 3px 0;
+    }
+  }
+}

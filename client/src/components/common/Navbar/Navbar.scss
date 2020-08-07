@@ -1,0 +1,39 @@
+@import '../../../styles/definition';
+
+.nav-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  
+  .filter-box {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      width: 33%;
+      background-color: $woowa-grey;
+      border: 2px solid $woowa-color;
+      color: $woowa-dark-grey;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $woowa-color;
+        color: white;
+        width: 40%;
+        transition: width 0.3s;
+      }
+    }
+  
+    a + a {
+      margin-left: 3%;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+@import '../../../styles/definition';
+
+.item-header {
+  color: $woowa-dark-grey;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  margin-bottom: 10px;
+
+  .date {
+    position: absolute;
+    font-weight: bold;
+  }
+  .day {
+    position: absolute;
+    left: 80px;
+  }
+  .date-income {
+    position: absolute;
+    right: 130px;
+    color: $bong-blue;
+  }
+  .date-expense {
+    position: absolute;
+    right: 0;
+    color: $woowa-color;
+  }
+}
+
+.item-list {
+  .item-content-container {
+    line-height: 30px;
+    position: relative;
+    padding: 10px 0;
+    border-top: 1px solid $woowa-dark-grey;
+    color: $woowa-dark-grey;
+    cursor: pointer;
+
+    .item-category {
+      border-radius: 5px;
+      padding: 2px 7px;
+      font-size: 13px;
+
+      background-color: white;
+      color: $bong-blue;
+      border: 2px solid $bong-blue;
+      cursor: pointer;
+    }
+
+    .item-modify {
+      position: absolute;
+      display: none;
+      left: 50%;
+      color: $woowa-dark-grey;
+    }
+
+    .item-content {
+      position: absolute;
+      left: 80px;
+    }
+
+    .item-card {
+      position: absolute;
+      right: 130px;
+    }
+
+    .item-amount {
+      position: absolute;
+      right: 0;
+      color: $woowa-color;
+    }
+    .item-type-expense {
+      background-color: white;
+      color: $woowa-color;
+      border: 2px solid $woowa-color;
+    }
+
+    &:hover {
+      background-color: $woowa-color-week;
+      .item-modify {
+        display: inline;
+      }
+    }
+  }
+}

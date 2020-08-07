@@ -1,0 +1,334 @@
+@import '../../styles/definition';
+
+.select-type {
+  margin: 50px 0 50px 320px;
+  input,
+  label {
+    cursor: pointer;
+  }
+}
+
+.pie-chart {
+  position: relative;
+  margin-top: 100px;
+}
+
+.pie-element-1 {
+  left: 20%;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  z-index: 5;
+
+  color: #6390aa;
+}
+
+.pie-element-1:before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+
+  transform: rotate(0turn);
+  background-color: currentColor;
+
+  animation: spin1 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+
+@keyframes spin1 {
+  to {
+    transform: rotate(0.05turn);
+  }
+}
+
+.pie-element-2 {
+  left: 20%;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  z-index: 4;
+
+  color: $woowa-dark-grey;
+}
+
+.pie-element-2:before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+
+  transform: rotate(0turn);
+  background-color: currentColor;
+
+  animation: spin2 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+
+@keyframes spin2 {
+  to {
+    transform: rotate(0.2turn);
+  }
+}
+
+.pie-element-3 {
+  left: 20%;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  z-index: 3;
+  color: $woowa-color;
+}
+
+.pie-element-3:before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+
+  transform: rotate(0turn);
+  background-color: currentColor;
+
+  animation: spin3 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+
+@keyframes spin3 {
+  to {
+    transform: rotate(0.3turn);
+  }
+}
+
+.pie-element-4 {
+  left: 20%;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  z-index: 2;
+  color: $woowa-grey;
+}
+
+.pie-element-4:before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+
+  transform: rotate(0turn);
+  background-color: currentColor;
+
+  animation: spin4 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+
+@keyframes spin4 {
+  to {
+    transform: rotate(0.4turn);
+  }
+}
+
+.pie-element-5 {
+  left: 20%;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-image: linear-gradient(to right, transparent 50%, currentColor 0);
+  z-index: 1;
+  color: #ebebeb;
+}
+
+.pie-element-5:before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background-color: inherit;
+  transform-origin: left;
+
+  transform: rotate(0turn);
+  background-color: currentColor;
+
+  animation: spin5 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) forwards;
+}
+
+@keyframes spin5 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
+.line-1 {
+  left: 39%;
+  top: 140px;
+  position: absolute;
+  width: 30px;
+  border-top: 2px solid $woowa-dark-grey;
+}
+
+.line-2 {
+  left: 21%;
+  top: 270px;
+  position: absolute;
+  width: 30px;
+  border-top: 2px solid $woowa-dark-grey;
+  transform: rotate(135deg);
+}
+
+.line-3 {
+  left: 17.5%;
+  top: 160px;
+  position: absolute;
+  width: 30px;
+  border-top: 2px solid $woowa-dark-grey;
+}
+
+.line-4 {
+  left: 25%;
+  top: -15px;
+  position: absolute;
+  width: 30px;
+  border-top: 2px solid $woowa-dark-grey;
+  transform: rotate(75deg);
+}
+
+.line-5 {
+  left: 20%;
+  top: 40px;
+  position: absolute;
+  width: 30px;
+  border-top: 2px solid $woowa-dark-grey;
+  transform: rotate(45deg);
+}
+
+.category-1 {
+  color: $woowa-dark-grey;
+  font-size: 15px;
+  position: absolute;
+  left: 41%;
+  top: 132px;
+}
+.category-2 {
+  color: $woowa-dark-grey;
+  font-size: 15px;
+  position: absolute;
+  left: 18%;
+  top: 292px;
+}
+.category-3 {
+  color: $woowa-dark-grey;
+  font-size: 15px;
+  position: absolute;
+  left: 11.3%;
+  top: 152px;
+}
+.category-4 {
+  color: $woowa-dark-grey;
+  font-size: 15px;
+  position: absolute;
+  left: 14%;
+  top: 12px;
+}
+.category-5 {
+  color: $woowa-dark-grey;
+  font-size: 15px;
+  position: absolute;
+  left: 24%;
+  top: -59px;
+  animation: opacity-control 1s 0.5s forwards;
+  visibility: hidden;
+}
+.category-1,
+.category-2,
+.category-3,
+.category-4,
+.category-5,
+.line-1,
+.line-2,
+.line-3,
+.line-4,
+.line-5,
+.stick-1,
+.stick-2,
+.stick-3,
+.stick-4,
+.stick-5 {
+  animation: opacity-control 1s 0.5s forwards;
+  visibility: hidden;
+  span {
+    color: $woowa-color;
+  }
+}
+
+@keyframes opacity-control {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+.stick-chart {
+  width: 50%;
+  margin-left: 56%;
+  font-size: 15px;
+  color: $woowa-dark-grey;
+  span {
+    color: $woowa-color;
+  }
+}
+
+.stick-element-1,
+.stick-element-2,
+.stick-element-3,
+.stick-element-4,
+.stick-element-5 {
+  height: 30px;
+  margin: 5px 0 15px 0;
+  animation: stick 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.stick-element-1 {
+  background-color: #6390aa;
+  width: 54%;
+}
+.stick-element-2 {
+  background-color: $woowa-dark-grey;
+  width: 14%;
+}
+.stick-element-3 {
+  background-color: $woowa-color;
+  width: 13%;
+}
+.stick-element-4 {
+  background-color: $woowa-grey;
+  width: 11%;
+}
+.stick-element-5 {
+  background-color: #ebebeb;
+  width: 8%;
+}
+
+@keyframes stick {
+  from {
+    width: 0%;
+  }
+}

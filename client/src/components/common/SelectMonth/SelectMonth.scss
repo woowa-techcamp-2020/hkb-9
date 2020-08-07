@@ -1,0 +1,25 @@
+@import '../../../styles/definition';
+
+.select-month {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  color: $woowa-dark-grey;
+
+  .month {
+    font-size: 1.3rem;
+    margin: 0 1rem 0.2rem 1rem;
+  }
+
+  i {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 20px;
+    &:hover {
+      color: black;
+    }
+  }
+}
