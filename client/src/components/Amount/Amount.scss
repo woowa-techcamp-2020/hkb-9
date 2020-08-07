@@ -1,8 +1,8 @@
 @import '../../styles//definition';
 
-.amount-form {
-  text-align: center;
 
+.amount-form {
+  margin-left: 40%;
   .income-label {
     padding: 0 10px;
     width: 180px;
@@ -34,6 +34,12 @@
   .income,
   .expense {
     margin: 15px 0;
+    position: relative;
+    .wrap {
+      position: absolute;
+      width: 100px;
+      left: 10%;
+    }
   }
 
   #checkbox-income {
@@ -58,12 +64,14 @@
   }
 
   .total-income {
-    margin: 0 20px;
+    float: right;
+    right: 0;
     color: $bong-blue;
   }
 
   .total-expense {
-    margin: 0 20px;
+    float: right;
+    right: 0;
     color: $woowa-color;
   }
 }
