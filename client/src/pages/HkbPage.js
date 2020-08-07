@@ -8,6 +8,7 @@ import {
   accountController,
 } from '../controllers';
 import { parsePath } from '../utils/functions';
+import { Statistics } from '../components/Statistics';
 
 export default class HkbPage {
   constructor() {
@@ -27,6 +28,8 @@ export default class HkbPage {
       new Main();
     } else if (path === 'calendar') {
       new Calendar();
+    } else if (path === 'statistics') {
+      new Statistics();
     }
   }
 }

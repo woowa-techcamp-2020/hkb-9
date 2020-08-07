@@ -1,7 +1,12 @@
 import { html } from '../../../utils/functions';
 
 export const inputFormTemplate = html`
-  <div class="input-form">
+  <div class="input-form">      
+    <div class="warn-type"></div>
+    <div class="warn-category"></div>
+    <div class="warn-card"></div>
+    <div class="warn-amount"></div>
+    <div class="warn-content"></div>
     <form>
       <button class="delete-btn" type="button">내용 지우기</button>
 
@@ -13,6 +18,7 @@ export const inputFormTemplate = html`
           class="income"
           name="type"
           value="income"
+          selected
         />
         <label for="income" class="income">수입</label>
         <input
@@ -23,7 +29,6 @@ export const inputFormTemplate = html`
           value="expense"
         />
         <label for="expense" class="expense">지출</label>
-        <div class="warn">분류를 선택해주세요</div>
       </div>
 
       <div class="input-form-1">

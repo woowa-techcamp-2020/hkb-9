@@ -3,7 +3,7 @@
 .calendar-container {
   font-family: 궁서;
   width: 70%;
-  margin: 3rem auto;
+  margin: 1.5rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,14 +40,14 @@
     flex-wrap: wrap;
 
     div {
-      font-size: 1.4rem;
       padding: 0.2rem;
       width: calc(100% / 7);
       height: 5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 50px;
+      display: block;
+      text-align: center;
+      // justify-content: center;
+      // align-items: center;
+      font-size: 40px;
       font-weight: bold;
       border: 1px solid black;
 
@@ -59,6 +59,19 @@
         border: 1px solid black;
         cursor: pointer;
         color: #eeeeee;
+      }
+
+      .income, .expense {
+        font-size: 12px;
+        display: block;
+        text-align: start;
+        margin: 2px 3px;
+        color: $woowa-dark-grey;
+
+      }
+      .income {
+        margin-top: 3px;
+        color: black;
       }
     }
 
@@ -82,7 +95,7 @@
   .logo {
     width: 50%;
     color: black;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: bold;
     font-style: 70px;
     padding: 20px;
@@ -90,6 +103,7 @@
     // display: inline;
     .block {
       display: block;
+      margin: 3px 0;
     }
   }
 }

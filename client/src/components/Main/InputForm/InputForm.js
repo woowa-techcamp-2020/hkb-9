@@ -17,8 +17,9 @@ import {
 import { STATUS } from '../../../utils/constants';
 
 const messages = {
-  typeError: '입/지출 항목을 체크해주세요',
-  selectError: '선택사항을 입력해주세요.',
+  typeError: '분류를 선택해주세요',
+  categoryError: '카테고리를 선택해주세요.',
+  cardError: '결제수단을 선택해주세요.',
   amountError: '금액을 입력해주세요.',
   contentError: '내용을 입력해주세요.',
 };
@@ -34,7 +35,7 @@ export default class InputForm {
   init() {
     this.$target = document.querySelector('.input-form-container');
     this.$target.innerHTML = inputFormTemplate;
-    this.isCategorySelected = false;
+    this.isTypeSelected = false;
     this.accountData = {};
   }
   setEditMode(accountData) {
@@ -106,6 +107,11 @@ export default class InputForm {
 
     this.$deleteButton = this.$target.querySelector('.delete-btn');
     this.$submitButton = this.$target.querySelector('.submit-btn');
+    this.$typeWarningMsg = this.$target.querySelector('.warn-type');
+    this.$categoryWarningMsg = this.$target.querySelector('.warn-category');
+    this.$cardWarningMsg = this.$target.querySelector('.warn-card');
+    this.$amountWarningMsg = this.$target.querySelector('.warn-amount');
+    this.$contentWarningMsg = this.$target.querySelector('.warn-content');
     accountController.subscribe(
       'isEditMode',
       this,
@@ -144,13 +150,40 @@ export default class InputForm {
         }
         this.reset();
       }
+      this.$typeWarningMsg.style.display = 'none';
+      this.$categoryWarningMsg.style.display = 'none';
+      this.$cardWarningMsg.style.display = 'none';
+      this.$amountWarningMsg.style.display = 'none';
+      this.$contentWarningMsg.style.display = 'none';
     };
 
     const categoryClickHandler = () => {
-      if (this.isCategorySelected) {
+      if (this.isTypeSelected) {
+        this.$typeWarningMsg.style.display = 'none';
+        this.$categoryWarningMsg.style.display = 'none';
         return;
       }
-      alert(messages.typeError);
+      this.$typeWarningMsg.innerHTML = messages.typeError;
+      this.$typeWarningMsg.style.display = 'block';
+    };
+
+    const cardChangeHandler = () => {
+      if (this.$cardInput.children[0].selected) {
+        this.$cardWarningMsg.innerHTML = messages.cardError;
+        this.$cardWarningMsg.style.display = 'block';
+        return;
+      }
+      this.$cardWarningMsg.style.display = 'none';
+    };
+
+    const amountKeyDownHandler = () => {
+      if (this.$amountInput) {
+        this.$amountWarningMsg.style.display = 'none';
+        return;
+      }
+      this.$amountWarningMsg.innerHTML = messages.amountError;
+      this.$amountWarningMsg.style.display = 'block';
+      return;
     };
 
     const createAccountHandler = async ({ target }) => {
@@ -158,24 +191,24 @@ export default class InputForm {
         return;
       }
 
-      if (!this.selectInputValidator()) {
+      if (!this.categoryInputValidator()) {
         return;
       }
 
-      if (!deleteCommas(this.$amountInput.value)) {
-        alert(messages.amountError);
+      if (!this.cardInputValidator()) {
         return;
       }
 
-      if (!this.$contentInput.value) {
-        alert(messages.contentError);
+      if (!this.amountInputValidator()) {
+        return;
+      }
+
+      if (!this.contentInputValidator()) {
         return;
       }
 
       this.dateInputParser();
       this.textInputParser();
-      this.amountInputParser();
-      this.monthInputParser();
       this.categoryInputParser();
       this.cardInputParser();
 
@@ -206,22 +239,48 @@ export default class InputForm {
     this.$amountInput.addEventListener('focus', deleteCommaHandler);
     this.$amountInput.addEventListener('change', changeStringToNumberHanlder);
     this.$category.addEventListener('click', categoryClickHandler);
+    this.$cardInput.addEventListener('change', cardChangeHandler);
+    this.$amountInput.addEventListener('keydown', amountKeyDownHandler);
     this.$deleteButton.addEventListener('click', deleteInputHandler);
     this.$submitButton.addEventListener('click', createAccountHandler);
   }
 
-  selectInputValidator() {
-    let isValidate = true;
-    Array.from(this.$selectElements).forEach($elemment => {
-      if ($elemment.children[0].selected) {
-        isValidate = false;
-        return true;
-      }
-    });
-    if (!isValidate) {
-      alert(messages.selectError);
+  categoryInputValidator() {
+    if (this.$category.children[0].selected) {
+      this.$categoryWarningMsg.innerHTML = messages.categoryError;
+      this.$categoryWarningMsg.style.display = 'block';
+      return false;
     }
-    return isValidate;
+    return true;
+  }
+
+  cardInputValidator() {
+    if (this.$cardInput.children[0].selected) {
+      this.$cardWarningMsg.innerHTML = messages.cardError;
+      this.$cardWarningMsg.style.display = 'block';
+      return false;
+    }
+    return true;
+  }
+
+  amountInputValidator() {
+    if (deleteCommas(this.$amountInput.value)) {
+      this.$amountWarningMsg.style.display = 'none';
+      return true;
+    }
+    this.$amountWarningMsg.innerHTML = messages.amountError;
+    this.$amountWarningMsg.style.display = 'block';
+    return false;
+  }
+
+  contentInputValidator() {
+    if (this.$contentInput.value) {
+      this.$contentWarningMsg.style.display = 'none';
+      return true;
+    }
+    this.$contentWarningMsg.innerHTML = messages.contentError;
+    this.$contentWarningMsg.style.display = 'block';
+    return false;
   }
 
   dateInputParser() {
@@ -251,8 +310,12 @@ export default class InputForm {
   }
 
   categoryInputParser() {
-    const { value } = this.$category;
-    this.accountData.category = value;
+    if (this.isTypeSelected) {
+      this.$categoryWarningMsg.style.display = 'none';
+      const { value } = this.$category;
+      this.accountData.category = value;
+      return;
+    }
   }
 
   cardInputParser() {
@@ -263,7 +326,8 @@ export default class InputForm {
   radioInputParser() {
     const $radioChecked = getCheckedRadioElement(this.$radioElements);
     if (!$radioChecked) {
-      alert(messages.typeError);
+      this.$typeWarningMsg.style.display = 'block';
+      this.$typeWarningMsg.innerHTML = messages.typeError;
       return;
     }
     this.accountData[$radioChecked.name] = $radioChecked.value;

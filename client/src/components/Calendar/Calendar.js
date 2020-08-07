@@ -66,11 +66,23 @@ export default class Calendar {
         this.date.getMonth(),
         i,
       ).getDay() === 0) {
-        days += `<div class="red">${i}</div>`;
+        days += `
+        <div class="red">
+          ${i}
+          <span class="income">+5000</span>
+          <span class="expense">-3000</span>    
+        </div>`;
         continue;
       }
 
-      days += `<div>${i}</div>`;
+      days += `
+        <div>
+          ${i}
+          <span class="income">+5000</span>
+          <span class="expense">-3000</span>    
+        </div>   
+        
+      `;
     }
 
     for (let i = 1; i <= nextDayIndex; i += 1) {
