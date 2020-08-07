@@ -163,8 +163,8 @@ export default class InputForm {
         this.$categoryWarningMsg.style.display = 'none';
         return;
       }
-      this.$typeWarningMsg.innerHTML = messages.typeError;
-      this.$typeWarningMsg.style.display = 'block';
+      // this.$typeWarningMsg.innerHTML = messages.typeError;
+      // this.$typeWarningMsg.style.display = 'block';
     };
 
     const cardChangeHandler = () => {
@@ -207,10 +207,15 @@ export default class InputForm {
         return;
       }
 
+      this.amountInputParser();
+      this.monthInputParser();
       this.dateInputParser();
-      this.textInputParser();
+      this.contentInputParser();
+      console.log('####', this.accountData);
       this.categoryInputParser();
+      console.log('####', this.accountData);
       this.cardInputParser();
+      console.log('####', this.accountData);
 
       if (target.classList.contains('item-modify')) {
         const status = await accountController.requestModifyAccount(
@@ -223,6 +228,7 @@ export default class InputForm {
 
         return;
       } // modify
+
       const status = await accountController.requestCreateAccount(
         this.accountData,
       );
@@ -283,6 +289,19 @@ export default class InputForm {
     return false;
   }
 
+  amountInputParser() {
+    const { name, value } = this.$amountInput;
+    console.log('name', name);
+    console.log('value', value);
+    if (value.length) {
+      this.accountData[name] = parseInt(deleteCommas(value));
+      console.log(this.accountData[name]);
+      return;
+    }
+    this.accountData[name] = 0;
+    return deleteCommas(value);
+  }
+
   dateInputParser() {
     const { name, value } = this.$dateInput;
     this.accountData[name] = value;
@@ -293,29 +312,15 @@ export default class InputForm {
     this.accountData.month = parseInt(value.substr(6, 1));
   } // month만 필요하니까
 
-  amountInputParser() {
-    const { name, value } = this.$amountInput;
-    if (value.length) {
-      this.accountData[name] = parseInt(deleteCommas(value));
-      return;
-    }
-    this.accountData[name] = 0;
-    return deleteCommas(value);
-  }
-
-  textInputParser() {
-    this.$textInputs.forEach(
-      $input => (this.accountData[$input.name] = $input.value),
-    );
+  contentInputParser() {
+    this.accountData.content = this.$contentInput.value;
   }
 
   categoryInputParser() {
-    if (this.isTypeSelected) {
-      this.$categoryWarningMsg.style.display = 'none';
-      const { value } = this.$category;
-      this.accountData.category = value;
-      return;
-    }
+    this.$categoryWarningMsg.style.display = 'none';
+    const { value } = this.$category;
+    this.accountData.category = value;
+    return;
   }
 
   cardInputParser() {

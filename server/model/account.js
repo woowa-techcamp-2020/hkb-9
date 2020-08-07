@@ -10,7 +10,7 @@ exports.createAccount = async (connection, options) => {
     cardId,
     userId,
   } = options;
-
+  console.log(options);
   const [{ insertId }] = await connection.query(
     `INSERT INTO account(type, category, amount, content, month, payment_date, card_id, user_id) 
      VALUES('${type}', '${category}', ${amount}, '${content}', ${month}, '${paymentDate}', ${cardId}, ${userId})`,
