@@ -2,6 +2,7 @@ import * as accountApis from '../api/accountApis';
 import { parseDatetime, getDayName } from '../utils/functions';
 class AccountModel {
   constructor() {
+    this.currentDate = new Date();
     this.currentYear = new Date().getFullYear();
     this.currentMonth = new Date().getMonth() + 1;
     this.accounts = [];
@@ -22,6 +23,11 @@ class AccountModel {
   setMonth(month) {
     this.currentMonth = month;
     this.setAccounts(this.accounts);
+  }
+
+  setDate(date) {
+    this.currentDate = date;
+    this.setAccounts(this.accoutns);
   }
 
   setAccounts(accounts) {

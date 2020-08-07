@@ -15,7 +15,13 @@ class AccountController extends Observer {
 
   setMonth(month) {
     Account.setMonth(month);
+    console.log(Account.get('currentDate'), month);
+    Account.set('date', Account.get('currentDate').setMonth(month - 1));
     this.notify('monthChanged', month);
+    this.notify('dateChanged', {
+      currentDate: new Date(Account.get('currentDate')),
+      accounts: Account.get('monthlyAccounts'),
+    });
     this.notify('accountChanged', this.get('monthlyAccounts'));
   }
 

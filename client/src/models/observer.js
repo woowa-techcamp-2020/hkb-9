@@ -13,8 +13,8 @@ class Observer {
       context,
       func,
     });
-    console.log(`somebody subscribed for '${name}' event`);
-    console.log(this.list);
+    // console.log(`somebody subscribed for '${name}' event`);
+    // console.log(this.list);
   }
 
   // eventName, context, callback을 받아서 등록
@@ -32,7 +32,7 @@ class Observer {
   // TODO
   notify(name, data) {
     if (!this.list[name]) return;
-    console.log(`observer is notifying for '${name}' evnet`);
+    // console.log(`observer is notifying for '${name}' evnet`);
     this.list[name].forEach(ele => ele.func(data));
   }
 
