@@ -14,8 +14,9 @@ class AccountController extends Observer {
   }
 
   setMonth(month) {
-    Account.set('currentMonth', month);
+    Account.setMonth(month);
     this.notify('monthChanged', month);
+    this.notify('accountChanged', this.get('monthlyAccounts'));
   }
 
   setEditMode(accountData) {
