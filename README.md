@@ -7,26 +7,29 @@
 ### 디렉토리 구조
 
 ```bash
-├  client ─  dist  # 빌드된 파일
+├  client  
+ ├  dist  # 빌드된 파일
  ├  public  # HTML template
- ├  src ─  api  # Api 관련 파일
+ ├  src
+  ├  api  # Api 관련 파일
   ├  components  # 프론트엔드 컴포넌트
- 	├  controllers  # 프론트엔드 컨트롤러 관련
- 	├  models  # 프론트엔드 모델(데이터 처리 로직)
- 	├  pages  # 메인 페이지
- 	├  styles  # 기본 스타일 관련
- 	├  utils  # 프론트엔드 유틸 함수
- 	├  App.js  # 모달 및 페이지 렌더링 관련
- 	├  index.js  # 프론트엔드 엔트리 파일
+  ├  controllers  # 프론트엔드 컨트롤러 관련
+  ├  models  # 프론트엔드 모델(데이터 처리 로직)
+  ├  pages  # 메인 페이지
+  ├  styles  # 기본 스타일 관련
+  ├  utils  # 프론트엔드 유틸 함수
+  ├  App.js  # 모달 및 페이지 렌더링 관련
+  ├  index.js  # 프론트엔드 엔트리 파일
   ├  public
 
-└  server  ── config  # 데이터베이스 연결
+└  server
+ ├  config  # 데이터베이스 연결
  ├  lib  # 패스포트 및 JWT
-	├  middlewares  # 서버 에러핸들러 모듈
-	├  model  # 서버 모델(데이터 처리 로직)
-	├  routes  # 서버 라우팅 관련
-	├  utils  # 서버 유틸 함수
-	├  index.js  # 서버 엔트리 파일
+ ├  middlewares  # 서버 에러핸들러 모듈
+ ├  model  # 서버 모델(데이터 처리 로직)
+ ├  routes  # 서버 라우팅 관련
+ ├  utils  # 서버 유틸 함수
+ ├  index.js  # 서버 엔트리 파일
 ```
 
 
