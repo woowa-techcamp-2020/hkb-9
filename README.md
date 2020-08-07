@@ -4,6 +4,10 @@
 
 
 
+### 배포 서버 주소
+
+
+
 ### 디렉토리 구조
 
 ```bash
@@ -20,7 +24,6 @@
   ├  utils  # 프론트엔드 유틸 함수
   ├  App.js  # 모달 및 페이지 렌더링 관련
   ├  index.js  # 프론트엔드 엔트리 파일
-  ├  public
 
 └  server
  ├  config  # 데이터베이스 연결
@@ -34,7 +37,38 @@
 
 
 
+### 설치
 
+```bash
+npm install
+```
+
+
+
+### 환경변수 설정
+
+- 최상위 디렉토리의 .env 파일을 아래를 참고하여 수정해주세요.
+
+```bash
+DB_HOST=데이터베이스 호스트
+DB_USER=데이터베이스 유저
+DB_NAME=데이터베이스 이름
+DB_PASS=데이터베이스 비밀번호
+
+JWT_SECRET=아무거나
+```
+
+
+
+### 실행
+
+```bash
+npm run production
+```
+
+
+
+### 프로젝트 기록
 
 **### [🍗 Ground Rule](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Ground-Rule)**
 
@@ -76,36 +110,4 @@
 
 \- [Passport, JWT and Salt](https://github.com/woowa-techcamp-2020/hkb-9/wiki/Passport,-JWT-and-Salt)
 
-\- [VanilaJS로 달력 구현하기](https://github.com/woowa-techcamp-2020/hkb-9/wiki/%EB%8B%AC%EB%A0%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
-
-
-
-**### 🥘 코딩 브금**
-
-\- [MyWay](https://www.youtube.com/watch?v=qQzdAsjWGPg)
-
-\- [ASMR](https://www.youtube.com/watch?v=yBmPDPCd_ls)
-
-\- [빡코딩](https://www.youtube.com/watch?v=rNeirjA65Dk)
-
-\- [샤워하면서 듣는다](https://www.youtube.com/watch?v=R2VtMjMsAjU)
-
-\- [회고 브금](https://www.youtube.com/watch?v=g3ENX3aHlqU)
-
-\- [해랑 이모 픽](https://www.youtube.com/watch?v=XQwsh9Ob2e0)
-
-\- [찬기st](https://www.youtube.com/watch?v=r2c2OdfY1Kc)
-
-\- [보첼리 형](https://www.youtube.com/watch?v=84tc_3-7qzg)
-
-\- [piano man](https://www.youtube.com/watch?v=gxEPV4kolz0)
-
-
-
-**### 🦧 ?**
-
-\- [I will win, why?](https://www.youtube.com/watch?v=j024crhw9ew)
-
-
-
-**### [📝 방명록](https://github.com/woowa-techcamp-2020/hkb-9/wiki/%EB%B0%A9%EB%AA%85%EB%A1%9D)**
+\- [VanilaJS로 달력 구현하기](
