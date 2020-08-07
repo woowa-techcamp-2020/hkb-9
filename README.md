@@ -1,22 +1,14 @@
 **# 홍봉 가계부**
 
-
-
-### 구성원
-
- (홍동욱)Ultra and Vessel(정봉근)
-
-<img src="https://user-images.githubusercontent.com/34447105/88755675-a4e81d00-d19c-11ea-96f8-6339e0cf675a.png" width="100">  <img src="https://user-images.githubusercontent.com/34447105/88755690-aca7c180-d19c-11ea-9d87-ecc618158275.png" width="100">
-
 ### 서비스 Overview
 
 
 
 ### 디렉토리 구조
 
-\```bash
-├  client ──  dist
-​          ├  public # HTML 플릿
+```bash
+├  client ──  dist  # 빌드된 파일
+​          ├  public  # HTML template
  				      ├  src ──  api  # Api 관련 파일
  				   	        		├  components  # 프론트엔드 컴포넌트
  				        		 			├  controllers  # 프론트엔드 컨트롤러 관련
