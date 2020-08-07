@@ -7,6 +7,7 @@ import { mapForIterator } from '../../../utils/functions';
 export default class List {
   constructor() {
     this.init();
+    this.bindEvent();
   }
 
   init() {
@@ -25,5 +26,15 @@ export default class List {
     for (const [date, account] of accounts) {
       new Item({ date, account });
     }
+  }
+
+  bindEvent() {
+    this.$target.addEventListener('click', ({ target }) => {
+      if (target.classList.contains('item-modify')) {
+        const $itemContainer = target.closest('.item-content-container');
+        const { id } = $itemContainer.dataset;
+        accountController.onClickModifyButton(Number(id));
+      }
+    });
   }
 }

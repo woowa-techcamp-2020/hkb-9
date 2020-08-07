@@ -27,6 +27,7 @@ export const itemContentTemplate = ({
       >${convertCategoryToKorean(category)}</span
     >
     <span class="item-content">${content}</span>
+    <i class="f7-icons item-modify">pencil_circle_fill</i>
     <span class="item-card">${payMethod}</span>
     <span class="item-amount ${type === 'expense' ? 'item-color-expense' : ''}"
       >${(type === 'income' ? '+' : '-') +

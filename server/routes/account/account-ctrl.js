@@ -21,20 +21,17 @@ exports.getAccountsController = async (req, res, next) => {
 
 exports.deleteAccountController = async (req, res, next) => {
   const connection = await pool.getConnection();
-  const affectedRows = await Account.deleteAccount(
-    connection,
-    req.params.accountId,
-  );
+  await Account.deleteAccount(connection, req.params.accountId);
+  const accounts = await Account.getAccounts(connection, req.user.id);
   connection.release();
-  res.status(200).json({ affectedRows });
+  res.status(200).json({ accounts });
 };
 
 exports.updateAccountController = async (req, res, next) => {
   const connection = await pool.getConnection();
-  const affectedRows = await Account.updateAccount(
-    connection,
-    req.params.accountId,
-    req.body,
-  );
-  res.status(200).json({ affectedRows });
+  console.log(req.body);
+  await Account.updateAccount(connection, req.params.accountId, req.body);
+  const accounts = await Account.getAccounts(connection, req.user.id);
+  connection.release();
+  res.status(200).json({ accounts });
 };

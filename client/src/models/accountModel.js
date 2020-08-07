@@ -78,6 +78,14 @@ class AccountModel {
   async createAccount(accountData) {
     return await accountApis.createAccount(accountData);
   }
+
+  async deleteAccount(targetId) {
+    return await accountApis.deleteAccount(targetId);
+  }
+
+  async modifyAccount(accountData) {
+    return await accountApis.modifyAccount(accountData);
+  }
 }
 
 export default new AccountModel();
