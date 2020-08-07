@@ -78,6 +78,15 @@ class AccountController extends Observer {
     }
     return res.status;
   }
+
+  async requestModifyAccount(accountData) {
+    const res = await Account.modifyAccount(accountData);
+    if (res.ok) {
+      const { accounts } = await res.json();
+      this.setAccounts(accounts);
+    }
+    return res.status;
+  }
 }
 
 export default new AccountController();

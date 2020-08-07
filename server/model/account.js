@@ -41,13 +41,13 @@ exports.updateAccount = async (connection, id, options) => {
     month,
     paymentDate,
     cardId,
-    userId,
+    user_id,
   } = options;
 
   const [{ affectedRows }] = await connection.query(
     `UPDATE account SET type='${type}', category='${category}', 
-    amount=${amount}, content='${content}', month=${month}, payment_date=${paymentDate},
-    card_id=${cardId}, user_id=${userId} WHERE id=${id}`,
+    amount=${amount}, content='${content}', month=${month}, payment_date='${paymentDate}',
+    card_id=${Number(cardId)}, user_id=${user_id} WHERE id=${id}`,
   );
 
   return affectedRows;

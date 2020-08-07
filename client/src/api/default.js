@@ -19,6 +19,16 @@ export const METHOD = {
     };
     return isJWT ? setTokenInHeader(options) : options;
   },
+  PUT(body, isJWT) {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    };
+    return isJWT ? setTokenInHeader(options) : options;
+  },
   DELETE() {
     const option = { method: 'DELETE' };
     return setTokenInHeader(option);

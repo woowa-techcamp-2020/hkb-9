@@ -38,9 +38,18 @@ export default class InputForm {
     this.accountData = {};
   }
   setEditMode(accountData) {
-    const { id, amount, category, type, content, payment_date } = accountData;
+    const {
+      id,
+      amount,
+      category,
+      type,
+      content,
+      payment_date,
+      payMethod,
+      card_id,
+    } = accountData;
     this.targetEditId = id; // 수정 삭제 위해 저장
-
+    this.accountData = accountData;
     this.$radioElements.forEach($element => {
       if ($element.className === type) {
         $element.checked = true;
@@ -50,10 +59,38 @@ export default class InputForm {
     this.$amountInput.value = amount;
     this.$category.value = category;
     this.$contentInput.value = content;
-    this.$dateInput.value = returnDateFormat(payment_date);
 
+    let targetIndex = 0;
+    Array.from(this.$cardInput.options).forEach((option, index) => {
+      if (Number(option.value) === card_id) {
+        targetIndex = index;
+      }
+    });
+    this.$cardInput.selectedIndex = targetIndex;
+
+    this.$dateInput.value = returnDateFormat(payment_date);
     this.$deleteButton.classList.add('item-delete');
     this.$deleteButton.innerHTML = '삭제';
+    this.$submitButton.classList.add('item-modify');
+    this.$submitButton.innerHTML = '수정하기';
+  }
+
+  reset() {
+    this.$deleteButton.classList.remove('item-delete');
+    this.$deleteButton.innerHTML = '내용 지우기';
+    this.$submitButton.classList.remove('item-modify');
+    this.$submitButton.innerHTML = '확인';
+
+    this.isCategorySelected = false;
+    this.$amountInput.value = '';
+    this.$contentInput.value = '';
+    this.$dateInput.value = returnDateFormat(new Date());
+    this.$category.innerHTML = initCardOptionTemplate;
+    this.$cardInput.childNodes[0].selected = true;
+    const $radioChecked = getCheckedRadioElement(this.$radioElements);
+    if ($radioChecked) {
+      $radioChecked.checked = false;
+    }
   }
 
   bindElement() {
@@ -102,16 +139,10 @@ export default class InputForm {
         const status = await accountController.requestDeleteAccount(
           this.targetEditId,
         );
-      }
-      this.isCategorySelected = false;
-      this.$amountInput.value = '';
-      this.$contentInput.value = '';
-      this.$dateInput.value = returnDateFormat(new Date());
-      this.$category.innerHTML = initCardOptionTemplate;
-      this.$cardInput.childNodes[0].selected = true;
-      const $radioChecked = getCheckedRadioElement(this.$radioElements);
-      if ($radioChecked) {
-        $radioChecked.checked = false;
+        if (status !== STATUS.SUCCESS) {
+          alert('삭제 실패');
+        }
+        this.reset();
       }
     };
 
@@ -122,7 +153,7 @@ export default class InputForm {
       alert(messages.typeError);
     };
 
-    const createAccountHandler = async () => {
+    const createAccountHandler = async ({ target }) => {
       if (!this.radioInputParser()) {
         return;
       }
@@ -147,6 +178,18 @@ export default class InputForm {
       this.monthInputParser();
       this.categoryInputParser();
       this.cardInputParser();
+
+      if (target.classList.contains('item-modify')) {
+        const status = await accountController.requestModifyAccount(
+          this.accountData,
+        );
+        if (status != STATUS.SUCCESS) {
+          alert('수정 실패');
+        }
+        this.reset();
+
+        return;
+      } // modify
       const status = await accountController.requestCreateAccount(
         this.accountData,
       );
