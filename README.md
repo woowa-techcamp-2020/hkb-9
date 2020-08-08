@@ -1,5 +1,6 @@
 ## 😆 홍봉 가계부
 ![image](https://user-images.githubusercontent.com/39187116/89608631-a7d7c180-d8b0-11ea-93da-a2b7b722b6ee.png)
+![image](https://user-images.githubusercontent.com/34447105/89706220-8523d680-d99e-11ea-8dbd-82e15ebd6173.png)
 
 ## 😎 배포 서버 주소
 [여기](http://13.125.230.171:3000) 😊
